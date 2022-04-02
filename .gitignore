@@ -1,0 +1,12 @@
+*.class
+*.war
+*.ear
+
+build/
+.buildpath
+*.iml
+*.ipr
+*.iws
+*.idea/
+
+/bin
