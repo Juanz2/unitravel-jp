@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Vuelo {
+public class Vuelo implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

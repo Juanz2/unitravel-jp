@@ -7,13 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Silla {
+public class Silla implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
