@@ -1,21 +1,17 @@
-package co.edu.uniquindio.unitravel.entidades;
+package co.edu.uniquindio.unitravel.entidadestr;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
-@Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ciudad implements Serializable {
 
@@ -23,10 +19,7 @@ public class Ciudad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
+    @Column(length = 50, nullable = false)
     private String nombre;
 
-    public Ciudad(int codigo, String nombre) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-    }
 }
