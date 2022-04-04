@@ -28,7 +28,7 @@ public class Hotel implements Serializable {
     @Column(nullable = false)
     private Integer numeroEstrellas;
 
-    @OneToMany(mappedBy = "hotel")
+    @ManyToMany(mappedBy = "hoteles")
     private List<Foto> fotos;
     @ManyToMany(mappedBy = "hoteles")
     private List<Caracteristica>caracteristicas;

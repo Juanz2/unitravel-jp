@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,10 +20,13 @@ public class Foto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
+
     @Column(nullable = false)
     private String url;
-    @ManyToOne
-    private Habitacion habitacion;
-    @ManyToOne
-    private Hotel hotel;
+
+    @ManyToMany
+    private List<Habitacion> habitaciones;
+
+    @ManyToMany
+    private List<Hotel> hoteles;
 }

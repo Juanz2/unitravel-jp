@@ -21,18 +21,24 @@ public class Habitacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
+
     @Min(0)
     @Column(nullable = false)
     private Double precio;
+
     @Min(0)
     @Column(nullable = false)
     private Integer capacidad;
+
     @ManyToMany(mappedBy = "habitaciones")
     private List<Reserva> reservas;
+
     @ManyToMany(mappedBy = "habitaciones")
     private List<Cama> camas;
-    @OneToMany(mappedBy = "habitacion")
+
+    @ManyToMany(mappedBy = "habitaciones")
     private List<Foto> fotos;
+
     @ManyToMany(mappedBy = "habitaciones")
     private List<Caracteristica> caracteristicas;
 }
