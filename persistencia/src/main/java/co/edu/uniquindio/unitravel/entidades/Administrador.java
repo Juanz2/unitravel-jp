@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unitravel.entidadestr;
+package co.edu.uniquindio.unitravel.entidades;
 
 public class Administrador extends  Persona{
 

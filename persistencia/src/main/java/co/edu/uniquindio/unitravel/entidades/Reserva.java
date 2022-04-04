@@ -1,9 +1,10 @@
-package co.edu.uniquindio.unitravel.entidadestr;
+package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -39,4 +40,6 @@ public class Reserva implements Serializable {
     private List<Silla> sillas;
     @ManyToMany
     private List<Habitacion> habitaciones;
+    @ManyToOne
+    private Usuario usuario;
 }

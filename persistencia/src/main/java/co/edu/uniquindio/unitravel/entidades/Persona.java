@@ -1,20 +1,18 @@
-package co.edu.uniquindio.unitravel.entidadestr;
+package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@AllArgsConstructor
+@ToString
 public class Persona {
 
     @Id

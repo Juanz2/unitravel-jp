@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unitravel.entidadestr;
+package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

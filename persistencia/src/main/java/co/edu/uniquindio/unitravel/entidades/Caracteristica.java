@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unitravel.entidadestr;
+package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,17 +12,18 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @EqualsAndHashCode
-public class Cama implements Serializable {
+@NoArgsConstructor
+public class Caracteristica implements Serializable {
 
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private int codigo;
-    @Column(nullable = false, length = 50)
-    private String tipo;
-
+    @Column(nullable = false)
+    private String nombre;
     @ManyToMany
     private List<Habitacion> habitaciones;
+    @ManyToMany
+    private List<Hotel> hoteles;
 }
