@@ -21,5 +21,8 @@ public class Foto implements Serializable {
     private int codigo;
     @Column(nullable = false)
     private String url;
-
+    @ManyToOne
+    private Habitacion habitacion;
+    @ManyToOne
+    private Hotel hotel;
 }

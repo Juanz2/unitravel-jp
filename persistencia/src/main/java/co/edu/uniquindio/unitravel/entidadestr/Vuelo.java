@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,5 +24,9 @@ public class Vuelo implements Serializable  {
     private String estado;
     @Column(length = 30, nullable = false)
     private String aerolinea;
+    @ManyToOne
+    private Ciudad ciudad;
+    @OneToMany(mappedBy = "vuelo")
+    private List<Silla> sillas;
 
 }

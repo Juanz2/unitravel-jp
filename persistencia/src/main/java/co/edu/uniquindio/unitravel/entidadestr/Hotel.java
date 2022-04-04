@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +28,12 @@ public class Hotel implements Serializable {
     @Column(nullable = false)
     private Integer numeroEstrellas;
 
+    @OneToMany(mappedBy = "hotel")
+    private List<Foto> fotos;
+    @ManyToMany(mappedBy = "hoteles")
+    private List<Caracteristica>caracteristicas;
+    @ManyToOne
+    private Ciudad ciudad;
+    @ManyToMany(mappedBy = "hoteles")
+    private List<Comentario> comentarios;
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,4 +22,8 @@ public class Caracteristica implements Serializable {
     private int codigo;
     @Column(nullable = false)
     private String nombre;
+    @ManyToMany
+    private List<Habitacion> habitaciones;
+    @ManyToMany
+    private List<Hotel> hoteles;
 }

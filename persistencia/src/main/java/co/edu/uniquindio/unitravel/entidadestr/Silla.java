@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,9 @@ public class Silla implements Serializable {
     @Min(0)
     @Column(nullable = false)
     private Double precio;
-
+    @ManyToOne
+    private Vuelo vuelo;
+    @ManyToMany(mappedBy = "sillas")
+    private List<Reserva>reservas;
 
 }

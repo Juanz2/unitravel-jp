@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -26,5 +27,7 @@ public class Comentario implements Serializable {
     private String calificacion;
     @Column(nullable = false)
     private LocalDateTime fechaCalificacion;
+    @ManyToMany
+    private List<Hotel> hoteles;
 
 }

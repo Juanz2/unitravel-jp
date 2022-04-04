@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,5 +35,8 @@ public class Reserva implements Serializable {
     @Column(nullable = false)
     private Integer cantidadPersonas;
 
-
+    @ManyToMany
+    private List<Silla> sillas;
+    @ManyToMany
+    private List<Habitacion> habitaciones;
 }
