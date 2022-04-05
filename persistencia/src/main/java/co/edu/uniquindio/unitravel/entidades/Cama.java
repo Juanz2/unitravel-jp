@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +11,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@AllArgsConstructor
+@ToString
 public class Cama implements Serializable {
 
     @Id
@@ -25,4 +24,9 @@ public class Cama implements Serializable {
 
     @ManyToMany
     private List<Habitacion> habitaciones;
+
+    public Cama(int codigo, String tipo) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+    }
 }
