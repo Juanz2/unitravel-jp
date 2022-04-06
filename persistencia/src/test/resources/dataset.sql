@@ -28,4 +28,4 @@ INSERT INTO silla (posicion, precio, vuelo_codigo) VALUES ("A3", "5000", "1");
 INSERT INTO hotel (nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES ("Hotel 1","Calle 1 # 24-55", "4", "23343234", "1");
 INSERT INTO hotel (nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES ("Hotel 2","Calle 32 # 66-45", "2", "23343234", "1");
 INSERT INTO hotel (nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES ("Hotel 3","Calle 15 # 23-45", "5", "23343234", "1");
-INSERT INTO hotel (nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES ("Hotel 4","Calle 17 # 17-46", "7", "23343234", "1");
+INSERT INTO hotel (nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES ("Hotel 4","Calle 17 # 17-46", "3", "23343234", "1");
