@@ -18,4 +18,13 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
 
     @Query("select h from Hotel h where h.ciudad.nombre = ?1")
     List<Hotel>obtenerHoteles(String nombreCiudad);
+
+    @Query("select h.ciudad.nombre, count(h) from Hotel h group by h.ciudad")
+    List<Object []> contarHotelesPorCiudad();
+
+    @Query("select h from Hotel h where h.comentarios is empty")
+    List<Hotel>ObtenerhotelesSinComentarios();
+
+    @Query("select h from Hotel h where h.nombre like %?1% ")
+    List<Hotel>obtenerHotelesPorNombre(String cadena);
 }

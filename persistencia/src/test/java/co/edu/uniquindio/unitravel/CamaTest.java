@@ -21,14 +21,14 @@ public class CamaTest {
     @Test
     public void registrar(){
 
-        Cama cama = new Cama(1,"Doble");
+        Cama cama = new Cama("Doble");
         Cama camaGuardada = camaRepo.save(cama);
         Assertions.assertNotNull(camaGuardada);
     }
 
     @Test
     public void eliminar (){
-        Cama cama = new Cama(1,"Doble");
+        Cama cama = new Cama("Doble");
         Cama camaGuardada = camaRepo.save(cama);
 
         camaRepo.delete(camaGuardada);
@@ -39,13 +39,14 @@ public class CamaTest {
 
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void actualizar() {
-        Cama cama = new Cama(2, "Doble XXL");
+        Cama cama = new Cama("Doble XXL");
         Cama camaGuardada = camaRepo.save(cama);
         camaGuardada.setTipo("Extra grande");
         camaRepo.save(camaGuardada);
-        Cama camaBusqueda = camaRepo.findById(2).orElse(null);
-        Assertions.assertEquals("287363/2**", camaBusqueda.getTipo());
+        Cama camaBusqueda = camaRepo.findById(camaGuardada.getCodigo()).orElse(null);
+        Assertions.assertEquals("Extra grande", camaBusqueda.getTipo());
     }
 
     @Test

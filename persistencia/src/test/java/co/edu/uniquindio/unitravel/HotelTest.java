@@ -49,4 +49,22 @@ public class HotelTest {
         System.out.println("Hoteles: " + listaHoteles);
         Assertions.assertEquals(2, listaHoteles.size());
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void contarCantidadHotelesCiudad(){
+        List<Object []> listaHotelesCiudad = hotelRepo.contarHotelesPorCiudad();
+        listaHotelesCiudad.forEach(c -> System.out.println(c[0]+"-"+c[1]));
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerHotelesSinComentario(){
+       List<Hotel> hotelesSinComentario =  hotelRepo.ObtenerhotelesSinComentarios();
+       Assertions.assertEquals(4, hotelesSinComentario.size());
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerHotelesPorNombre(){
+        List<Hotel> hotelesNombre = hotelRepo.obtenerHotelesPorNombre("Eco");
+        Assertions.assertEquals(1, hotelesNombre.size());
+    }
 }

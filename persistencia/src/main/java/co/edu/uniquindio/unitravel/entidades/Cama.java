@@ -25,8 +25,8 @@ public class Cama implements Serializable {
     @ManyToMany
     private List<Habitacion> habitaciones;
 
-    public Cama(int codigo, String tipo) {
-        this.codigo = codigo;
+    public Cama(String tipo) {
+
         this.tipo = tipo;
     }
 }

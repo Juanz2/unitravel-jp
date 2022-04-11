@@ -40,4 +40,7 @@ public class Hotel implements Serializable {
     @ManyToMany(mappedBy = "hoteles")
     @ToString.Exclude
     private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Habitacion> habitaciones;
 }
