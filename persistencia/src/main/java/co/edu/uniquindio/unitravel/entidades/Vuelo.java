@@ -25,7 +25,9 @@ public class Vuelo implements Serializable  {
     @Column(length = 30, nullable = false)
     private String aerolinea;
     @ManyToOne
-    private Ciudad ciudad;
+    private Ciudad ciudadOrigen;
+    @ManyToOne
+    private Ciudad ciudadDestino;
     @OneToMany(mappedBy = "vuelo")
     private List<Silla> sillas;
 

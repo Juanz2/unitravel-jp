@@ -67,4 +67,17 @@ public class HotelTest {
         List<Hotel> hotelesNombre = hotelRepo.obtenerHotelesPorNombre("Eco");
         Assertions.assertEquals(1, hotelesNombre.size());
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarHotelCiudad(){
+        List<Hotel> listaHoteles = hotelRepo.obtenerHotelesCiudadOrdenado("Armenia");
+        listaHoteles.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void promedioCalificacionHotel(){
+        List<Object[]> calificacion = hotelRepo.promedioCalificacionHotel();
+        calificacion.forEach(c -> System.out.println(c[0]+"-"+c[1]));
+    }
 }

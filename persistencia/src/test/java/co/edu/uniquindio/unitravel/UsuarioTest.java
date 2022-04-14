@@ -14,10 +14,12 @@ import java.util.List;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UsuarioTest {
+
     @Autowired
     private UsuarioRepo usuarioRepo;
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void registrar() {
         Usuario usuario = new Usuario("1094975931", "Juan Pablo", "jpzh@gmail.com", "123@93733");
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
@@ -25,6 +27,7 @@ public class UsuarioTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void eliminar() {
         Usuario usuario = new Usuario("1094975931", "Juan Pablo", "jpzh@gmail.com", "123@93733");
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
@@ -36,6 +39,7 @@ public class UsuarioTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void actualizar() {
         Usuario usuario = new Usuario("1094975931", "Juan Pablo", "jpzh@gmail.com", "123@93733");
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
