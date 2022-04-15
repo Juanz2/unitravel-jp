@@ -1,7 +1,10 @@
 package co.edu.uniquindio.unitravel;
 
 import co.edu.uniquindio.unitravel.dto.VueloDto;
+import co.edu.uniquindio.unitravel.entidades.Ciudad;
+import co.edu.uniquindio.unitravel.entidades.Vuelo;
 import co.edu.uniquindio.unitravel.repositorios.VueloRepo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -16,6 +19,29 @@ public class VueloTest {
 
     @Autowired
     private VueloRepo vueloRepo;
+
+
+    @Test
+    public void crearVuelo(){
+
+        Ciudad ciudadOrigen = new Ciudad("Cali");
+        Ciudad ciudadDestino = new Ciudad("Bogotá");
+        Vuelo vuelo = new Vuelo("Pendiente", "Avianca", ciudadOrigen, ciudadDestino, "A");
+        Vuelo vueloCreado = vueloRepo.save(vuelo);
+        Assertions.assertNotNull(vueloCreado);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void modificarEstadoVuelo(){
+
+        Vuelo vueloModificar = vueloRepo.findById(1).orElse(null);
+        if (vueloModificar != null) {
+            vueloModificar.setEstadoVuelo("Atrasado");
+            vueloRepo.save(vueloModificar);
+            Assertions.assertEquals("Atrasado", vueloModificar.getEstadoVuelo());
+        }
+    }
 
     @Test
     @Sql("classpath:dataset.sql")

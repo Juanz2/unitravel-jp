@@ -19,8 +19,12 @@ public class Cama implements Serializable {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
+
     @Column(nullable = false, length = 50)
     private String tipo;
+
+    @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
+    private String estado;
 
     @ManyToMany
     private List<Habitacion> habitaciones;

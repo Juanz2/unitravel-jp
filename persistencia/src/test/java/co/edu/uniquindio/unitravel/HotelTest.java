@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unitravel;
 
+import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
+import co.edu.uniquindio.unitravel.repositorios.CiudadRepo;
 import co.edu.uniquindio.unitravel.repositorios.HotelRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,32 @@ public class HotelTest {
 
     @Autowired
     private HotelRepo hotelRepo;
+   @Autowired
+    private CiudadRepo ciudadRepo;
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void crearHotel(){
+        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
+        if (ciudad!=null){
+            Hotel hotel = new Hotel("Hotel Estelar", "Calle 9 #12-90","7468729", 5, ciudad, "A");
+            Hotel hotelGuardado = hotelRepo.save(hotel);
+            Assertions.assertNotNull(hotelGuardado);
+        }
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarHotel(){
+        Hotel hotel = hotelRepo.findById(1).orElse(null);
+        if (hotel!=null){
+            hotel.setDireccion("Calle 10 # 50-01");
+            hotel.setNumeroEstrellas(4);
+            hotel.setEstado("I");
+            Hotel hotelActualizado = hotelRepo.save(hotel);
+            Assertions.assertEquals("Calle 10 # 50-01", hotelActualizado.getDireccion());
+        }
+    }
 
     @Test
     @Sql("classpath:dataset.sql")

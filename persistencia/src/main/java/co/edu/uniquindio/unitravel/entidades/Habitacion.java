@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
 public class Habitacion implements Serializable {
 
     @Id
@@ -27,6 +28,9 @@ public class Habitacion implements Serializable {
     @Min(0)
     @Column(nullable = false)
     private Integer capacidad;
+
+    @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
+    private String estado;
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "habitaciones")
@@ -47,4 +51,18 @@ public class Habitacion implements Serializable {
     @ToString.Exclude
     @ManyToOne
     private Hotel hotel;
+
+    /**
+     * Método constructor de la clase
+     * @param precio
+     * @param capacidad
+     * @param estado
+     * @param hotel
+     */
+    public Habitacion(Double precio, Integer capacidad, String estado, Hotel hotel) {
+        this.precio = precio;
+        this.capacidad = capacidad;
+        this.estado = estado;
+        this.hotel = hotel;
+    }
 }

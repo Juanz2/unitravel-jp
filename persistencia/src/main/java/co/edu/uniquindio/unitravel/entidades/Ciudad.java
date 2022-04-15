@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@AllArgsConstructor
 public class Ciudad implements Serializable {
 
     @Id
@@ -21,6 +22,9 @@ public class Ciudad implements Serializable {
 
     @Column(length = 50, nullable = false)
     private String nombre;
+
+    @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
+    private String estado;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ciudadOrigen")
@@ -32,5 +36,11 @@ public class Ciudad implements Serializable {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ciudad")
-    private List<Hotel>hoteles;
+    private List<Hotel> hoteles;
+
+
+    public Ciudad(String nombre) {
+        this.nombre = nombre;
+    }
 }
+

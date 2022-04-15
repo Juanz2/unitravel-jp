@@ -21,14 +21,22 @@ public class Comentario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
+
     @Column(nullable = false)
     private String comentario;
+
     @Column(nullable = false)
     private String calificacion;
+
     @Column(nullable = false)
     private LocalDateTime fechaCalificacion;
+
+    @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
+    private String estado;
+
     @ManyToMany
     private List<Hotel> hoteles;
+
     @ManyToOne
     private Usuario usuario;
 }

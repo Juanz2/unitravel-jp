@@ -12,5 +12,5 @@ import java.util.List;
 public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     @Query("select c.hoteles from Ciudad c where c.nombre = ?1")
-    List<Hotel>obtenerHoteles(String nombreCiudad);
+    List<Hotel>obtenerHotelesCiudad(String nombreCiudad);
 }

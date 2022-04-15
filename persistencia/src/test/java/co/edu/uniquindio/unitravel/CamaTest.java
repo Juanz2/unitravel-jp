@@ -55,7 +55,4 @@ public class CamaTest {
         List<Cama> listaCamas = camaRepo.findAll();
         System.out.println("Camas: \n" + listaCamas);
     }
-
-
-
 }

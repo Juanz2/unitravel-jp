@@ -24,6 +24,9 @@ public class Foto implements Serializable {
     @Column(nullable = false)
     private String url;
 
+    @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
+    private String estado;
+
     @ManyToMany
     private List<Habitacion> habitaciones;
 

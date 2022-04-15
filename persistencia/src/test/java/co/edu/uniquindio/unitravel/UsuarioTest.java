@@ -46,7 +46,9 @@ public class UsuarioTest {
         usuarioGuardado.setPassword("287363/2**");
         usuarioRepo.save(usuarioGuardado);
         Usuario usuarioBuscado = usuarioRepo.findById("1094975931").orElse(null);
-        Assertions.assertEquals("287363/2**", usuarioBuscado.getPassword());
+        if (usuarioBuscado != null) {
+            Assertions.assertEquals("287363/2**", usuarioBuscado.getPassword());
+        }
     }
 
     @Test
@@ -54,5 +56,23 @@ public class UsuarioTest {
     public void listar() {
         List<Usuario> usuarios = usuarioRepo.findAll();
         System.out.println("Lista:\n" + usuarios);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void validarIngresoUsuario() {
+
+        Usuario usuario = usuarioRepo.usuarioIngreso("jpzh351@gmail.com", "passw0rd123*");
+        boolean ingreso = usuario != null;
+        Assertions.assertTrue(ingreso);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void validarUsuarioCrear() {
+
+        Usuario usuario = usuarioRepo.validarUsuarioCrear("jpzh351@gmail.com", "1094874931");
+        boolean existe = usuario != null;
+        Assertions.assertTrue(existe);
     }
 }
