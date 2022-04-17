@@ -128,23 +128,15 @@ INSERT INTO RESERVA_HABITACIONES VALUES (7, 1);
 INSERT INTO RESERVA_HABITACIONES VALUES (8, 2);
 
 -------------------------Comentarios-----------------------
-INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula) VALUES (1, "5", "Es un buen hotel","2022-01-01", "1094975931");
-INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula) VALUES (2, "4", "Buena atención","2022-01-20", "1094975931");
-INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula) VALUES (3, "3", "No me gustó la comida","2022-01-15", "89004116");
-INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula) VALUES (4, "5", "Excelente la atención","2022-01-11", "1094969178");
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (1, 5, "Es un buen hotel","2022-01-01", "1094975931", 1);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (2, 4, "Buena atención","2022-01-20", "1094975931", 2);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (3, 3, "No me gustó la comida","2022-01-15", "89004116", 3);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (4, 5, "Excelente la atención","2022-01-11", "1094969178", 4);
 
-
-----------------------Comentario hoteles---------------------
-
-INSERT INTO COMENTARIO_HOTELES VALUES (1, 1);
-INSERT INTO COMENTARIO_HOTELES VALUES (2, 2);
-INSERT INTO COMENTARIO_HOTELES VALUES (3, 3);
-INSERT INTO COMENTARIO_HOTELES VALUES (4, 4);
-INSERT INTO COMENTARIO_HOTELES VALUES (4, 1);
-INSERT INTO COMENTARIO_HOTELES VALUES (3, 1);
-INSERT INTO COMENTARIO_HOTELES VALUES (4, 2);
-INSERT INTO COMENTARIO_HOTELES VALUES (4, 3);
-INSERT INTO COMENTARIO_HOTELES VALUES (4, 4);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (5, 5, "Excelente atención, amabilidad","2022-01-01", "1094975931", 5);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (6, 2, "Buen desayuno","2022-01-20", "1094975931", 6);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (7, 5, "Dejan enntrar mascotas :)","2022-01-15", "89004116", 7);
+INSERT INTO COMENTARIO (codigo, calificacion, comentario, fecha_calificacion, usuario_cedula, hotel_codigo) VALUES (8, 5, "Buen lugar para disfruta en familia","2022-01-11", "1094969178", 8);
 
 ----------------------Caracteristicas---------------------
 INSERT INTO CARACTERISTICA VALUES (1, "A", "Hotel buena ubicación cerca a centro comercial");

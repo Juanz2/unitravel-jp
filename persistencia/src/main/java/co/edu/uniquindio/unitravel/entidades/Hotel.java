@@ -46,7 +46,7 @@ public class Hotel implements Serializable {
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
     private String estado;
 
-    @ManyToMany(mappedBy = "hoteles")
+    @OneToMany(mappedBy = "hotel")
     @ToString.Exclude
     private List<Comentario> comentarios;
 

@@ -26,7 +26,7 @@ public class Comentario implements Serializable {
     private String comentario;
 
     @Column(nullable = false)
-    private String calificacion;
+    private int calificacion;
 
     @Column(nullable = false)
     private LocalDateTime fechaCalificacion;
@@ -34,8 +34,8 @@ public class Comentario implements Serializable {
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
     private String estado;
 
-    @ManyToMany
-    private List<Hotel> hoteles;
+    @ManyToOne
+    private Hotel hotel;
 
     @ManyToOne
     private Usuario usuario;

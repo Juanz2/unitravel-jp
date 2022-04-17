@@ -49,4 +49,20 @@ public class VueloTest {
         List<VueloDto> listaVuelosPorCiudad = vueloRepo.vuelosPorCiudad();
         listaVuelosPorCiudad.forEach(System.out::println);
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void vuelosAerolinea(){
+        List<Vuelo> listaVuelos = vueloRepo.vuelosAerolinea("Avianca");
+        listaVuelos.forEach(System.out::println);
+        Assertions.assertEquals(1, listaVuelos.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void vuelosPorHotel(){
+        List<Vuelo> listaVuelos = vueloRepo.vuelosPorHotel(1);
+        listaVuelos.forEach(System.out::println);
+    }
+
+
 }
