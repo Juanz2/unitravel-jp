@@ -8,5 +8,7 @@ build/
 *.ipr
 *.iws
 *.idea/
-
+*.lock
+*.bin
 /bin
+/resources/application.properties
