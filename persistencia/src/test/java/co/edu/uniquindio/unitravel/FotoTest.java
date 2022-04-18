@@ -28,7 +28,7 @@ public class FotoTest {
     @Test
     @Sql("classpath:dataset.sql")
     /**
-     *
+     * Actualización de fotos
      */
     public void actualizarFoto() {
         Foto fotoActualizar = fotoRepo.findById(1).orElse(null);
