@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@ToString
 public class Foto implements Serializable {
 
     @Id
@@ -28,8 +26,22 @@ public class Foto implements Serializable {
     private String estado;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Habitacion> habitaciones;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Hotel> hoteles;
+
+    /**
+     * Método constructor de la clase
+     * @param codigo
+     * @param url
+     * @param estado
+     */
+    public Foto(int codigo, String url, String estado) {
+        this.codigo = codigo;
+        this.url = url;
+        this.estado = estado;
+    }
 }
