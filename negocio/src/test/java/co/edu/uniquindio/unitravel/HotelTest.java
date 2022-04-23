@@ -86,7 +86,7 @@ public class HotelTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerHotelesSinComentario(){
-       List<Hotel> hotelesSinComentario =  hotelRepo.ObtenerhotelesSinComentarios();
+       List<Hotel> hotelesSinComentario =  hotelRepo.ObtenerHotelesSinComentarios();
        Assertions.assertEquals(4, hotelesSinComentario.size());
     }
     @Test

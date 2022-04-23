@@ -32,11 +32,10 @@ public class Hotel implements Serializable {
     @Column(nullable = false)
     private Integer numeroEstrellas;
 
-    @ManyToMany(mappedBy = "hoteles")
-    @ToString.Exclude
-    private List<Foto> fotos;
+    @ElementCollection
+    private List<String> fotos;
 
-    @ManyToMany(mappedBy = "hoteles")
+    @ManyToMany
     @ToString.Exclude
     private List<Caracteristica>caracteristicas;
 

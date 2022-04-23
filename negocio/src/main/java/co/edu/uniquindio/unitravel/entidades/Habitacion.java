@@ -36,16 +36,14 @@ public class Habitacion implements Serializable {
     @ManyToMany(mappedBy = "habitaciones")
     private List<Reserva> reservas;
 
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "habitaciones")
+    @ElementCollection
     private List<Cama> camas;
 
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "habitaciones")
-    private List<Foto> fotos;
+    @ElementCollection
+    private List<String> fotos;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "habitaciones")
+    @ManyToMany
     private List<Caracteristica> caracteristicas;
 
     @ToString.Exclude

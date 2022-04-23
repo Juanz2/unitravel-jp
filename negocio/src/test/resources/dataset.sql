@@ -162,9 +162,4 @@ INSERT INTO caracteristica_habitaciones VALUES (6,2);
 INSERT INTO caracteristica_habitaciones VALUES (7,3);
 INSERT INTO caracteristica_habitaciones VALUES (8,4);
 
--------------------Fotos---------------------
-
-INSERT INTO FOTO (codigo, url) values (1, "wwww.youtube.com");
-INSERT INTO FOTO (codigo, url) values (2, "wwww.google.com");
-INSERT INTO FOTO (codigo, url) values (3, "wwww.facebook.com");
 

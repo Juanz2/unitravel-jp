@@ -12,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @ToString
-public class Foto implements Serializable {
+public class Caracteristica implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,28 +20,26 @@ public class Foto implements Serializable {
     private int codigo;
 
     @Column(nullable = false)
-    private String url;
+    private String nombre;
 
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
     private String estado;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "caracteristicas")
     @ToString.Exclude
     private List<Habitacion> habitaciones;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "caracteristicas")
     @ToString.Exclude
     private List<Hotel> hoteles;
 
     /**
      * Método constructor de la clase
-     * @param codigo
-     * @param url
+     * @param nombre
      * @param estado
      */
-    public Foto(int codigo, String url, String estado) {
-        this.codigo = codigo;
-        this.url = url;
+    public Caracteristica(String nombre, String estado) {
+        this.nombre = nombre;
         this.estado = estado;
     }
 }

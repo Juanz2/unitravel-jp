@@ -29,7 +29,7 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
         Cree una consulta que permita determinar qué hoteles no tienen comentarios. Use IS EMPTY.
      */
     @Query("select h from Hotel h where h.comentarios is empty")
-    List<Hotel>ObtenerhotelesSinComentarios();
+    List<Hotel>ObtenerHotelesSinComentarios();
 
     /*
         Cree una consulta que devuelva una lista con todos los hoteles que contengan en su nombre una
