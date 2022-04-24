@@ -20,7 +20,7 @@ public class CiudadTest {
 
     @Test
     public void crearCiudad() {
-        Ciudad ciudad = new Ciudad("Cali");
+        Ciudad ciudad = new Ciudad("Cali", "A");
         Ciudad ciudadGuardada = ciudadRepo.save(ciudad);
         Assertions.assertNotNull(ciudadGuardada);
     }

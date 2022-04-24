@@ -50,4 +50,6 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
      */
     @Query("select h, avg(com.calificacion) from Hotel h inner join h.comentarios com group by h")
     List<Object[]> promedioCalificacionHotel();
+    @Query("select h from Hotel h where h.estado = 'A'")
+    List<Hotel> obtenerListaHoteles ();
 }

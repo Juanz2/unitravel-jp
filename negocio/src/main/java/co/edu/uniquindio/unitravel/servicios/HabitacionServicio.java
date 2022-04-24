@@ -7,7 +7,7 @@ import java.util.List;
 public interface HabitacionServicio {
 
     Habitacion registrarHabitacion(Habitacion habitacion) throws Exception;
-    Habitacion actualizarHabitacion (Habitacion habitacion);
+    Habitacion actualizarHabitacion (Habitacion habitacion) throws Exception;
     Habitacion obtenerHabitacion (int codigo) throws Exception;
     void eliminarVuelo (int codigo) throws Exception;
 

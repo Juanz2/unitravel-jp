@@ -24,8 +24,8 @@ public class VueloTest {
     @Test
     public void crearVuelo(){
 
-        Ciudad ciudadOrigen = new Ciudad("Cali");
-        Ciudad ciudadDestino = new Ciudad("Bogotá");
+        Ciudad ciudadOrigen = new Ciudad("Cali", "A");
+        Ciudad ciudadDestino = new Ciudad("Bogotá", "A");
         Vuelo vuelo = new Vuelo("Pendiente", "Avianca", ciudadOrigen, ciudadDestino, "A");
         Vuelo vueloCreado = vueloRepo.save(vuelo);
         Assertions.assertNotNull(vueloCreado);

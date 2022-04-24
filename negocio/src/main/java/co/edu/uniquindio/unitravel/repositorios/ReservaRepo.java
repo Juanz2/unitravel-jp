@@ -30,4 +30,6 @@ public interface ReservaRepo extends JpaRepository<Reserva, Integer> {
      */
     @Query("select res from Reserva res where res.usuario.cedula = ?1")
     List<Reserva>listaReservasUsuario(String cedula);
+    @Query("select res from Reserva  res where res.estado = 'A'")
+    List<Reserva> obtenerListaReservas();
 }

@@ -15,4 +15,6 @@ public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
     @Query("select new co.edu.uniquindio.unitravel.dto.ComentarioDto(c.usuario.nombre, c.hotel.nombre, c.fechaCalificacion, c.calificacion, c.comentario) " +
             "from Comentario c where c.estado = 'A'")
     List<ComentarioDto> comentariosHoteles();
+    @Query("select c from Comentario c where c.estado = 'A'")
+    List<Comentario> obtenerComentarios ();
 }

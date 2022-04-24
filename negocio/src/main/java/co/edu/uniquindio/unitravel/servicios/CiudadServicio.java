@@ -7,7 +7,7 @@ import java.util.List;
 public interface CiudadServicio {
 
     Ciudad registrarCiudad(Ciudad ciudad) throws Exception;
-    Ciudad actualizarCiudad (Ciudad ciudad);
+    Ciudad actualizarCiudad (Ciudad ciudad) throws Exception;
     Ciudad obtenerCiudad (int codigo) throws  Exception;
     void eliminarCiudad (int codigo) throws  Exception;
     List<Ciudad> listarCiudades() ;

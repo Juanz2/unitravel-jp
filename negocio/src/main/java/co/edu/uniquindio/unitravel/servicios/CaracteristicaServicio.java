@@ -11,6 +11,6 @@ public interface CaracteristicaServicio {
     Caracteristica obtenerCaracteristica(int codigo) throws Exception;
     void eliminarCaracteristica(int codigo) throws Exception;
 
-    List<Caracteristica> obtenerCarasteristicas();
+    List<Caracteristica> obtenerCaracteristicas();
 
 }

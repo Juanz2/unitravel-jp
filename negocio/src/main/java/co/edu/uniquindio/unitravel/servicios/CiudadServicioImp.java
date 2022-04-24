@@ -25,7 +25,11 @@ public class CiudadServicioImp implements CiudadServicio{
     }
 
     @Override
-    public Ciudad actualizarCiudad(Ciudad ciudad) {
+    public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception{
+        Ciudad ciudadBusqueda = ciudadRepo.obtenerCiudad(ciudad.getNombre());
+        if(ciudadBusqueda !=null)
+            throw new Exception("La ciudad "+ ciudad.getNombre() + " ya se encuentra creada");
+
         return ciudadRepo.save(ciudad);
     }
 

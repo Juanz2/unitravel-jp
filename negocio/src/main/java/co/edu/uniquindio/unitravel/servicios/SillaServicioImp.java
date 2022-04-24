@@ -7,17 +7,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SillaImp implements SillaServicio{
+public class SillaServicioImp implements SillaServicio{
 
     private final SillaRepo sillaRepo;
 
-    public SillaImp(SillaRepo sillaRepo) {this.sillaRepo = sillaRepo;}
+    public SillaServicioImp(SillaRepo sillaRepo) {this.sillaRepo = sillaRepo;}
 
     @Override
-    public Silla registrarSilla(Silla silla) throws Exception {return sillaRepo.save(silla);}
+    public Silla registrarSilla(Silla silla) throws Exception {
+        if (silla.getPrecio() <=0){
+            throw new Exception("El valor de la silla debe ser mayor a 0");
+        }
+        return sillaRepo.save(silla);
+    }
 
     @Override
-    public Silla actualizarSilla(Silla silla) {return sillaRepo.save(silla);}
+    public Silla actualizarSilla(Silla silla) throws Exception{
+        if(silla.getPrecio() <=0)
+            throw new Exception("El precio de la silla debe ser mayor a 0");
+        return sillaRepo.save(silla);
+    }
 
     @Override
     public Silla obtenerSilla(int codigo) throws Exception {

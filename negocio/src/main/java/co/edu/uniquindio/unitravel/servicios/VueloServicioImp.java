@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VueloImp implements VueloServicio{
+public class VueloServicioImp implements VueloServicio{
 
 
     private final VueloRepo vueloRepo;
 
-    public VueloImp (VueloRepo vueloRepo){
+    public VueloServicioImp(VueloRepo vueloRepo){
         this.vueloRepo = vueloRepo;
     }
 

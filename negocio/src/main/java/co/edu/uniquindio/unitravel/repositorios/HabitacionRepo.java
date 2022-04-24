@@ -14,6 +14,7 @@ public interface HabitacionRepo extends JpaRepository<Habitacion, Integer> {
 
     @Query("select c from Caracteristica c join c.habitaciones hb where hb.codigo = ?1")
     List<Caracteristica> obtenerCaracteristicasHabitacion(int codigoHabitacion);
-
+    @Query("select h from Habitacion h where h.estado = 'A'")
+    List<Habitacion> obtenerListaHabitaciones();
 
 }

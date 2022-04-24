@@ -54,7 +54,7 @@ public class Reserva implements Serializable {
     private Usuario usuario;
 
     /**
-     * Método comnstructor de la clase
+     * Método constructor de la clase
      * @param fechaReserva
      * @param fechaInicio
      * @param precioTotal

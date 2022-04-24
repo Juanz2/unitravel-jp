@@ -5,11 +5,11 @@ import co.edu.uniquindio.unitravel.repositorios.ComentarioRepo;
 
 import java.util.List;
 
-public class ComentarioImpl implements ComentarioServicio {
+public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
 
-    public ComentarioImpl(ComentarioRepo comentarioRepo) {this.comentarioRepo = comentarioRepo;}
+    public ComentarioServicioImpl(ComentarioRepo comentarioRepo) {this.comentarioRepo = comentarioRepo;}
 
 
     @Override
@@ -38,6 +38,6 @@ public class ComentarioImpl implements ComentarioServicio {
 
     @Override
     public List<Comentario> obtenerComentarios() {
-        return null;
+        return comentarioRepo.obtenerComentarios();
     }
 }

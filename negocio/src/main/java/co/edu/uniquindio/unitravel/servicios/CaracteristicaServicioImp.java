@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CaracteristicaImp implements CaracteristicaServicio{
+public class CaracteristicaServicioImp implements CaracteristicaServicio{
 
     private final CaracteristicaRepo caracteristicaRepo;
 
-    public CaracteristicaImp(CaracteristicaRepo caracteristicaRepo) {this.caracteristicaRepo = caracteristicaRepo;}
+    public CaracteristicaServicioImp(CaracteristicaRepo caracteristicaRepo) {this.caracteristicaRepo = caracteristicaRepo;}
 
     @Override
     public Caracteristica registrarCaracteristica(Caracteristica caracteristica){
@@ -42,8 +42,7 @@ public class CaracteristicaImp implements CaracteristicaServicio{
     }
 
     @Override
-    public List<Caracteristica> obtenerCarasteristicas() {
-        //No esta el metodo obtener caracteristicas
-        return null;
+    public List<Caracteristica> obtenerCaracteristicas() {
+        return caracteristicaRepo.obtenerListaCaracteristicas();
     }
 }

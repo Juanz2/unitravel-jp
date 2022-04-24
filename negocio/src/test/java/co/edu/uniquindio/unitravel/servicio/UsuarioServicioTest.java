@@ -19,15 +19,20 @@ public class UsuarioServicioTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
-    public void crearUsuario() throws Exception {
+    public void crearUsuario() {
+
         Usuario usuario = new Usuario("1094975931", "Juan Pablo", "jpzh@gmail.com", "123@93733");
-        Usuario usuarioGuardado = usuarioServicio.registrarUsuario(usuario);
-        Assertions.assertNotNull(usuarioGuardado);
+        try {
+            Usuario usuarioGuardado = usuarioServicio.registrarUsuario(usuario);
+            Assertions.assertNotNull(usuarioGuardado);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarUsuario()  {
+    public void actualizarUsuario() {
         Usuario usuario;
         try {
             usuario = usuarioServicio.obtenerUsuario("1094975931");
@@ -43,26 +48,25 @@ public class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void eliminarUsuario()  {
+    public void eliminarUsuario() {
 
         try {
             usuarioServicio.eliminarUsuario("1094975931");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarUsuarios ()  {
+    public void listarUsuarios() {
         List<Usuario> listaUsuarios;
         try {
             listaUsuarios = usuarioServicio.listarUsuarios();
             Assertions.assertEquals(5, listaUsuarios.size());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
     }
 }
 
