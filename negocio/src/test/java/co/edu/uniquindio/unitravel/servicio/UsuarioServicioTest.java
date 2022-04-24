@@ -19,6 +19,7 @@ public class UsuarioServicioTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void crearUsuario() {
 
         Usuario usuario = new Usuario("1094975931", "Juan Pablo", "jpzh@gmail.com", "123@93733");
