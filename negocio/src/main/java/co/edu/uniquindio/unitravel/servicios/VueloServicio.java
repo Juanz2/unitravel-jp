@@ -10,5 +10,6 @@ public interface VueloServicio {
     Vuelo actualizarVuelo (Vuelo vuelo);
     Vuelo obtenerVuelo (int codigo) throws Exception;
     void eliminarVuelo (int codigo) throws Exception;
+
     List<Vuelo> obtenerVuelos ();
 }

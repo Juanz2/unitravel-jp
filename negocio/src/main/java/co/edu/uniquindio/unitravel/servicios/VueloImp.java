@@ -17,7 +17,7 @@ public class VueloImp implements VueloServicio{
     }
 
     @Override
-    public Vuelo registrarVuelo(Vuelo vuelo)  {return vueloRepo.save(vuelo);}
+    public Vuelo registrarVuelo(Vuelo vuelo) {return vueloRepo.save(vuelo);}
 
     @Override
     public Vuelo actualizarVuelo(Vuelo vuelo) {return vueloRepo.save(vuelo);}
