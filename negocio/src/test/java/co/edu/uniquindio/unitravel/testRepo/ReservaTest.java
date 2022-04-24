@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unitravel;
+package co.edu.uniquindio.unitravel.testRepo;
 
 import co.edu.uniquindio.unitravel.entidades.Reserva;
 import co.edu.uniquindio.unitravel.entidades.Usuario;

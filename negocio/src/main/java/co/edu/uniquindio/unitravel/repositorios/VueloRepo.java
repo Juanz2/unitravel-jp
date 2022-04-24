@@ -22,4 +22,7 @@ public interface VueloRepo extends JpaRepository<Vuelo, Integer> {
 
     @Query("select v from Hotel h join h.habitaciones hb join hb.reservas res join res.sillas si join si.vuelo v where h.codigo =  ?1")
     List<Vuelo> vuelosPorHotel(int codigoHotel);
+
+    @Query("select v from Vuelo v where v.estado = 'A'")
+    List<Vuelo> obtenerVuelos();
 }

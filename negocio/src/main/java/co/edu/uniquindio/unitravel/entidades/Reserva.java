@@ -30,6 +30,8 @@ public class Reserva implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaInicio;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaFin;
     @Min(0)
     @Column(nullable = false)
     private Double precioTotal;
