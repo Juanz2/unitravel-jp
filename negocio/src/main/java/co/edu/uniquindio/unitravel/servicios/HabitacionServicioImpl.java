@@ -21,7 +21,7 @@ public class HabitacionServicioImpl implements HabitacionServicio {
         if (habitacion.getPrecio() <= 0)
             throw new Exception("El valor de la habitación debe ser mayor a 0");
 
-        if(habitacion.getCapacidad() <= 0)
+        if (habitacion.getCapacidad() <= 0)
             throw new Exception("La capacidad de la habitacion debe ser mayor a 0");
         return habitacionRepo.save(habitacion);
     }
@@ -31,7 +31,7 @@ public class HabitacionServicioImpl implements HabitacionServicio {
         if (habitacion.getPrecio() <= 0)
             throw new Exception("El valor de la habitación debe ser mayor a 0");
 
-        if(habitacion.getCapacidad() <= 0)
+        if (habitacion.getCapacidad() <= 0)
             throw new Exception("La capacidad de la habitacion debe ser mayor a 0");
         return habitacionRepo.save(habitacion);
     }
@@ -46,7 +46,7 @@ public class HabitacionServicioImpl implements HabitacionServicio {
     }
 
     @Override
-    public void eliminarVuelo(int codigo) throws Exception {
+    public void eliminarHabitacion(int codigo) throws Exception {
         Habitacion habitacion = habitacionRepo.findById(codigo).orElse(null);
         if (habitacion == null) {
             throw new Exception("La habitacion " + codigo + "No existe");
@@ -55,7 +55,7 @@ public class HabitacionServicioImpl implements HabitacionServicio {
     }
 
     @Override
-    public List<Habitacion> obtenerHabitacion() {
+    public List<Habitacion> obtenerHabitaciones() {
         return habitacionRepo.obtenerListaHabitaciones();
     }
 }

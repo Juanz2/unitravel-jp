@@ -19,6 +19,9 @@ public class Hotel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
 
+    @Column(length = 15, nullable = false)
+    private String nit;
+
     @Column(nullable = false, length = 200)
     private String nombre;
 
@@ -61,12 +64,13 @@ public class Hotel implements Serializable {
      * @param ciudad
      * @param estado
      */
-    public Hotel(String nombre, String direccion, String telefono, Integer numeroEstrellas, Ciudad ciudad, String estado) {
+    public Hotel(String nombre, String nit, String direccion, String telefono, Integer numeroEstrellas, Ciudad ciudad, String estado) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.numeroEstrellas = numeroEstrellas;
         this.ciudad = ciudad;
         this.estado = estado;
+        this.nit = nit;
     }
 }

@@ -16,8 +16,8 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
     @Query("select h.ciudad.nombre from Hotel h where  h.codigo = ?1")
     String obtenerNombreCiudad(Integer codigo);
 
-    @Query("select h from Hotel h where h.ciudad.nombre = ?1")
-    List<Hotel>obtenerHoteles(String nombreCiudad);
+    @Query("select h from Hotel h where h.ciudad.nombre = ?1 and h.estado = 'A'")
+    List<Hotel>obtenerHotelesNombre(String nombreCiudad);
 
     /*
         Cree una consulta que permita contar el número de hoteles que hay por cada ciudad. Use GROUP BY.
@@ -52,4 +52,7 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
     List<Object[]> promedioCalificacionHotel();
     @Query("select h from Hotel h where h.estado = 'A'")
     List<Hotel> obtenerListaHoteles ();
+
+    @Query("select h from Hotel  h where h.nit = ?1")
+    Hotel obtenerHotelNit(String nit);
 }

@@ -29,8 +29,9 @@ public class ReservaTest {
         Usuario usuario = usuarioRepo.findById("1094975931").orElse(null);
         LocalDateTime fechaReserva = LocalDateTime.parse("2022-04-14T18:14:01.184");
         LocalDateTime fechaInicio = LocalDateTime.parse("2022-04-20T20:12:04.184");
+        LocalDateTime fechaFin = LocalDateTime.parse("2022-04-21T20:12:04.184");
         if(usuario!=null){
-            Reserva reserva = new Reserva(fechaReserva, fechaInicio, 250000.0, "Reservado", "A", 4, usuario);
+            Reserva reserva = new Reserva(fechaReserva, fechaInicio, fechaFin,250000.0, "Reservado", "A", 4, usuario);
             Reserva reservaGuardada = reservaRepo.save(reserva);
             Assertions.assertNotNull(reservaGuardada);
         }

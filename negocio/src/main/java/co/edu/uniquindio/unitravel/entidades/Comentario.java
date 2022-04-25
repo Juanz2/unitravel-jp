@@ -39,4 +39,22 @@ public class Comentario implements Serializable {
 
     @ManyToOne
     private Usuario usuario;
+
+
+    /**
+     * Metodo constructor de la clase
+     * @param comentario comentario
+     * @param calificacion calificacion
+     * @param estado estado
+     * @param hotel hotel
+     * @param usuario usuario
+     */
+    public Comentario(String comentario, int calificacion, String estado, Hotel hotel, Usuario usuario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.estado = estado;
+        this.hotel = hotel;
+        this.usuario = usuario;
+        this.fechaCalificacion = LocalDateTime.now();
+    }
 }

@@ -25,4 +25,7 @@ public class NivelAcceso {
     @OneToMany(mappedBy = "nivelAcceso")
     private List<Usuario> usuarios;
 
+    @Column(nullable = false, length = 1)
+    private String estado;
+
 }
