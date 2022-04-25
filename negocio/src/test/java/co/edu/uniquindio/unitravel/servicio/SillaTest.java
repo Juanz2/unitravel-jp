@@ -1,7 +1,9 @@
 package co.edu.uniquindio.unitravel.servicio;
 
 import co.edu.uniquindio.unitravel.entidades.Silla;
+import co.edu.uniquindio.unitravel.entidades.Vuelo;
 import co.edu.uniquindio.unitravel.servicios.SillaServicio;
+import co.edu.uniquindio.unitravel.servicios.VueloServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,18 @@ public class SillaTest {
 
         @Autowired
         private SillaServicio sillaServicio;
+        @Autowired
+        private VueloServicio vueloServicio;
 
         @Test
         @Sql("classpath:dataset.sql")
         public void registrarSilla() {
 
-            Silla silla = new Silla("A", "Disponible");
+
+
             try {
+                Vuelo vuelo = vueloServicio.obtenerVuelo(1);
+                Silla silla = new Silla("D1", 25000.00, vuelo, "A", "Disponible");
                 sillaServicio.registrarSilla(silla);
             } catch (Exception e) {
                 System.out.println(e.getMessage());

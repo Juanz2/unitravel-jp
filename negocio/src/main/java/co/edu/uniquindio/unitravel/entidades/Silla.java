@@ -46,7 +46,7 @@ public class Silla implements Serializable {
      * @param posicion
      * @param estado
      */
-    public Silla(String posicion, String estado) {
+    public Silla(String posicion,double precio,Vuelo vuelo ,String estado, String estadoSilla) {
         this.posicion = posicion;
         this.precio = precio;
         this.vuelo = vuelo;
