@@ -27,7 +27,7 @@ public class HotelTest {
     public void crearHotel(){
         Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
         if (ciudad!=null){
-            Hotel hotel = new Hotel("Hotel Estelar", "Calle 9 #12-90","7468729", 5, ciudad, "A");
+            Hotel hotel = new Hotel("Hotel Estelar", "489927666-7","Calle 9 #12-90","7468729", 5, ciudad, "A");
             Hotel hotelGuardado = hotelRepo.save(hotel);
             Assertions.assertNotNull(hotelGuardado);
         }
@@ -73,7 +73,7 @@ public class HotelTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerListaHotelCiudad (){
-        List<Hotel> listaHoteles = hotelRepo.obtenerHoteles("Armenia");
+        List<Hotel> listaHoteles = hotelRepo.obtenerHotelesNombre("Armenia");
         System.out.println("Hoteles: " + listaHoteles);
         Assertions.assertEquals(2, listaHoteles.size());
     }

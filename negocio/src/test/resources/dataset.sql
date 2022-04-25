@@ -1,9 +1,9 @@
 ---------------------Niveles accesos--------------------
-INSERT INTO NIVEL_ACCESO VALUES (1, "ADMINISTRADOR");
-INSERT INTO NIVEL_ACCESO VALUES (2, "ADMINISTRADOR HOTEL");
-INSERT INTO NIVEL_ACCESO VALUES (3, "CLIENTE");
+INSERT INTO NIVEL_ACCESO VALUES (1, "A", "ADMINISTRADOR");
+INSERT INTO NIVEL_ACCESO VALUES (2, "A", "ADMINISTRADOR HOTEL");
+INSERT INTO NIVEL_ACCESO VALUES (3, "A", "CLIENTE");
 ---------------------Usuarios--------------------
-insert into usuario values ("1094975931", "jpzh351@gmail.com", "Juan Pablo Zabala", "passw0rd123*", 1);
+insert into usuario values ("1094975931", "jpzh315@gmail.com", "Juan Pablo Zabala", "passw0rd123*", 1);
 insert into usuario values ("1094969178", "pepe@email.com", "Pepe Perez", "654", 2);
 insert into usuario values ("89004116", "pedro@email.com", "Pedro Martinez", "342", 3);
 
@@ -50,14 +50,14 @@ INSERT INTO silla (posicion, precio, vuelo_codigo, estado, estado_silla) VALUES 
 INSERT INTO silla (posicion, precio, vuelo_codigo, estado, estado_silla) VALUES ("C3", "25000", "2", "A", "Disponible");
 
 ---------------------Hoteles--------------------
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (1,"Hotel Casa grande","Calle 1 # 24-55", "4", "7467833", "1");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (2,"Hotel De Lujo","Calle 32 # 66-45", "2", "318278233", "2");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (3,"Hotel San Marcos","Calle 15 # 23-45", "5", "781633344", "3");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (4,"Hotel Villa Nación","Calle 17 # 17-46", "3", "3109874567", "4");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (5,"Hotel Happy","Calle 17 # 17-46", "3", "3109874567", "4");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (6,"Hotel Eco","Calle 22 # 34-46", "3", "3109874567", "1");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (7,"Hotel Start","Calle 12 # 45-34", "5", "73652344", "4");
-INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo) VALUES (8,"Hotel Mocawa","Calle 17 # 76-78", "5", "62827663", "1");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (1,"Hotel Casa grande","Calle 1 # 24-55", "4", "7467833", "1", "903873633-2");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (2,"Hotel De Lujo","Calle 32 # 66-45", "2", "318278233", "2", "801983733-4");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (3,"Hotel San Marcos","Calle 15 # 23-45", "5", "781633344", "3", "18398373-7");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (4,"Hotel Villa Nación","Calle 17 # 17-46", "3", "3109874567", "4", "17837333-4");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (5,"Hotel Happy","Calle 17 # 17-46", "3", "3109874567", "4", "18993773-2");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (6,"Hotel Eco","Calle 22 # 34-46", "3", "3109874567", "1", "900762522-5");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (7,"Hotel Start","Calle 12 # 45-34", "5", "73652344", "4", "1289723311-8");
+INSERT INTO hotel (codigo, nombre, direccion, numero_estrellas, telefono, ciudad_codigo, nit) VALUES (8,"Hotel Mocawa","Calle 17 # 76-78", "5", "62827663", "1", "17827265533-1");
 
 ------------------Habitaciones--------------------
 INSERT INTO habitacion VALUES (1, 2, "A",520000,1);

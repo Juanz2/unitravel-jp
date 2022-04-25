@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unitravel.servicio;
 
 import co.edu.uniquindio.unitravel.entidades.Usuario;
+import co.edu.uniquindio.unitravel.servicios.EmailServicio;
 import co.edu.uniquindio.unitravel.servicios.UsuarioServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ public class UsuarioServicioTest {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+    @Autowired
+    private EmailServicio emailServicio;
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -68,6 +71,11 @@ public class UsuarioServicioTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void enviarCorreo(){
+        boolean estado = emailServicio.EnviarEmail("Prueba", "Mensaje generado de prueba", "jpzh315@gmail.com");
+        Assertions.assertTrue(estado);
     }
 }
 

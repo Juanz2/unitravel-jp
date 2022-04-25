@@ -28,7 +28,7 @@ public interface ReservaRepo extends JpaRepository<Reserva, Integer> {
     Cree una consulta que devuelva una lista de reservas y el detalle de cada reserva de un cliente
     dado su código.
      */
-    @Query("select res from Reserva res where res.usuario.cedula = ?1")
+    @Query("select res from Reserva res where res.usuario.cedula = ?1 and res.estado = 'A'")
     List<Reserva>listaReservasUsuario(String cedula);
     @Query("select res from Reserva  res where res.estado = 'A'")
     List<Reserva> obtenerListaReservas();

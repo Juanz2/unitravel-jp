@@ -12,4 +12,6 @@ public interface UsuarioServicio {
     void eliminarUsuario(String cedula) throws Exception;
     List<Usuario> listarUsuarios() throws Exception;
     Usuario validarLogin(String correo, String password) throws Exception;
+
+    void recuperarPassword(String correo) throws  Exception;
 }

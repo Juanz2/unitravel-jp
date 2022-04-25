@@ -63,9 +63,10 @@ public class Reserva implements Serializable {
      * @param cantidadPersonas
      * @param usuario
      */
-    public Reserva(LocalDateTime fechaReserva, LocalDateTime fechaInicio, Double precioTotal, String estadoReserva, String estado, Integer cantidadPersonas, Usuario usuario) {
+    public Reserva(LocalDateTime fechaReserva, LocalDateTime fechaInicio, LocalDateTime fechaFin,Double precioTotal, String estadoReserva, String estado, Integer cantidadPersonas, Usuario usuario) {
         this.fechaReserva = fechaReserva;
         this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.precioTotal = precioTotal;
         this.estadoReserva = estadoReserva;
         this.estado = estado;
