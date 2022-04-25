@@ -41,6 +41,11 @@ public class VueloServicioImp implements VueloServicio{
     }
 
     @Override
+    public List<Vuelo> listarVuelos() {
+        return null;
+    }
+
+    @Override
     public List<Vuelo> obtenerVuelos() {
         return vueloRepo.obtenerVuelos();
     }

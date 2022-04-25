@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-public class Vuelo implements Serializable  {
+public class Vuelo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +42,7 @@ public class Vuelo implements Serializable  {
 
     /**
      * Metodo constructor de la clase
+     *
      * @param estadoVuelo
      * @param aerolinea
      * @param ciudadOrigen

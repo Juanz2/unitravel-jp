@@ -44,11 +44,9 @@ public class Silla implements Serializable {
     /**
      * Método constructor de la clase
      * @param posicion
-     * @param precio
-     * @param vuelo
      * @param estado
      */
-    public Silla(String posicion, Double precio, Vuelo vuelo, String estado, String estadoSilla) {
+    public Silla(String posicion, String estado) {
         this.posicion = posicion;
         this.precio = precio;
         this.vuelo = vuelo;

@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -16,6 +15,16 @@ import java.util.List;
 @Getter
 @Setter
 public class Comentario implements Serializable {
+
+    public Comentario(String comentario,int calificacion, String estado, Hotel hotel, Usuario usuario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.estado = estado;
+        this.hotel = hotel;
+        this.usuario = usuario;
+        this.fechaCalificacion = LocalDateTime.now();
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

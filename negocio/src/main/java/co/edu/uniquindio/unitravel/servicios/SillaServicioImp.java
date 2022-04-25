@@ -2,6 +2,7 @@ package co.edu.uniquindio.unitravel.servicios;
 
 import co.edu.uniquindio.unitravel.entidades.Silla;
 import co.edu.uniquindio.unitravel.repositorios.SillaRepo;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class SillaServicioImp implements SillaServicio{
     }
 
     @Override
-    public Silla actualizarSilla(Silla silla) throws Exception{
+    public Silla actualizarSilla(@NotNull Silla silla) throws Exception{
         if(silla.getPrecio() <=0)
             throw new Exception("El precio de la silla debe ser mayor a 0");
         return sillaRepo.save(silla);
@@ -47,5 +48,16 @@ public class SillaServicioImp implements SillaServicio{
     }
 
     @Override
-    public List<Silla> obtenerSillas() {return sillaRepo.obtenerSillasOrdenPrecio();}
+    public List<Silla> listarSillas() {
+        return null;
+    }
+
+    @Override
+    public List<Silla> obtenerSillas() {
+        return null;
+    }
+
+
+
+
 }
