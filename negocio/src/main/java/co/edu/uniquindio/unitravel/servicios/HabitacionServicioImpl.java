@@ -4,6 +4,7 @@ import co.edu.uniquindio.unitravel.entidades.Habitacion;
 import co.edu.uniquindio.unitravel.repositorios.HabitacionRepo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -54,8 +55,14 @@ public class HabitacionServicioImpl implements HabitacionServicio {
         habitacionRepo.delete(habitacion);
     }
 
+
     @Override
     public List<Habitacion> obtenerHabitaciones() {
         return habitacionRepo.obtenerListaHabitaciones();
+    }
+
+    @Override
+    public List<Habitacion> obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReserva){
+        return habitacionRepo.obtenerHabitacionesDisponibles(fechaInicioReserva);
     }
 }

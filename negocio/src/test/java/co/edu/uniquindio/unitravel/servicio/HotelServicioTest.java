@@ -14,7 +14,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
 public class HotelServicioTest {
 
     @Autowired

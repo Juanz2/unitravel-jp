@@ -88,8 +88,8 @@ INSERT INTO habitacion_camas VALUES (11,1);
 INSERT INTO habitacion_camas VALUES (12,1);
 
 -----------------------Reserva---------------------
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (1, 4, "A", "2022-04-22", "2022-04-24", "2022-01-01", 500000, "89004116");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (2, 3, "A", "2022-04-23", "2022-04-26", "2022-04-26", 300000, "1094975931");
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (1, 4, "A", "2022-04-22", "20242-0-24", "2022-01-01", 500000, "89004116");
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (2, 3, "A", "2022-04-21", "2022-04-26", "2022-04-26", 300000, "1094975931");
 INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (3, 2, "A", "2022-04-18", "2022-04-22", "2022-04-22", 500000, "1094975931");
 INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (4, 1, "A", "2022-04-12", "2022-04-16", "2022-04-16", 250000, "1094969178");
 INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (5, 7, "A", "2022-04-11", "2022-04-15", "2022-04-15", 500000, "89004116");

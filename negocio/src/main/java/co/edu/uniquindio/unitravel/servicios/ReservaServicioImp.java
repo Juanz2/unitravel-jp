@@ -1,9 +1,11 @@
 package co.edu.uniquindio.unitravel.servicios;
 
+import co.edu.uniquindio.unitravel.entidades.Habitacion;
 import co.edu.uniquindio.unitravel.entidades.Reserva;
 import co.edu.uniquindio.unitravel.repositorios.ReservaRepo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,12 +45,7 @@ public class ReservaServicioImp implements ReservaServicio {
     @Override
     public Reserva actualizarReserva(Reserva reserva) throws Exception {
 
-        String descripcionCorreo = "Se ha actualizado la reserva correctamente \n" +
-                "Detalles: \n\n" +
-                "Fecha inicio: " + reserva.getFechaInicio() +
-                "\nFecha fin " + reserva.getFechaFin() +
-                "\nNumero de personas: " + reserva.getCantidadPersonas() +
-                "\nValor total: " + reserva.getPrecioTotal();
+        String descripcionCorreo = obtenerDescripcionReserva(reserva);
 
         if (reserva.getFechaInicio().isAfter(reserva.getFechaFin())) {
             throw new Exception("La fecha inicio" + reserva.getFechaInicio() + " es mayor a la fecha fin " + reserva.getFechaFin());
@@ -89,4 +86,20 @@ public class ReservaServicioImp implements ReservaServicio {
     public List<Reserva> listarReservasUsuario(String cedula) {
         return reservaRepo.listaReservasUsuario(cedula);
     }
+
+    /**
+     * Obtiene la descripción de la reserva para formar el cuerpo del mensaje de correo
+     * @param reserva del cliente
+     * @return Detalle reserva
+     */
+    private String obtenerDescripcionReserva (Reserva reserva){
+        return  "Se ha actualizado la reserva correctamente \n" +
+                "Detalles: \n\n" +
+                "Fecha inicio: " + reserva.getFechaInicio() +
+                "\nFecha fin " + reserva.getFechaFin() +
+                "\nNumero de personas: " + reserva.getCantidadPersonas() +
+                "\nValor total: " + reserva.getPrecioTotal();
+    }
+
+
 }

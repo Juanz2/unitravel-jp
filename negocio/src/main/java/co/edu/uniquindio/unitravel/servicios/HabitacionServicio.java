@@ -2,6 +2,7 @@ package co.edu.uniquindio.unitravel.servicios;
 
 import co.edu.uniquindio.unitravel.entidades.Habitacion;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface HabitacionServicio {
@@ -12,4 +13,6 @@ public interface HabitacionServicio {
     void eliminarHabitacion (int codigo) throws Exception;
 
     List<Habitacion> obtenerHabitaciones ();
+
+    List<Habitacion>obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReservaß);
 }
