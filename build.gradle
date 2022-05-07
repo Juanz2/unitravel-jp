@@ -17,7 +17,7 @@ subprojects {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-        implementation 'org.primefaces:primefaces:10.0.0'
+        implementation 'org.primefaces:primefaces:11.0.0'
 
     }
 }

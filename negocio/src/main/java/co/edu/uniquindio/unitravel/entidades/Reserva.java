@@ -53,6 +53,9 @@ public class Reserva implements Serializable {
     @ManyToOne
     private Usuario usuario;
 
+    @ManyToOne
+    private MetodoPago metodoPago;
+
     /**
      * Método constructor de la clase
      * @param fechaReserva
