@@ -30,6 +30,10 @@ public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
     private NivelAcceso nivelAcceso;
+
+    @ManyToOne
+    private Ciudad ciudad;
+
     public Usuario(String codigo, String nombre, @Email String correo, String password) {
         super(codigo, nombre, correo, password);
     }

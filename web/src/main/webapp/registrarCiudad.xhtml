@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Página de Inicio</title>
+</h:head>
+<h:body>
+   <h:form id="form">
+       <div class="card crud-demo">
+           <p:toolbar>
+               <p:toolbarGroup>
+                   <p:commandButton value="Nueva ciudad" icon="pi pi-plus"
+                   update=":form:manage-ciudad-content" oncomplete="PF('manageCiudadDialog').show()"
+                                    styleClass="ui-button-success" style="margin-right: .5rem">
+                    <p:resetInput target=":form:manage-ciudad-content"/>
+                   </p:commandButton>
+               </p:toolbarGroup>
+           </p:toolbar>
+       </div>
+
+       <p:dialog header="Registro Ciudad" showEffect="fade" modal="true"
+                 widgetVar="manageCiudadDialog" responsive="true">
+           <p:outputPanel id="manage-ciudad-content" class="ui-fluid">
+               <div class="p-field">
+                   <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
+                   <p:inputText id="name" value="#{ciudadBean.ciudad.nombre}" required="true"/>
+               </div>
+           </p:outputPanel>
+
+           <f:facet name="footer">
+               <p:commandButton value="Save" icon="pi pi-check" actionListener="#{ciudadBean.registrarCiudad()}"
+                                update="manage-ciudad-content" process="manage-ciudad-content @this"/>
+               <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCiudadDialog').hide()"
+                                class="ui-button-secondary"/>
+           </f:facet>
+       </p:dialog>
+       <p:growl showDetail="true"/>
+   </h:form>
+</h:body>
+</html>

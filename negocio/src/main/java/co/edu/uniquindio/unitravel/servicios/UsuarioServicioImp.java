@@ -19,12 +19,12 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public Usuario registrarUsuario(Usuario u) throws Exception {
-        Usuario usuarioBuscado = obtenerUsuario(u.getCedula());
+        Usuario usuarioBuscado = usuarioRepo.findById(u.getCedula()).orElse(null);
         if (usuarioBuscado != null) {
             throw new Exception("El usuario " + u.getCedula() + " ya se encuentra registrado");
         }
         if (buscarPorCorreo(u.getEmail()) != null) {
-            throw new Exception("El usuario " + u.getCedula() + " ya se encuentra registrado");
+            throw new Exception("El correo " + u.getEmail() + " ya se encuentra registrado");
         }
         return usuarioRepo.save(u);
     }

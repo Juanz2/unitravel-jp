@@ -38,6 +38,9 @@ public class Ciudad implements Serializable {
     @OneToMany(mappedBy = "ciudad")
     private List<Hotel> hoteles;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "ciudad")
+    private List<Usuario> usuarios;
 
     public Ciudad(String nombre, String estado) {
         this.nombre = nombre;

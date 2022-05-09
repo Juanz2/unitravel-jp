@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Registrar Hotel</title>
+</h:head>
+<h:body>
+    <h:form>
+
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <p:outputLabel  value="Dirección:" for="direccion"/>
+            <p:inputText id="direccion" value="#{hotelBean.hotel.direccion}" required="true"/>
+
+            <p:outputLabel value="Nit:" for="nit"/>
+            <p:inputText id="nit" value="#{hotelBean.hotel.nit}" required="true"/>
+
+            <p:outputLabel value="Nombre:" for="nombreHotel"/>
+            <p:inputText id="nombreHotel" value="#{hotelBean.hotel.nombre}" required="true"/>
+
+            <p:outputLabel value="Estrellas:" for="numeroEstrellas"/>
+            <p:rating id="numeroEstrellas" value="#{hotelBean.hotel.numeroEstrellas}" required="true"/>
+
+            <p:outputLabel value="Telefono:" for="telefono"/>
+            <p:inputText id="telefono" value="#{hotelBean.hotel.telefono}" required="true"/>
+
+        </h:panelGrid>
+
+        <p:commandButton value="Registrar hotel" action="#{hotelBean.registrarHotel()}" update="@form" resetValues="true"/>
+        <p:growl showDetail="true"/>
+    </h:form>
+</h:body>
+</html>
