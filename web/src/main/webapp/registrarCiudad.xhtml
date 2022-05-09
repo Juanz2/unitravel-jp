@@ -16,32 +16,83 @@
        <div class="card crud-demo">
            <p:toolbar>
                <p:toolbarGroup>
-                   <p:commandButton value="Nueva ciudad" icon="pi pi-plus"
+                   <p:commandButton value="Nueva ciudad" icon="pi pi-plus" actionListener="#{ciudadBean.openNew()}"
                    update=":form:manage-ciudad-content" oncomplete="PF('manageCiudadDialog').show()"
                                     styleClass="ui-button-success" style="margin-right: .5rem">
                     <p:resetInput target=":form:manage-ciudad-content"/>
                    </p:commandButton>
                </p:toolbarGroup>
            </p:toolbar>
+           <p:dataTable id="dt-ciudad" widgetVar="dtCiudad" var="ciudadTable" value="#{ciudadBean.listaCiudades}"
+                        reflow="true" styleClass="ciudad-table"
+                        selection="#{ciudadBean.ciudadesSeleccionadas}" rowKey="#{ciudadTable.codigo}" paginator="true"
+                        rows="10" rowSelectMode="add" paginatorPosition="bottom">
+
+               <f:facet name="header">
+                   <div class="ciudad-table-header">
+                       <span style="font-weight: bold">CIUDADES</span>
+
+                       <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dt-ciudad').filter()" placeholder="Buscar"/>
+                    </span>
+
+                   </div>
+               </f:facet>
+               <p:column selectionMode="multiple" exportable="false"></p:column>
+
+               <p:column headerText="Codigo" sortBy="#{ciudadTable.codigo}" >
+                   <h:outputText value="#{ciudadTable.codigo}"/>
+               </p:column>
+
+               <p:column headerText="Nombre" sortBy="#{ciudadTable.nombre}">
+                   <h:outputText value="#{ciudadTable.nombre}"/>
+               </p:column>
+
+               <p:column headerText="Estado" sortBy="#{ciudadBean.ciudad.estado}">
+                   <h:outputText value="#{ciudadTable.estado}"/>
+               </p:column>
+
+               <p:column exportable="false">
+                   <p:commandButton icon="pi pi-pencil" update=":form:manage-ciudad-content"
+                                    oncomplete="PF('manageCiudadDialog').show()"
+                                    styleClass="edit-button rounded-button ui-button-success" process="@this">
+                       <f:setPropertyActionListener value="#{ciudadTable}" target="#{ciudadBean.ciudadSeleccionada}"/>
+                       <p:resetInput target=":form:manage-ciudad-content"/>
+                   </p:commandButton>
+                   <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                    oncomplete="PF('deleteCiudadDialog').show()">
+                       <f:setPropertyActionListener value="#{ciudadTable}" target="#{crudView.selectedProduct}"/>
+                   </p:commandButton>
+               </p:column>
+           </p:dataTable>
+           <p:dialog header="Registro Ciudad" showEffect="fade" modal="true"
+                     widgetVar="manageCiudadDialog" responsive="true">
+               <p:outputPanel id="manage-ciudad-content" class="ui-fluid">
+                   <div class="p-field">
+                       <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
+                       <p:inputText id="name" value="#{ciudadBean.ciudad.nombre}" required="true"/>
+                   </div>
+               </p:outputPanel>
+
+               <f:facet name="footer">
+                   <p:commandButton value="Save" icon="pi pi-check" actionListener="#{ciudadBean.registrarCiudad()}"
+                                    update="manage-ciudad-content" process="manage-ciudad-content @this"/>
+                   <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCiudadDialog').hide()"
+                                    class="ui-button-secondary"/>
+               </f:facet>
+           </p:dialog>
+
+           <p:confirmDialog widgetVar="deleteCiudadDialog" showEffect="fade" width="300"
+                            message="¿Desea eliminar la ciudad?" header="Confirm" severity="warn">
+               <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{crudView.deleteProduct}"
+                                process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+               <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                onclick="PF('deleteProductDialog').hide()"/>
+           </p:confirmDialog>
+
+           <p:growl id="messages" showDetail="true"/>
        </div>
-
-       <p:dialog header="Registro Ciudad" showEffect="fade" modal="true"
-                 widgetVar="manageCiudadDialog" responsive="true">
-           <p:outputPanel id="manage-ciudad-content" class="ui-fluid">
-               <div class="p-field">
-                   <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
-                   <p:inputText id="name" value="#{ciudadBean.ciudad.nombre}" required="true"/>
-               </div>
-           </p:outputPanel>
-
-           <f:facet name="footer">
-               <p:commandButton value="Save" icon="pi pi-check" actionListener="#{ciudadBean.registrarCiudad()}"
-                                update="manage-ciudad-content" process="manage-ciudad-content @this"/>
-               <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCiudadDialog').hide()"
-                                class="ui-button-secondary"/>
-           </f:facet>
-       </p:dialog>
-       <p:growl showDetail="true"/>
    </h:form>
 </h:body>
 </html>

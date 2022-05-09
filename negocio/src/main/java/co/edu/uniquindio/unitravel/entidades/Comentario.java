@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
@@ -48,6 +49,5 @@ public class Comentario implements Serializable {
 
     @ManyToOne
     private Usuario usuario;
-
 
 }
