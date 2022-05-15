@@ -23,8 +23,6 @@ public class CiudadBean implements Serializable {
 
     private final CiudadServicio ciudadServicio;
 
-    private Ciudad ciudad;
-
     private List<Ciudad> ciudadesSeleccionadas;
 
     private List<Ciudad> listaCiudades;
@@ -40,19 +38,23 @@ public class CiudadBean implements Serializable {
 
         this.listaCiudades = new ArrayList<>();
         this.listaCiudades = ciudadServicio.listarCiudades();
+
+        ciudadSeleccionada = new Ciudad();
+        ciudadSeleccionada.setEstado("A");
     }
 
     /**
      *
      */
     public void registrarCiudad() {
+
         try {
-            ciudadServicio.registrarCiudad(ciudad);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Acción procesada correctamente");
-            FacesContext.getCurrentInstance().addMessage(null, msj);
+            ciudadServicio.registrarCiudad(ciudadSeleccionada);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
+            PrimeFaces.current().ajax().update("form:messages", "form:dt-ciudad");
         } catch (Exception e) {
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta\n", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, msj);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            PrimeFaces.current().ajax().update("form:messages", "form:dt-ciudad");
         }
     }
 
@@ -67,12 +69,13 @@ public class CiudadBean implements Serializable {
             PrimeFaces.current().ajax().update("form:messages", "form:dt-ciudad");
             this.ciudadSeleccionada = null;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se ha logrado eliminar la ciudad"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-ciudad");
         }
     }
 
     public void openNew(){
-        this.ciudadSeleccionada = new Ciudad();
+        ciudadSeleccionada = new Ciudad();
+        ciudadSeleccionada.setEstado("A");
     }
 }

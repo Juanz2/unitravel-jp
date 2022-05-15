@@ -2,6 +2,7 @@ package co.edu.uniquindio.unitravel.servicios;
 
 import co.edu.uniquindio.unitravel.entidades.Habitacion;
 import co.edu.uniquindio.unitravel.repositorios.HabitacionRepo;
+import co.edu.uniquindio.unitravel.repositorios.ReservaRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,9 +13,11 @@ public class HabitacionServicioImpl implements HabitacionServicio {
 
 
     private final HabitacionRepo habitacionRepo;
+    private final ReservaRepo reservaRepo;
 
-    public HabitacionServicioImpl(HabitacionRepo habitacionRepo) {
+    public HabitacionServicioImpl(HabitacionRepo habitacionRepo, ReservaRepo reservaRepo) {
         this.habitacionRepo = habitacionRepo;
+        this.reservaRepo = reservaRepo;
     }
 
     @Override
@@ -62,7 +65,9 @@ public class HabitacionServicioImpl implements HabitacionServicio {
     }
 
     @Override
-    public List<Habitacion> obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReserva){
-        return habitacionRepo.obtenerHabitacionesDisponibles(fechaInicioReserva);
+    public List<Habitacion> obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReserva, LocalDateTime fechaFinReserva, int codigoHotel){
+        return habitacionRepo.consultarDisponibilidadHabitacion(fechaInicioReserva, fechaFinReserva, codigoHotel);
     }
+
+
 }

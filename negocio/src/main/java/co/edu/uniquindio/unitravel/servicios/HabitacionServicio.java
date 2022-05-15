@@ -14,5 +14,5 @@ public interface HabitacionServicio {
 
     List<Habitacion> obtenerHabitaciones ();
 
-    List<Habitacion>obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReservaß);
+    List<Habitacion>obtenerHabitacionesDisponibles(LocalDateTime fechaInicioReserva, LocalDateTime fechaFinReserva, int codigoHotel);
 }

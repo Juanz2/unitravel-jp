@@ -17,61 +17,65 @@ import java.util.List;
 @Transactional
 public class SillaTest {
 
-    private class SillaServicioTest {
 
-        @Autowired
-        private SillaServicio sillaServicio;
-        @Autowired
-        private VueloServicio vueloServicio;
+    @Autowired
+    private SillaServicio sillaServicio;
+    @Autowired
+    private VueloServicio vueloServicio;
 
-        @Test
-        @Sql("classpath:dataset.sql")
-        public void registrarSilla() {
-
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarSilla() {
 
 
-            try {
-                Vuelo vuelo = vueloServicio.obtenerVuelo(1);
-                Silla silla = new Silla("D1", 25000.00, vuelo, "A", "Disponible");
-                sillaServicio.registrarSilla(silla);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                Assertions.assertTrue(false);
-            }
+        try {
+            Vuelo vuelo = vueloServicio.obtenerVuelo(1);
+            Silla silla = new Silla("D1", 25000.00, vuelo, "A", "Disponible");
+            sillaServicio.registrarSilla(silla);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Assertions.assertTrue(false);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarSilla() {
+
+        try {
+            Silla silla = sillaServicio.obtenerSilla(1);
+            silla.setPosicion("B");
+            silla.setEstadoSilla("Reservada");
+            silla.setPrecio(85000.0);
+            sillaServicio.actualizarSilla(silla);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarSilla() {
+        try {
+            sillaServicio.eliminarSilla(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+            System.out.println(e.getMessage());
         }
 
-        @Test
-        @Sql("classpath:dataset.sql")
-        public void actualizarSilla() {
+    }
 
-            try {
-                Silla silla = sillaServicio.obtenerSilla(1);
-                silla.setPosicion("B");
-                silla.setEstadoSilla("Reservada");
-                silla.setPrecio(85000.0);
-                sillaServicio.actualizarSilla(silla);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCiudades() {
+        List<Silla> listaSilla = sillaServicio.obtenerSillas();
+        listaSilla.forEach(System.out::println);
+    }
 
-        @Test
-        @Sql("classpath:dataset.sql")
-        public void eliminarSilla() {
-            try {
-                sillaServicio.eliminarSilla(1);
-            } catch (Exception e) {
-                Assertions.assertTrue(false);
-                System.out.println(e.getMessage());
-            }
-
-        }
-        @Test
-        @Sql("classpath:dataset.sql")
-        public void listarCiudades(){
-            List<Silla> listaSilla = sillaServicio.obtenerSillas();
-            listaSilla.forEach(System.out::println);
-        }
-
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerSillaAleatoria() {
+        Silla silla = sillaServicio.obtenerSillaAleatoria();
+        Assertions.assertEquals("A2", silla.getPosicion());
     }
 }

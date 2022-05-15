@@ -11,6 +11,8 @@ Silla registrarSilla(Silla silla) throws Exception;
 Silla actualizarSilla(Silla silla) throws Exception;
 Silla obtenerSilla(int codigo) throws Exception;
 void eliminarSilla (int codigo) throws Exception;
+
+Silla obtenerSillaAleatoria ();
 List<Silla> listarSillas ();
 
     List<Silla> obtenerSillas();

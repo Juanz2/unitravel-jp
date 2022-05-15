@@ -57,7 +57,7 @@ public class CiudadServicioImp implements CiudadServicio {
     @Override
     public List<Ciudad> listarCiudades() {
 
-        List<Ciudad> listaCiudades = ciudadRepo.findAll();
+        List<Ciudad> listaCiudades = ciudadRepo.obtenerCiudades();
         return listaCiudades;
     }
 }

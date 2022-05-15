@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @DataJpaTest
@@ -61,4 +62,6 @@ public class HabitacionTest {
         List<Caracteristica> listaComentarios = habitacionRepo.obtenerCaracteristicasHabitacion(1);
         listaComentarios.forEach(System.out::println);
     }
+
+
 }

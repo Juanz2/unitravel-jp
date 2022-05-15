@@ -71,11 +71,13 @@ public class HabitacionServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerHabitacionesDisponibles() {
-        LocalDateTime fechaInicioReserva = LocalDateTime.parse("2022-04-22T23:59:59.184");
-        //LocalDateTime fechaFinReserva = LocalDateTime.parse("2022-04-24T23:23:59.184");
-        List<Habitacion> habitacionesDisponibles = habitacionServicio.obtenerHabitacionesDisponibles(fechaInicioReserva);
-        habitacionesDisponibles.forEach(System.out::println);
-        Assertions.assertEquals(0, habitacionesDisponibles.size());
+    public void obtenerHabitacionesDisponibles(){
+
+        LocalDateTime fechaInicio = LocalDateTime.parse("2022-04-20T20:12:04.184");
+        LocalDateTime fechaFin = LocalDateTime.parse("2022-04-21T20:12:04.184");
+
+        List<Habitacion> listaHabitaciones = habitacionServicio.obtenerHabitacionesDisponibles(fechaInicio, fechaFin,1);
+
+        listaHabitaciones.forEach(System.out::println);
     }
 }

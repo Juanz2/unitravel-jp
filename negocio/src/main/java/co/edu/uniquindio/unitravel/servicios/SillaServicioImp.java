@@ -57,7 +57,9 @@ public class SillaServicioImp implements SillaServicio{
         return null;
     }
 
-
-
+    @Override
+    public Silla obtenerSillaAleatoria(){
+        return sillaRepo.obtenerSillaAleatoria();
+    }
 
 }

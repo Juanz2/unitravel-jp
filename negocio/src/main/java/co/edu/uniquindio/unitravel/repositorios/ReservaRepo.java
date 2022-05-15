@@ -2,6 +2,7 @@ package co.edu.uniquindio.unitravel.repositorios;
 
 import co.edu.uniquindio.unitravel.entidades.Habitacion;
 import co.edu.uniquindio.unitravel.entidades.Reserva;
+import co.edu.uniquindio.unitravel.entidades.Silla;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,7 @@ public interface ReservaRepo extends JpaRepository<Reserva, Integer> {
     List<Reserva>listaReservasUsuario(String cedula);
     @Query("select res from Reserva  res where res.estado = 'A'")
     List<Reserva> obtenerListaReservas();
+
 
 
 }

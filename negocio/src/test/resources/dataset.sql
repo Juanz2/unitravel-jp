@@ -2,16 +2,6 @@
 INSERT INTO NIVEL_ACCESO VALUES (1, "A", "ADMINISTRADOR");
 INSERT INTO NIVEL_ACCESO VALUES (2, "A", "ADMINISTRADOR HOTEL");
 INSERT INTO NIVEL_ACCESO VALUES (3, "A", "CLIENTE");
----------------------Usuarios--------------------
-insert into usuario values ("1094975931", "jpzh315@gmail.com", "Juan Pablo Zabala", "passw0rd123*", 1);
-insert into usuario values ("1094969178", "pepe@email.com", "Pepe Perez", "654", 2);
-insert into usuario values ("89004116", "pedro@email.com", "Pedro Martinez", "342", 3);
-
----------------------Usuarios teléfonos----------------
-
-INSERT INTO USUARIO_TELEFONO VALUES ("1094975931", "8172281123");
-INSERT INTO USUARIO_TELEFONO VALUES ("1094969178", "3182762734");
-INSERT INTO USUARIO_TELEFONO VALUES ("89004116", "3128716334");
 
 ---------------------Ciudades--------------------
 INSERT INTO ciudad (codigo, nombre) VALUES (1, "Armenia");
@@ -19,6 +9,19 @@ INSERT INTO ciudad (codigo, nombre) VALUES (2, "Bogota");
 INSERT INTO ciudad (codigo, nombre) VALUES (3, "Cartagena");
 INSERT INTO ciudad (codigo, nombre) VALUES (4, "Manizales");
 INSERT INTO ciudad (codigo, nombre) VALUES (5, "Pereira");
+
+---------------------Usuarios--------------------
+insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("1094975931", "jpzh315@gmail.com", "Juan Pablo Zabala", "passw0rd123*", 1,1);
+insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("1094969178", "pepe@email.com", "Pepe Perez", "654", 2,1);
+insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("89004116", "pedro@email.com", "Pedro Martinez", "342", 3,1);
+
+---------------------Usuarios teléfonos----------------
+
+INSERT INTO USUARIO_TELEFONO VALUES ("1094975931", "8172281123");
+INSERT INTO USUARIO_TELEFONO VALUES ("1094969178", "3182762734");
+INSERT INTO USUARIO_TELEFONO VALUES ("89004116", "3128716334");
+
+
 
 ---------------------Vuelos--------------------
 INSERT INTO vuelo (codigo, aerolinea, estado, ciudad_origen_codigo, ciudad_destino_codigo,estado_vuelo) VALUES (1,"Avianca", "A", "1","3", "En transito");
@@ -87,19 +90,23 @@ INSERT INTO habitacion_camas VALUES (10,1);
 INSERT INTO habitacion_camas VALUES (11,1);
 INSERT INTO habitacion_camas VALUES (12,1);
 
+----------------------Metodo Pago------------------
+INSERT INTO METODO_PAGO (CODIGO, NOMBRE, ESTADO) VALUES (1, "CREDITO", "A");
+INSERT INTO METODO_PAGO (CODIGO, NOMBRE, ESTADO) VALUES (2, "CONTADO", "A");
+
 -----------------------Reserva---------------------
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (1, 4, "A", "2022-04-22", "20242-0-24", "2022-01-01", 500000, "89004116");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (2, 3, "A", "2022-04-21", "2022-04-26", "2022-04-26", 300000, "1094975931");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (3, 2, "A", "2022-04-18", "2022-04-22", "2022-04-22", 500000, "1094975931");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (4, 1, "A", "2022-04-12", "2022-04-16", "2022-04-16", 250000, "1094969178");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (5, 7, "A", "2022-04-11", "2022-04-15", "2022-04-15", 500000, "89004116");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (6, 2, "A", "2022-04-25", "2022-04-30", "2022-04-30", 190000, "1094969178");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (7, 1, "A", "2022-04-30", "2022-05-03", "2022-05-03", 120000, "1094975931");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (8, 8, "A", "2022-04-12", "2022-04-22", "2022-04-22", 890111, "89004116");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (9, 2, "A", "2022-04-12", "2022-04-15", "2022-04-15", 7452200, "1094969178");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (10, 2, "A", "2022-02-15", "2022-02-16", "2022-04-16", 500000, "1094969178");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (11, 2, "A", "2022-02-15", "2022-02-18", "2022-04-18", 3290883, "89004116");
-INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula)VALUES (12, 2, "A", "2022-02-25", "2022-02-27", "2022-01-30", 1450000, "1094969178");
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (1, 4, "A", "2022-04-22", "2022-04-24", "2022-01-01", 500000, "89004116",1);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (2, 3, "A", "2022-04-21", "2022-04-26", "2022-04-26", 300000, "1094975931",1);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (3, 2, "A", "2022-04-18", "2022-04-22", "2022-04-22", 500000, "1094975931",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (4, 1, "A", "2022-04-12", "2022-04-16", "2022-04-16", 250000, "1094969178",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (5, 7, "A", "2022-04-11", "2022-04-15", "2022-04-15", 500000, "89004116",1);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (6, 2, "A", "2022-04-25", "2022-04-30", "2022-04-30", 190000, "1094969178",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (7, 1, "A", "2022-04-30", "2022-05-03", "2022-05-03", 120000, "1094975931",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (8, 8, "A", "2022-04-12", "2022-04-22", "2022-04-22", 890111, "89004116",1);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (9, 2, "A", "2022-04-12", "2022-04-15", "2022-04-15", 7452200, "1094969178",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (10, 2, "A", "2022-02-15", "2022-02-16", "2022-04-16", 500000, "1094969178",2);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (11, 2, "A", "2022-02-15", "2022-02-18", "2022-04-18", 3290883, "89004116",1);
+INSERT INTO RESERVA (codigo, cantidad_personas, estado_reserva, fecha_inicio, fecha_fin, fecha_reserva, precio_total, usuario_cedula,metodo_pago_codigo) VALUES (12, 2, "A", "2022-02-25", "2022-02-27", "2022-01-30", 1450000, "1094969178",1);
 
 -----------------------Reserva silla---------------------
 INSERT INTO RESERVA_SILLAS VALUES (1, 1);
