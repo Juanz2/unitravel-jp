@@ -12,11 +12,14 @@ public class CaracteristicaServicioImp implements CaracteristicaServicio{
 
     private final CaracteristicaRepo caracteristicaRepo;
 
-    public CaracteristicaServicioImp(CaracteristicaRepo caracteristicaRepo) {this.caracteristicaRepo = caracteristicaRepo;}
+    public CaracteristicaServicioImp(CaracteristicaRepo caracteristicaRepo) {
+        this.caracteristicaRepo = caracteristicaRepo;
+    }
 
     @Override
     public Caracteristica registrarCaracteristica(Caracteristica caracteristica){
-        return caracteristicaRepo.save(caracteristica);}
+        return caracteristicaRepo.save(caracteristica);
+    }
 
     @Override
     public Caracteristica actualizarCaracteristica(Caracteristica caracteristica) {
@@ -26,7 +29,7 @@ public class CaracteristicaServicioImp implements CaracteristicaServicio{
     @Override
     public Caracteristica obtenerCaracteristica(int codigo) throws Exception {
         Caracteristica caracteristica = caracteristicaRepo.findById(codigo).orElse(null);
-        if (caracteristica == caracteristica){
+        if (caracteristica == null){
             throw new Exception("La caracteristica "+ codigo + "no existe");
         }
         return caracteristica;

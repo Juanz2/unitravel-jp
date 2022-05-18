@@ -9,10 +9,36 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="styleUni.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <title>Página de Inicio</title>
 </h:head>
 <h:body>
-    <h1>Hola Mundo</h1>
-    <h1>#{inicioBean.mensaje}</h1>
+
+        <div class="p-3 bg-dark text-white">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+                    <li><a href="registrarHotel.xhtml" class="nav-link px-2 text-white">Hoteles</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Vuelos</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Preguntas frecuentes</a></li>
+                </ul>
+
+                <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <p:inputText type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Buscar..." aria-label="Search"/>
+                </h:form>
+
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-light me-2">Ingresar</button>
+                    <button type="button" class="btn btn-warning">Registrarse</button>
+                </div>
+            </div>
+        </div>
 </h:body>
 </html>

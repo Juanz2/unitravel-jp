@@ -24,6 +24,8 @@ public class HotelServicioImp implements HotelServicio{
             throw new Exception("El hotel " + hotel.getNombre() + " ya existe");
         if(hotel.getNumeroEstrellas() <= 0 )
             throw new Exception("El número de estrellas debe ser mayor a cero");
+        if (hotel.getTelefono().length() > 10)
+            throw new Exception("El número de teléfono excede el limite");
         return hotelRepo.save(hotel);
     }
 

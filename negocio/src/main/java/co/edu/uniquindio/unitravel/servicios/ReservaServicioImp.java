@@ -25,13 +25,6 @@ public class ReservaServicioImp implements ReservaServicio {
         //Se suma el valor del iva 19%
         reserva.setPrecioTotal(reserva.getPrecioTotal() + (reserva.getPrecioTotal()*19)/100);
 
-        String descripcionCorreo = "Se ha creado la reserva correctamente \n" +
-                "Detalles: \n\n" +
-                "\nFecha inicio: " + reserva.getFechaInicio() +
-                "\nFecha fin " + reserva.getFechaFin() +
-                "\nNumero de personas: " + reserva.getCantidadPersonas() +
-                "\nValor total incluido iva: " + reserva.getPrecioTotal();
-
         if (reserva.getFechaInicio().isAfter(reserva.getFechaFin())) {
             throw new Exception("La fecha inicio" + reserva.getFechaInicio() + " es mayor a la fecha fin " + reserva.getFechaFin());
         }
@@ -43,7 +36,7 @@ public class ReservaServicioImp implements ReservaServicio {
         }
 
         //Se envía el correo electrónico del usuario
-        emailServicio.EnviarEmail("Reserva Unitravel", descripcionCorreo, reserva.getUsuario().getEmail());
+        emailServicio.EnviarEmail("Reserva Unitravel", obtenerDescripcionReserva(reserva), reserva.getUsuario().getEmail());
         return reservaRepo.save(reserva);
     }
 
@@ -52,8 +45,6 @@ public class ReservaServicioImp implements ReservaServicio {
 
         //Se suma el valor del iva 19%
         reserva.setPrecioTotal(reserva.getPrecioTotal() + (reserva.getPrecioTotal()*19)/100);
-
-        String descripcionCorreo = obtenerDescripcionReserva(reserva);
 
         if (reserva.getFechaInicio().isAfter(reserva.getFechaFin())) {
             throw new Exception("La fecha inicio" + reserva.getFechaInicio() + " es mayor a la fecha fin " + reserva.getFechaFin());
@@ -64,7 +55,7 @@ public class ReservaServicioImp implements ReservaServicio {
         if (reserva.getPrecioTotal() <= 0) {
             throw new Exception("El precio total debe ser mayor a 0");
         }
-        emailServicio.EnviarEmail("Modificación Reserva Unitravel", descripcionCorreo, reserva.getUsuario().getEmail());
+        emailServicio.EnviarEmail("Modificación Reserva Unitravel", obtenerDescripcionReserva(reserva), reserva.getUsuario().getEmail());
         return reservaRepo.save(reserva);
     }
 
