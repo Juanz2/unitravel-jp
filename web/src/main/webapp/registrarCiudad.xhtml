@@ -39,7 +39,7 @@
                     <div>
                         <span class="filter-container ui-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <p:inputText id="globalFilter" onkeyup="PF('dt-ciudad').filter()" placeholder="Buscar" />
+                        <p:inputText id="globalFilter" onkeyup="PF('dt-ciudad').filter()" placeholder="Buscar"/>
                     </span>
                     </div>
                 </f:facet>
@@ -50,7 +50,7 @@
                 </p:column>
 
                 <p:column headerText="Estado">
-                    <h:outputText value="#{ciudadTable.estado}" />
+                    <h:outputText value="#{ciudadTable.estado}"/>
                 </p:column>
 
                 <p:column exportable="false">
@@ -61,20 +61,20 @@
                         <p:resetInput target=":form:manage-ciudad-content"/>
                     </p:commandButton>
                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                     oncomplete="PF('deleteCiudadDialog').show()" update="dt-ciudad" style="margin-left: 30px">
+                                     oncomplete="PF('deleteCiudadDialog').show()" update="dt-ciudad"
+                                     style="margin-left: 30px">
                         <f:setPropertyActionListener value="#{ciudadTable}" target="#{ciudadBean.ciudadSeleccionada}"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
+
             <p:dialog header="Registro Ciudad" showEffect="fade" modal="true"
                       widgetVar="manageCiudadDialog" responsive="true">
                 <p:outputPanel id="manage-ciudad-content" class="ui-fluid">
-                    <p:outputPanel>
-                        <div class="p-field">
-                            <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
-                            <p:inputText id="name" value="#{ciudadBean.ciudadSeleccionada.nombre}" required="true"/>
-                        </div>
-                    </p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
+                        <p:inputText id="name" value="#{ciudadBean.ciudadSeleccionada.nombre}" required="true"/>
+                    </div>
                 </p:outputPanel>
 
                 <f:facet name="footer">
@@ -90,7 +90,7 @@
                 <p:commandButton value="Si" icon="pi pi-check" actionListener="#{ciudadBean.eliminarCiudad}"
                                  oncomplete="PF('deleteCiudadDialog').hide()" update="dt-ciudad"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                 onclick="PF('deleteProductDialog').hide()"/>
+                                 onclick="PF('deleteSillaDialog').hide()"/>
             </p:confirmDialog>
 
             <p:growl id="messages" showDetail="true"/>
