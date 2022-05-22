@@ -15,4 +15,9 @@ public class LoginBean {
 
     private String usuarioLabel ="Nombre de usuario";
     private String password;
+    private String usuario;
+
+    public void ingresar(){
+        System.out.println("Ingreso");
+    }
 }

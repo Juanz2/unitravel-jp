@@ -43,6 +43,8 @@ public class SillaBean implements Serializable {
         listaSillas = sillaServicio.obtenerSillas();
         sillaSeleccionada = new Silla();
         sillaSeleccionada.setEstado("A");
+        silla = new Silla();
+        silla.setEstado("A");
     }
 
     /**
@@ -51,7 +53,7 @@ public class SillaBean implements Serializable {
     public void registrarSilla() {
 
         try {
-            sillaServicio.registrarSilla(sillaSeleccionada);
+            sillaServicio.registrarSilla(silla);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
         } catch (Exception e) {
@@ -110,6 +112,7 @@ public class SillaBean implements Serializable {
      */
     public void openNew(){
         silla = new Silla();
+        silla.setEstado("A");
     }
 
 }

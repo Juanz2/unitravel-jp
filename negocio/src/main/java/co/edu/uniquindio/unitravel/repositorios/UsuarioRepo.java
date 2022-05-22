@@ -20,4 +20,7 @@ public interface UsuarioRepo extends JpaRepository<Usuario, String> {
     Usuario validarUsuarioCrear(String email, String cedula);
 
     Optional<Usuario> findByEmail(String correo);
+
+    @Query("select u from Usuario u where u.email = ?1")
+    Usuario buscarUsuarioPorCorreo(String email);
 }

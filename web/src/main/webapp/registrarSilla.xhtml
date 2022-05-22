@@ -59,7 +59,7 @@
 
                 <p:column exportable="false">
                     <p:commandButton icon="pi pi-pencil" update="form"
-                                     oncomplete="PF('manageSilladDialog').show()"
+                                     oncomplete="PF('manageEditSillaDialog').show()"
                                      styleClass="edit-button rounded-button ui-button-success" process="@this">
                         <f:setPropertyActionListener value="#{sillaTable}" target="#{sillaBean.sillaSeleccionada}"/>
                         <p:resetInput target=":form:manage-silla-content"/>
@@ -80,25 +80,25 @@
                     <h:panelGrid columns="2" cellpadding="5">
 
                         <p:outputLabel for="posicion">Posicion</p:outputLabel>
-                        <p:inputText id="posicion" value="#{sillaBean.sillaSeleccionada.posicion}" required="true"/>
+                        <p:inputText id="posicion" value="#{sillaBean.silla.posicion}" required="true"/>
 
                         <p:outputLabel for="precio">Precio</p:outputLabel>
-                        <p:inputText id="precio" value="#{sillaBean.sillaSeleccionada.precio}" required="true"/>
-
+                        <p:inputText id="precio" value="#{sillaBean.silla.precio}" required="true"/>
 
                         <p:outputLabel for="estado">Estado</p:outputLabel>
-                        <p:inputText id="estado" value="#{sillaBean.sillaSeleccionada.estadoSilla}" required="true"/>
+                        <p:inputText id="estado" value="#{sillaBean.silla.estadoSilla}" required="true"/>
 
                     </h:panelGrid>
                 </p:outputPanel>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{sillaBean.registrarSilla}"
+                    <p:commandButton value="Guardar---" icon="pi pi-check" actionListener="#{sillaBean.registrarSilla()}"
                                      update="dt-silla" oncomplete="PF('manageSillaDialog').hide()"/>
                     <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageSillaDialog').hide()"
                                      class="ui-button-secondary"/>
                 </f:facet>
             </p:dialog>
+
 
             <p:confirmDialog widgetVar="deleteSillaDialog" showEffect="fade" width="300"
                              message="¿Desea eliminar la silla?" header="Confirmación" severity="warn">

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Registrar hotel</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <div class="card crud-demo">
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Nueva habitación" icon="pi pi-plus"
+                                     actionListener="#{habitacionBean.openNew}"
+                                     update="dt-habitacion" oncomplete="PF('manageHabitacionDialog').show()"
+                                     styleClass="ui-button-success" style="margin-right: .5rem">
+                        <p:resetInput target=":form:manage-habitacion-content"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="Eiminar" icon="pi pi-trash"
+                                     actionListener="PF('deleteHabitacionDialog').show()"
+                                     update="dt-habitacion"
+                                     styleClass="ui-button-danger" style="margin-right: .5rem">
+                        <p:resetInput target=":form:manage-habitacion-content"/>
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:dataTable id="dt-habitacion" widgetVar="dtHabitacion" var="habitacionTable"
+                         value="#{habitacionBean.listaHabitaciones}"
+                         reflow="true" selection="#{habitacionBean.habitacionSeleccionada}"
+                         rowKey="#{habitacionTable.codigo}"
+                         paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                <f:facet name="header">
+                    <div>
+                        <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dt-habitacion').filter()" placeholder="Buscar"/>
+                    </span>
+                    </div>
+                </f:facet>
+                <p:column selectionMode="multiple" exportable="false"></p:column>
+                <p:column headerText="Capacidad">
+                    <h:outputText value="#{habitacionTable.capacidad}"/>
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <h:outputText value="#{habitacionTable.precio}"/>
+                </p:column>
+
+                <p:column headerText="Hotel">
+                    <h:outputText value="#{habitacionTable.hotel.nombre}"/>
+                </p:column>
+
+                <p:column exportable="false">
+                    <p:commandButton icon="pi pi-pencil" update="form"
+                                     oncomplete="PF('manageHabitacionDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        <f:setPropertyActionListener value="#{habitacionTable}" target="#{habitacionBean.habitacionSeleccionada}"/>
+                        <p:resetInput target=":form:manage-habitacion-content"/>
+                    </p:commandButton>
+                    <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                     oncomplete="PF('deleteHabitacionDialog').show()" update="dt-habitacion"
+                                     style="margin-left: 30px">
+                        <f:setPropertyActionListener value="#{hotelTable}" target="#{hotelBean.hotelSeleccionado}"/>
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:dialog header="Registro Habitación" widgetVar="manageHabitacionDialog" showEffect="fade" modal="true"
+            responsive="true">
+
+                <p:outputPanel id="manage-habitacion-content" class="ui-fluid">
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="capacidad">Capacidad</p:outputLabel>
+                        <p:inputText id="capacidad" value="#{habitacionBean.habitacion.capacidad}" required="true"/>
+
+                        <p:outputLabel for="precio">Precio</p:outputLabel>
+                        <p:inputText id="precio" value="#{habitacionBean.habitacion.precio}" required="true"/>
+
+                        <p:outputLabel value="Hotel:" for="id_hotel"/>
+                        <p:selectOneMenu id="id_hotel" value="#{habitacionBean.habitacion.hotel}" required="true" requiredMessage="La habitación es obligatoria"
+                                         converter="#{hotelConverter}">
+                            <f:selectItem itemLabel="Seleccione el hotel" noSelectionOption="true" />
+                            <f:selectItems var="hotel" itemLabel="#{hotel.nombre}" value="#{habitacionBean.listaHoteles}"/>
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+
+                </p:outputPanel>
+                <f:facet name="footer">
+                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{habitacionBean.registrarHabitacion()}"
+                                     update="dt-habitacion" oncomplete="PF('manageHabitacionDialog').hide()"/>
+                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
+                                     class="ui-button-secondary"/>
+                </f:facet>
+            </p:dialog>
+
+            <p:confirmDialog widgetVar="deleteHabitacionDialog" showEffect="fade" width="300"
+                             message="¿Desea eliminar el Hotel?" header="Confirmación" severity="warn">
+                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{habitacionBean.eliminarHabitacion()}"
+                                 oncomplete="PF('deleteHabitacionDialog').hide()" update="dt-hotel"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteHabitacionDialog').hide()"/>
+            </p:confirmDialog>
+
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+
+        </div>
+    </h:form>
+</h:body>
+</html>

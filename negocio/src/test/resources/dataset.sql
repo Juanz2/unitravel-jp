@@ -14,6 +14,7 @@ INSERT INTO ciudad (codigo, nombre) VALUES (5, "Pereira");
 insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("1094975931", "jpzh315@gmail.com", "Juan Pablo Zabala", "passw0rd123*", 1,1);
 insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("1094969178", "pepe@email.com", "Pepe Perez", "654", 2,1);
 insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("89004116", "pedro@email.com", "Pedro Martinez", "342", 3,1);
+insert into usuario (CEDULA, EMAIL, NOMBRE, PASSWORD, CIUDAD_CODIGO, NIVEL_ACCESO_CODIGO) values ("109478263", "pedro1@email.com", "Pedro Martinez", "342", 3,1);
 
 ---------------------Usuarios teléfonos----------------
 

@@ -26,4 +26,6 @@ public interface SillaRepo extends JpaRepository<Silla, Integer> {
     @Query(value = "select * from Silla s where s.estado = 'A' and s.estado_silla='Disponible' limit 1", nativeQuery = true)
     Silla obtenerSillaAleatoria();
 
+    @Query("select s from Silla s where s.estado = 'A'")
+    List<Silla> obtenerListaSillas();
 }

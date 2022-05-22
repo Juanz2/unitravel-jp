@@ -54,7 +54,7 @@ public class SillaServicioImp implements SillaServicio{
 
     @Override
     public List<Silla> obtenerSillas() {
-        return null;
+        return sillaRepo.obtenerListaSillas();
     }
 
     @Override

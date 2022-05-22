@@ -1,7 +1,9 @@
 package co.edu.uniquindio.unitravel.bean;
 
+import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.servicios.HotelServicio;
+import co.edu.uniquindio.unitravel.servicios.UnitravelServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
@@ -20,7 +22,8 @@ import java.util.List;
 public class HotelBean implements Serializable {
 
     private final HotelServicio hotelServicio;
-
+    private final UnitravelServicio unitravelServicio;
+    private List<Ciudad> listaCiudades;
     @Getter @Setter
     private Hotel hotel;
 
@@ -33,14 +36,16 @@ public class HotelBean implements Serializable {
     @Getter @Setter
     private List<Hotel> hotelesSeleccionados;
 
-    public HotelBean(HotelServicio hotelServicio) {
+    public HotelBean(HotelServicio hotelServicio, UnitravelServicio unitravelServicio) {
         this.hotelServicio = hotelServicio;
+        this.unitravelServicio = unitravelServicio;
     }
 
     @PostConstruct
     public void init() {
         listaHoteles = new ArrayList<>();
         listaHoteles = hotelServicio.obtenerHoteles();
+        listaCiudades = unitravelServicio.obtenerCiudades();
         hotelSeleccionado = new Hotel();
         hotelSeleccionado.setEstado("A");
     }

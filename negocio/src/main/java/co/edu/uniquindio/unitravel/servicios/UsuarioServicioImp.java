@@ -84,7 +84,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public void recuperarPassword(String correo) throws Exception {
-        Usuario usuario = usuarioRepo.findByEmail(correo).orElse(null);
+        Usuario usuario = usuarioRepo.buscarUsuarioPorCorreo(correo);
         if (usuario == null)
             throw new Exception("Correo electrónico no encontrado");
 

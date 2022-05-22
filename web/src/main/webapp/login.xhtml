@@ -12,49 +12,45 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
     </f:facet>
-    <h:outputStylesheet library="css" name="primeicons.css"/>
-    <h:outputStylesheet library="css" name="primeflex.min.css"/>
-    <h:outputStylesheet library="css" name="layout-yellow.css"/>
+    <h:outputStylesheet library="css" name="styleUni.css"/>
     <title>Login</title>
 </h:head>
 
-<h:body styleClass="login-body">
-    <div class="login-topbar">
-        <h:link outcome="/dashboard" class="logo">
-            <p:graphicImage name="logo-marca.png" library="img"/>
-        </h:link>
+<h:body>
+
+    <div class="card">
+    <p:card style="width: 25em">
+        <f:facet name="header">
+            <p:graphicImage name="unitravelPrincipal.jpeg" library="img"/>
+        </f:facet>
+        <f:facet name="title">
+            BIENVENIDO
+        </f:facet>
+        <f:facet name="subtitle">
+            Unitravel
+        </f:facet>
+
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel value="Usuario:" for="id_usuario"/>
+                <p:inputText id="id_usuario" value="#{loginBean.usuario}" required="true"/>
+
+                <p:outputLabel value="Contraseña:" for="password_usuario"/>
+                <p:password id="password_usuario" value="#{loginBean.password}" required="true"/>
+
+            </h:panelGrid>
+            <h:panelGrid columns="1" cellpadding="5">
+                <a href="recuperarPassword.xhtml" class="subinfo">
+                    <span>¿Ha olvidado su contraseña?</span>
+                </a>
+                <p:commandButton value="Ingresar" action="#{usuarioBean.registrarUsuario()}" update="@form"
+                                 resetValues="true"/>
+            </h:panelGrid>
+            <p:growl showDetail="true"/>
+        </h:form>
+    </p:card>
     </div>
-    <div class="login-image">
-        <div class="login-panel">
-            <p:graphicImage name="logo-marca.png" library="img"/>
-            <div class="col-12">
-                <div class="input-wrapper">
-                    <p:inputText placeholder="Usuario"/>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="input-wrapper">
-                    <p:inputText placeholder="Contraseña"/>
-                </div>
-            </div>
-            <div class="checkbox-container">
-                <div class="remember-me">
-                    <p:selectBooleanCheckbox/>
-                    <span>Recordarme</span>
-                </div>
-                <p:commandButton type="button" value="Ingresar"/>
-            </div>
-
-            <div class="separator"></div>
-
-            <a href="#" class="subinfo">
-                <span>¿Ha olvidado su contraseña?</span>
-            </a>
-
-        </div>
-    </div>
-
-
 </h:body>
 
 </html>

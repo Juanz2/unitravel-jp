@@ -2,3 +2,9 @@
     width: 50px;
     margin-right: 10px;
 }
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

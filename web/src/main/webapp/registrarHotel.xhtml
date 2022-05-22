@@ -95,6 +95,13 @@
                         <p:outputLabel for="telefono">Teléfono</p:outputLabel>
                         <p:inputText id="telefono" value="#{hotelBean.hotelSeleccionado.telefono}"/>
 
+                        <p:outputLabel value="Ciudad:" for="id_ciudad"/>
+                        <p:selectOneMenu id="id_ciudad" value="#{hotelBean.hotel.ciudad}" required="true" requiredMessage="La ciudad es obligatoria"
+                                         converter="#{ciudadConverter}">
+                            <f:selectItem itemLabel="Seleccione la ciudad" noSelectionOption="true" />
+                            <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.listaCiudades}"/>
+                        </p:selectOneMenu>
+
                         <p:outputLabel for="direccion">Direccion</p:outputLabel>
                         <p:inputText id="direccion" value="#{hotelBean.hotelSeleccionado.direccion}" required="true"/>
 
@@ -114,7 +121,7 @@
                 <p:commandButton value="Si" icon="pi pi-check" actionListener="#{hotelBean.eliminarHotel}"
                                  oncomplete="PF('deleteHotelDialog').hide()" update="dt-hotel"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                 onclick="PF('deleteProductDialog').hide()"/>
+                                 onclick="PF('deleteHotelDialog').hide()"/>
             </p:confirmDialog>
 
             <p:growl id="messages" showDetail="true"/>
