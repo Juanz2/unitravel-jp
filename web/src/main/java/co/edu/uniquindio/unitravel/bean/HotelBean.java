@@ -46,6 +46,7 @@ public class HotelBean implements Serializable {
         listaHoteles = new ArrayList<>();
         listaHoteles = hotelServicio.obtenerHoteles();
         listaCiudades = unitravelServicio.obtenerCiudades();
+        hotel = new Hotel();
         hotelSeleccionado = new Hotel();
         hotelSeleccionado.setEstado("A");
     }

@@ -26,6 +26,9 @@ public class Habitacion implements Serializable {
     @Column(nullable = false)
     private Double precio;
 
+    @Column(length = 10)
+    private String numeroHabitacion;
+
     @Min(0)
     @Column(nullable = false)
     private Integer capacidad;

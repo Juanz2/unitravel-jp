@@ -10,14 +10,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
 public class Hotel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    @EqualsAndHashCode.Include
+    private Integer codigo;
 
     @Column(length = 15, nullable = false, unique = true)
     private String nit;

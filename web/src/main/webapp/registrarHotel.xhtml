@@ -53,8 +53,12 @@
                     <h:outputText value="#{hotelTable.nombre}" sortBy="#{HotelTable.nombre}"/>
                 </p:column>
 
-                <p:column headerText="# Estrellas">
+                <p:column headerText="Estrellas">
                     <p:rating value="#{hotelTable.numeroEstrellas}" readonly="true"/>
+                </p:column>
+
+                <p:column headerText="Ciudad">
+                    <h:outputText value="#{hotelTable.ciudad.nombre}"/>
                 </p:column>
 
                 <p:column headerText="Telefono">
@@ -96,7 +100,7 @@
                         <p:inputText id="telefono" value="#{hotelBean.hotelSeleccionado.telefono}"/>
 
                         <p:outputLabel value="Ciudad:" for="id_ciudad"/>
-                        <p:selectOneMenu id="id_ciudad" value="#{hotelBean.hotel.ciudad}" required="true" requiredMessage="La ciudad es obligatoria"
+                        <p:selectOneMenu id="id_ciudad" value="#{hotelBean.hotelSeleccionado.ciudad}" required="true" requiredMessage="La ciudad es obligatoria"
                                          converter="#{ciudadConverter}">
                             <f:selectItem itemLabel="Seleccione la ciudad" noSelectionOption="true" />
                             <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.listaCiudades}"/>

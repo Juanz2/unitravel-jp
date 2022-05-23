@@ -9,33 +9,32 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Registrar hotel</title>
+    <title>Registrar habitacion</title>
 </h:head>
 <h:body>
     <h:form id="form">
         <div class="card crud-demo">
             <p:toolbar>
                 <p:toolbarGroup>
-                    <p:commandButton value="Nueva habitación" icon="pi pi-plus"
-                                     actionListener="#{habitacionBean.openNew}"
+                    <p:commandButton value="Nuevo habitacion" icon="pi pi-plus" actionListener="#{habitacionBean.openNew}"
                                      update="dt-habitacion" oncomplete="PF('manageHabitacionDialog').show()"
                                      styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-habitacion-content"/>
+                        <p:resetInput target=":form:manage-Habitacion-content"/>
                     </p:commandButton>
 
-                    <p:commandButton value="Eiminar" icon="pi pi-trash"
-                                     actionListener="PF('deleteHabitacionDialog').show()"
+                    <p:commandButton value="Eiminar" icon="pi pi-trash" actionListener="PF('deleteHabitacionDialog').show()"
                                      update="dt-habitacion"
                                      styleClass="ui-button-danger" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-habitacion-content"/>
+                        <p:resetInput target=":form:manage-Habitacion-content"/>
                     </p:commandButton>
+
                 </p:toolbarGroup>
             </p:toolbar>
-            <p:dataTable id="dt-habitacion" widgetVar="dtHabitacion" var="habitacionTable"
-                         value="#{habitacionBean.listaHabitaciones}"
-                         reflow="true" selection="#{habitacionBean.habitacionSeleccionada}"
-                         rowKey="#{habitacionTable.codigo}"
-                         paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+            <p:dataTable id="dt-habitacion" widgetVar="dtHabitacion" var="habitacionTable" value="#{habitacionBean.listaHabitaciones}"
+                         reflow="true" styleClass="Habitacion-table"
+                         selection="#{habitacionBean.habitacionesSeleccionadas}" rowKey="#{habitacionTable.codigo}" paginator="true"
+                         rows="10" rowSelectMode="add" paginatorPosition="bottom">
+
                 <f:facet name="header">
                     <div>
                         <span class="filter-container ui-input-icon-left">
@@ -45,17 +44,23 @@
                     </div>
                 </f:facet>
                 <p:column selectionMode="multiple" exportable="false"></p:column>
+
+                <p:column headerText="Numero habitación">
+                    <h:outputText value="#{habitacionTable.numeroHabitacion}" sortBy="#{habitacionTable.numeroHabitacion}"/>
+                </p:column>
+
                 <p:column headerText="Capacidad">
-                    <h:outputText value="#{habitacionTable.capacidad}"/>
+                    <h:outputText value="#{habitacionTable.capacidad}" sortBy="#{habitacionTable.capacidad}"/>
                 </p:column>
 
                 <p:column headerText="Precio">
-                    <h:outputText value="#{habitacionTable.precio}"/>
+                    <h:outputText value="#{habitacionTable.precio}" sortBy="#{habitacionTable.precio}"/>
                 </p:column>
 
                 <p:column headerText="Hotel">
-                    <h:outputText value="#{habitacionTable.hotel.nombre}"/>
+                    <h:outputText value="#{habitacionTable.hotel.nombre}" readonly="true"/>
                 </p:column>
+
 
                 <p:column exportable="false">
                     <p:commandButton icon="pi pi-pencil" update="form"
@@ -67,36 +72,40 @@
                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
                                      oncomplete="PF('deleteHabitacionDialog').show()" update="dt-habitacion"
                                      style="margin-left: 30px">
-                        <f:setPropertyActionListener value="#{hotelTable}" target="#{hotelBean.hotelSeleccionado}"/>
+                        <f:setPropertyActionListener value="#{habitacionTable}" target="#{habitacionBean.habitacionSeleccionada}"/>
                     </p:commandButton>
                 </p:column>
-
             </p:dataTable>
 
-            <p:dialog header="Registro Habitación" widgetVar="manageHabitacionDialog" showEffect="fade" modal="true"
-            responsive="true">
-
+            <p:dialog header="Registro Habitacion" showEffect="fade" modal="true"
+                      widgetVar="manageHabitacionDialog" responsive="true">
                 <p:outputPanel id="manage-habitacion-content" class="ui-fluid">
 
                     <h:panelGrid columns="2" cellpadding="5">
+
+                        <p:outputLabel for="numero">Numero habitación</p:outputLabel>
+                        <p:inputText id="numero" value="#{habitacionBean.habitacionSeleccionada.numeroHabitacion}" required="true"/>
+
+
                         <p:outputLabel for="capacidad">Capacidad</p:outputLabel>
-                        <p:inputText id="capacidad" value="#{habitacionBean.habitacion.capacidad}" required="true"/>
+                        <p:inputText id="capacidad" value="#{habitacionBean.habitacionSeleccionada.capacidad}" required="true"/>
 
                         <p:outputLabel for="precio">Precio</p:outputLabel>
-                        <p:inputText id="precio" value="#{habitacionBean.habitacion.precio}" required="true"/>
+                        <p:inputText id="precio" value="#{habitacionBean.habitacionSeleccionada.precio}" required="true"/>
 
-                        <p:outputLabel value="Hotel:" for="id_hotel"/>
-                        <p:selectOneMenu id="id_hotel" value="#{habitacionBean.habitacion.hotel}" required="true" requiredMessage="La habitación es obligatoria"
-                                         converter="#{hotelConverter}">
+                        <p:outputLabel value="Hotel:" for="hotelId"/>
+                        <p:selectOneMenu id="hotelId" required="true" requiredMessage="La ciudad es obligatoria"
+                                         converter="#{hotelConverter}" value="#{habitacionBean.habitacionSeleccionada.hotel}">
                             <f:selectItem itemLabel="Seleccione el hotel" noSelectionOption="true" />
-                            <f:selectItems var="hotel" itemLabel="#{hotel.nombre}" value="#{habitacionBean.listaHoteles}"/>
+                            <f:selectItems  value="#{habitacionBean.listaHoteles}" var="hotelVar" itemLabel="#{hotelVar.nombre}"/>
                         </p:selectOneMenu>
 
-                    </h:panelGrid>
 
+                    </h:panelGrid>
                 </p:outputPanel>
+
                 <f:facet name="footer">
-                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{habitacionBean.registrarHabitacion()}"
+                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{habitacionBean.registrarHabitacion}"
                                      update="dt-habitacion" oncomplete="PF('manageHabitacionDialog').hide()"/>
                     <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
                                      class="ui-button-secondary"/>
@@ -104,9 +113,9 @@
             </p:dialog>
 
             <p:confirmDialog widgetVar="deleteHabitacionDialog" showEffect="fade" width="300"
-                             message="¿Desea eliminar el Hotel?" header="Confirmación" severity="warn">
-                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{habitacionBean.eliminarHabitacion()}"
-                                 oncomplete="PF('deleteHabitacionDialog').hide()" update="dt-hotel"/>
+                             message="¿Desea eliminar el Habitacion?" header="Confirmación" severity="warn">
+                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{habitacionBean.eliminarHabitacion}"
+                                 oncomplete="PF('deleteHabitacionDialog').hide()" update="dt-habitacion"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                  onclick="PF('deleteHabitacionDialog').hide()"/>
             </p:confirmDialog>
@@ -118,8 +127,8 @@
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
                                  icon="pi pi-times"/>
             </p:confirmDialog>
-
         </div>
+
     </h:form>
 </h:body>
 </html>

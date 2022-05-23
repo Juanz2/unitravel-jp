@@ -13,11 +13,10 @@ import java.io.Serializable;
 @Component
 public class CiudadConverter implements Converter<Ciudad>, Serializable {
 
-    private final UnitravelServicio unitravelServicio;
+
     private final CiudadServicio ciudadServicio;
 
-    public CiudadConverter(UnitravelServicio unitravelServicio, CiudadServicio ciudadServicio) {
-        this.unitravelServicio = unitravelServicio;
+    public CiudadConverter(CiudadServicio ciudadServicio) {
         this.ciudadServicio = ciudadServicio;
     }
 

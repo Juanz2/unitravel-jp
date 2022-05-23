@@ -17,18 +17,23 @@ import java.util.List;
 
 @Component
 @ViewScoped
-@Getter
-@Setter
+
 public class HabitacionBean {
 
     private final HabitacionServicio habitacionServicio;
     private final HotelServicio hotelServicio;
+    @Getter @Setter
     private List<Hotel> listaHoteles;
+    @Getter @Setter
     private List<Habitacion> listaHabitaciones;
+    @Getter @Setter
     private Habitacion habitacion;
 
+    @Getter @Setter
     private Habitacion habitacionSeleccionada;
 
+    @Getter @Setter
+    private List<Habitacion> habitacionesSeleccionadas;
 
     public HabitacionBean(HabitacionServicio habitacionServicio, HotelServicio hotelServicio) {
         this.habitacionServicio = habitacionServicio;
@@ -37,6 +42,8 @@ public class HabitacionBean {
 
     @PostConstruct
     public void init (){
+        habitacionSeleccionada = new Habitacion();
+        habitacionSeleccionada.setEstado("A");
         listaHabitaciones = habitacionServicio.obtenerHabitaciones();
         listaHoteles = hotelServicio.obtenerHoteles();
     }
@@ -46,7 +53,7 @@ public class HabitacionBean {
      */
     public void registrarHabitacion(){
         try {
-            habitacionServicio.registrarHabitacion(habitacion);
+            habitacionServicio.registrarHabitacion(habitacionSeleccionada);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-habitacion");
         }catch (Exception e){
