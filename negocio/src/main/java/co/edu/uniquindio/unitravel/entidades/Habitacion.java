@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @AllArgsConstructor
 public class Habitacion implements Serializable {

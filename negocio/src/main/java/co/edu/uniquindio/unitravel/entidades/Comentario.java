@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 public class Comentario implements Serializable {
