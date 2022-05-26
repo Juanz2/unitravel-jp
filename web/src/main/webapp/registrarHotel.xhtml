@@ -17,173 +17,174 @@
             <p:toolbar>
                 <p:toolbarGroup>
                     <p:commandButton value="Nuevo hotel" icon="pi pi-plus" actionListener="#{hotelBean.openNew(actionEvent)}"
-                                      oncomplete="PF('manageHotelDialog').show()"
+                                     oncomplete="PF('manageHotelDialog').show()"
                                      styleClass="ui-button-success" style="margin-right: .5rem">
                     </p:commandButton>
 
                     <p:commandButton value="Eiminar" icon="pi pi-trash" actionListener="PF('deleteHotelDialog').show()"
-                                     update="dt-hotel"
+                                     update="tabla:dt-hotel"
                                      styleClass="ui-button-danger" style="margin-right: .5rem">
 
                     </p:commandButton>
 
                 </p:toolbarGroup>
             </p:toolbar>
+        </div>
+    </h:form>
 
+    <h:form id="tabla">
 
-                <p:dataTable id="dt-hotel" var="hotelTable" value="#{hotelBean.listaHoteles}"
-                             reflow="true" styleClass="Hotel-table"
-                             selection="#{hotelBean.hotelesSeleccionados}" rowKey="#{hotelTable.codigo}" paginator="true"
-                             rows="10" rowSelectMode="add" paginatorPosition="bottom">
+        <p:dataTable id="dt-hotel" var="hotelTable" value="#{hotelBean.listaHoteles}"
+                     reflow="true" styleClass="Hotel-table"
+                     selection="#{hotelBean.hotelesSeleccionados}" rowKey="#{hotelTable.codigo}" paginator="true"
+                     rows="10" rowSelectMode="add" paginatorPosition="bottom">
 
-                    <f:facet name="header">
-                        <div>
+            <f:facet name="header">
+                <div>
                         <span class="filter-container ui-input-icon-left">
                         <i class="pi pi-search"></i>
                         <p:inputText id="globalFilter" onkeyup="PF('dt-hotel').filter()" placeholder="Buscar"/>
                     </span>
-                        </div>
-                    </f:facet>
+                </div>
+            </f:facet>
 
-                    <p:column headerText="Nit">
-                        <h:outputText value="#{hotelTable.nit}"/>
-                    </p:column>
+            <p:column headerText="Nit">
+                <h:outputText value="#{hotelTable.nit}"/>
+            </p:column>
 
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{hotelTable.nombre}"/>
-                    </p:column>
+            <p:column headerText="Nombre">
+                <h:outputText value="#{hotelTable.nombre}"/>
+            </p:column>
 
-                    <p:column headerText="Estrellas">
-                        <p:rating value="#{hotelTable.numeroEstrellas}" readonly="true"/>
-                    </p:column>
+            <p:column headerText="Estrellas">
+                <p:rating value="#{hotelTable.numeroEstrellas}" readonly="true"/>
+            </p:column>
 
-                    <p:column headerText="Ciudad">
-                        <h:outputText value="#{hotelTable.ciudad.nombre}"/>
-                    </p:column>
+            <p:column headerText="Ciudad">
+                <h:outputText value="#{hotelTable.ciudad.nombre}"/>
+            </p:column>
 
-                    <p:column headerText="Telefono">
-                        <h:outputText value="#{hotelTable.telefono}"/>
-                    </p:column>
+            <p:column headerText="Telefono">
+                <h:outputText value="#{hotelTable.telefono}"/>
+            </p:column>
 
-                    <p:column exportable="false" headerText="Opciones">
-                        <p:commandButton icon="pi pi-pencil" update="form"
-                                         oncomplete="PF('manageHotelDialog').show()"
-                                         styleClass="edit-button rounded-button ui-button-success" process="@this">
-                            <f:setPropertyActionListener value="#{hotelTable}" target="#{hotelBean.hotelSeleccionado}"/>
+            <p:column exportable="false" headerText="Opciones">
+                <p:commandButton icon="pi pi-pencil" update="formulario_edit"
+                                 oncomplete="PF('manageHotelDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" action="#{hotelBean.seleccionarHotel(hotelTable)}" >
+                </p:commandButton>
+                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                 oncomplete="PF('deleteHotelDialog').show()" update="eliminar_hoteld"
+                                 style="margin-left: 30px" action="#{hotelBean.seleccionarHotel(hotelTable)}">
+                </p:commandButton>
 
-                        </p:commandButton>
-                        <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                         oncomplete="PF('deleteHotelDialog').show()" update="dt-hotel"
-                                         style="margin-left: 30px">
-                            <f:setPropertyActionListener value="#{hotelTable}" target="#{hotelBean.hotelSeleccionado}"/>
+                <p:commandButton class="ui-button-info rounded-button" icon="pi pi-key"
+                                 oncomplete="PF('manageHabitacionDialog').show()" update="registrar_hab"
+                                 style="margin-left: 30px" action="#{hotelBean.seleccionarHotel(hotelTable)}">
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
 
-                        </p:commandButton>
+        <p:growl id="messages" showDetail="true"/>
 
-                        <p:commandButton class="ui-button-info rounded-button" icon="pi pi-key"
-                                         oncomplete="PF('manageHabitacionDialog').show()" update="dt-hotel"
-                                         style="margin-left: 30px">
-                            <f:setPropertyActionListener value="#{hotelTable}" target="#{hotelBean.hotelSeleccionado}"/>
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
-
-
-            <p:dialog header="Registro Hotel" showEffect="fade" modal="true"
-                      widgetVar="manageHotelDialog" responsive="true">
-                <h:form id="formCrear">
-
-
-
-                    <h:panelGrid columns="2" cellpadding="5">
-
-                        <p:outputLabel for="name">Nombre Hotel</p:outputLabel>
-                        <p:inputText id="name" value="#{hotelBean.hotelSeleccionado.nombre}" required="true"/>
-
-                        <p:outputLabel for="nit">Nit</p:outputLabel>
-                        <p:inputText id="nit" value="#{hotelBean.hotelSeleccionado.nit}" required="true"/>
-
-                        <p:outputLabel for="numeroEstrellas">Numero de Estrellas</p:outputLabel>
-                        <p:rating id="numeroEstrellas" value="#{hotelBean.hotelSeleccionado.numeroEstrellas}"
-                                  required="true"/>
-
-                        <p:outputLabel for="telefono">Teléfono</p:outputLabel>
-                        <p:inputText id="telefono" value="#{hotelBean.hotelSeleccionado.telefono}"/>
-
-                        <p:outputLabel value="Ciudad:" for="id_ciudad"/>
-                        <p:selectOneMenu id="id_ciudad" value="#{hotelBean.hotelSeleccionado.ciudad}" required="true" requiredMessage="La ciudad es obligatoria"
-                                         converter="#{ciudadConverter}">
-                            <f:selectItem itemLabel="Seleccione la ciudad" noSelectionOption="true" />
-                            <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.listaCiudades}"/>
-                        </p:selectOneMenu>
-
-                        <p:outputLabel for="direccion">Direccion</p:outputLabel>
-                        <p:inputText id="direccion" value="#{hotelBean.hotelSeleccionado.direccion}" required="true"/>
-
-                        <p:outputLabel for="imagenes_hotel" value="Imágenes: " />
-                        <p:fileUpload id="imagenes_hotel"
-
-                                      listener="#{hotelBean.subirImagenes}" mode="advanced"
-                                      multiple="true" sizeLimit="1000000" fileLimit="5"
-                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
-
-                    </h:panelGrid>
-                </h:form>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHotel}"
-                                     update="dt-hotel" oncomplete="PF('manageHotelDialog').hide()"/>
-                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHotelDialog').hide()"
-                                     class="ui-button-secondary"/>
-                </f:facet>
-            </p:dialog>
-
-            <p:dialog header="Registrar habitación (#{hotelBean.hotelSeleccionado.nombre})" widgetVar="manageHabitacionDialog"  showEffect="fade">
-
-                    <h:panelGrid columns="2" cellpadding="5">
-
-
-                        <p:outputLabel for="numero">Numero habitación</p:outputLabel>
-                        <p:inputText id="numero" value="#{hotelBean.habitacion.numeroHabitacion}"/>
-
-                        <p:outputLabel for="capacidad">Capacidad</p:outputLabel>
-                        <p:inputText id="capacidad" value="#{hotelBean.habitacion.capacidad}"/>
-
-                        <p:outputLabel for="precio">Precio</p:outputLabel>
-                        <p:inputText id="precio" value="#{hotelBean.habitacion.precio}"/>
-
-                        <p:outputLabel for="imagenes_habitacion" value="Imágenes: " />
-                        <p:fileUpload id="imagenes_habitacion"
-
-                                      listener="#{hotelBean.subirImagenes}" mode="advanced"
-                                      multiple="true" sizeLimit="1000000" fileLimit="5"
-                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    </h:panelGrid>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHabitacion}"
-                                     update="dt-hotel" oncomplete="PF('manageHabitacionDialog').hide()"/>
-                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
-                                     class="ui-button-secondary"/>
-                </f:facet>
-            </p:dialog>
-
-            <p:confirmDialog widgetVar="deleteHotelDialog" showEffect="fade" width="300"
-                             message="¿Desea eliminar el Hotel?" header="Confirmación" severity="warn">
-                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{hotelBean.eliminarHotel}"
-                                 oncomplete="PF('deleteHotelDialog').hide()" update="dt-hotel"/>
-                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                 onclick="PF('deleteHotelDialog').hide()"/>
-            </p:confirmDialog>
-
-            <p:growl id="messages" showDetail="true"/>
-
-            <p:confirmDialog global="true" showEffect="fade" width="300">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-                                 icon="pi pi-times"/>
-            </p:confirmDialog>
-        </div>
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="pi pi-times"/>
+        </p:confirmDialog>
 
     </h:form>
+
+
+    <p:dialog id="formulario_edit" header="Registro Hotel" showEffect="fade" modal="true"
+              widgetVar="manageHotelDialog" responsive="true">
+        <h:form id="formCrear">
+
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel for="name">Nombre Hotel</p:outputLabel>
+                <p:inputText id="name" value="#{hotelBean.hotelSeleccionado.nombre}" required="true"/>
+
+                <p:outputLabel for="nit">Nit</p:outputLabel>
+                <p:inputText id="nit" value="#{hotelBean.hotelSeleccionado.nit}" required="true"/>
+
+                <p:outputLabel for="numeroEstrellas">Numero de Estrellas</p:outputLabel>
+                <p:rating id="numeroEstrellas" value="#{hotelBean.hotelSeleccionado.numeroEstrellas}"
+                          required="true"/>
+
+                <p:outputLabel for="telefono">Teléfono</p:outputLabel>
+                <p:inputText id="telefono" value="#{hotelBean.hotelSeleccionado.telefono}"/>
+
+                <p:outputLabel value="Ciudad:" for="id_ciudad"/>
+                <p:selectOneMenu id="id_ciudad" value="#{hotelBean.hotelSeleccionado.ciudad}" required="true" requiredMessage="La ciudad es obligatoria"
+                                 converter="#{ciudadConverter}">
+                    <f:selectItem itemLabel="Seleccione la ciudad" noSelectionOption="true" />
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.listaCiudades}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                <p:inputText id="direccion" value="#{hotelBean.hotelSeleccionado.direccion}" required="true"/>
+
+                <p:outputLabel for="imagenes_hotel" value="Imágenes: " />
+                <p:fileUpload id="imagenes_hotel"
+
+                              listener="#{hotelBean.subirImagenes}" mode="advanced"
+                              multiple="true" sizeLimit="1000000" fileLimit="5"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+            </h:panelGrid>
+
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHotel}"
+                                 update="tabla:dt-hotel" oncomplete="PF('manageHotelDialog').hide()"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHotelDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog id="registrar_hab" header="Registrar habitación (#{hotelBean.hotelSeleccionado.nombre})" widgetVar="manageHabitacionDialog"  showEffect="fade">
+
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+
+
+                <p:outputLabel for="numero">Numero habitación</p:outputLabel>
+                <p:inputText id="numero" value="#{hotelBean.habitacion.numeroHabitacion}"/>
+
+                <p:outputLabel for="capacidad">Capacidad</p:outputLabel>
+                <p:inputText id="capacidad" value="#{hotelBean.habitacion.capacidad}"/>
+
+                <p:outputLabel for="precio">Precio</p:outputLabel>
+                <p:inputText id="precio" value="#{hotelBean.habitacion.precio}"/>
+
+                <p:outputLabel for="imagenes_habitacion" value="Imágenes: " />
+                <p:fileUpload id="imagenes_habitacion"
+
+                              listener="#{hotelBean.subirImagenes}" mode="advanced"
+                              multiple="true" sizeLimit="1000000" fileLimit="5"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+            </h:panelGrid>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHabitacion}"
+                                 update="tabla:dt-hotel" oncomplete="PF('manageHabitacionDialog').hide()"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </h:form>
+    </p:dialog>
+
+    <p:confirmDialog id="eliminar_hoteld" widgetVar="deleteHotelDialog" showEffect="fade" width="300"
+                     message="¿Desea eliminar el Hotel?" header="Confirmación" severity="warn">
+        <h:form>
+            <p:commandButton value="Si" icon="pi pi-check" action="#{hotelBean.eliminarHotel}"
+                             oncomplete="PF('deleteHotelDialog').hide()" update="tabla:dt-hotel"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deleteHotelDialog').hide()"/>
+        </h:form>
+    </p:confirmDialog>
+
 </h:body>
 </html>

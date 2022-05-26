@@ -19,9 +19,7 @@ public class HotelServicioImp implements HotelServicio{
     @Override
     public Hotel registrarHotel(Hotel hotel) throws Exception{
 
-        Hotel hotelBusqueda = hotelRepo.obtenerHotelNit(hotel.getNit());
-        if (hotelBusqueda != null)
-            throw new Exception("El hotel " + hotel.getNombre() + " ya existe");
+
         if(hotel.getNumeroEstrellas() <= 0 )
             throw new Exception("El número de estrellas debe ser mayor a cero");
         if (hotel.getTelefono().length() > 10)
@@ -39,9 +37,6 @@ public class HotelServicioImp implements HotelServicio{
     @Override
     public Hotel actualizarHotel(Hotel hotel) throws Exception{
 
-        Hotel hotelBusqueda = hotelRepo.obtenerHotelNit(hotel.getNit());
-        if (hotelBusqueda != null)
-            throw new Exception("El hotel " + hotel.getNombre() + " ya existe");
         if(hotel.getNumeroEstrellas() <= 0 )
             throw new Exception("El número de estrellas debe ser mayor a cero");
         return hotelRepo.save(hotel);

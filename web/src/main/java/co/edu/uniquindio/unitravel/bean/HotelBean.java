@@ -165,9 +165,15 @@ public class HotelBean implements Serializable {
     public void eliminarHotel() {
         try {
             hotelServicio.eliminarHotel(hotelSeleccionado.getCodigo());
+            listaHoteles.remove(hotelSeleccionado);
         } catch (Exception e) {
             e.getStackTrace();
         }
     }
+
+    public void seleccionarHotel(Hotel h){
+        this.hotelSeleccionado = h;
+    }
+
 
 }
