@@ -27,6 +27,8 @@ public class Ciudad implements Serializable {
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
     private String estado;
 
+    private String foto;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "ciudadOrigen")
     private List<Vuelo> vuelosOrigen;

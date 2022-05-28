@@ -12,4 +12,10 @@ public interface CaracteristicaRepo extends JpaRepository<Caracteristica, Intege
     @Query("select  c from Caracteristica  c where c.estado = 'A'")
     List<Caracteristica> obtenerListaCaracteristicas();
 
+    @Query("select c from Caracteristica c where c.estado = 'A' and c.tipo = 1")
+    List<Caracteristica>obtenerCaracteristicasHotel();
+
+    @Query("select c from Caracteristica c where c.estado = 'A' and c.tipo = 2")
+    List<Caracteristica>obtenerCaracteristicasHabitacion();
+
 }

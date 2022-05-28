@@ -12,7 +12,9 @@
     <title>Registrar hotel</title>
 </h:head>
 <h:body>
+
     <h:form id="form">
+        <p:growl id="message" showDetail="true"/>
         <div class="card crud-demo">
             <p:toolbar>
                 <p:toolbarGroup>
@@ -35,8 +37,7 @@
     <h:form id="tabla">
 
         <p:dataTable id="dt-hotel" var="hotelTable" value="#{hotelBean.listaHoteles}"
-                     reflow="true" styleClass="Hotel-table"
-                     selection="#{hotelBean.hotelesSeleccionados}" rowKey="#{hotelTable.codigo}" paginator="true"
+                     reflow="true" styleClass="Hotel-table" paginator="true"
                      rows="10" rowSelectMode="add" paginatorPosition="bottom">
 
             <f:facet name="header">
@@ -85,7 +86,7 @@
             </p:column>
         </p:dataTable>
 
-        <p:growl id="messages" showDetail="true"/>
+
 
         <p:confirmDialog global="true" showEffect="fade" width="300">
             <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
@@ -102,17 +103,17 @@
 
             <h:panelGrid columns="2" cellpadding="5">
 
-                <p:outputLabel for="name">Nombre Hotel</p:outputLabel>
+                <p:outputLabel for="name" value="Nombre"/>
                 <p:inputText id="name" value="#{hotelBean.hotelSeleccionado.nombre}" required="true"/>
 
                 <p:outputLabel for="nit">Nit</p:outputLabel>
                 <p:inputText id="nit" value="#{hotelBean.hotelSeleccionado.nit}" required="true"/>
 
-                <p:outputLabel for="numeroEstrellas">Numero de Estrellas</p:outputLabel>
+                <p:outputLabel for="numeroEstrellas" value="Numero de Estrellas"/>
                 <p:rating id="numeroEstrellas" value="#{hotelBean.hotelSeleccionado.numeroEstrellas}"
                           required="true"/>
 
-                <p:outputLabel for="telefono">Teléfono</p:outputLabel>
+                <p:outputLabel for="telefono" value="Teléfono"/>
                 <p:inputText id="telefono" value="#{hotelBean.hotelSeleccionado.telefono}"/>
 
                 <p:outputLabel value="Ciudad:" for="id_ciudad"/>
@@ -122,25 +123,38 @@
                     <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.listaCiudades}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                <p:outputLabel for="direccion" value="Dirección" />
                 <p:inputText id="direccion" value="#{hotelBean.hotelSeleccionado.direccion}" required="true"/>
+
+                <p:outputLabel for="grid" value="Caracteristicas"/>
+                <p:selectManyCheckbox id="grid" value="#{hotelBean.hotelSeleccionado.caracteristicas}" layout="grid"
+                                      columns="3" styleClass="grid-checkbox" converter="#{caracteristicasConverter}" required="true">
+                    <f:selectItems value="#{hotelBean.listaCaracteristicaHotel}" var="caracteristica" itemLabel="#{caracteristica.nombre}" itemValue="#{caracteristica}"/>
+                </p:selectManyCheckbox>
+
+                <p:outputLabel for="descripcion" value="Descripcion"/>
+                <p:inputTextarea id="descripcion" value="#{hotelBean.hotelSeleccionado.descripcion}" required="true"
+                                 rows="5" cols="30" maxlength="10" ounterTemplate="{0} characters remaining."
+                                 autoResize="false"/>
 
                 <p:outputLabel for="imagenes_hotel" value="Imágenes: " />
                 <p:fileUpload id="imagenes_hotel"
-
                               listener="#{hotelBean.subirImagenes}" mode="advanced"
                               multiple="true" sizeLimit="1000000" fileLimit="5"
                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
 
+
+
             </h:panelGrid>
 
 
-            <f:facet name="footer">
+            <h:panelGrid cellpadding="5" columns="2">
                 <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHotel}"
                                  update="tabla:dt-hotel" oncomplete="PF('manageHotelDialog').hide()"/>
                 <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHotelDialog').hide()"
                                  class="ui-button-secondary"/>
-            </f:facet>
+            </h:panelGrid>
+
         </h:form>
     </p:dialog>
 
@@ -159,6 +173,11 @@
                 <p:outputLabel for="precio">Precio</p:outputLabel>
                 <p:inputText id="precio" value="#{hotelBean.habitacion.precio}"/>
 
+                <p:outputLabel for="grid_hb">Características</p:outputLabel>
+                <p:selectManyCheckbox id="grid_hb" value="#{hotelBean.habitacion.caracteristicas}" layout="grid" columns="3" styleClass="grid-checkbox" converter="#{caracteristicasConverter}" required="true">
+                    <f:selectItems value="#{hotelBean.listaCaracteristicaHabitacion}" var="caracteristicaHb" itemLabel="#{caracteristicaHb.nombre}" itemValue="#{caracteristicaHb}"/>
+                </p:selectManyCheckbox>
+
                 <p:outputLabel for="imagenes_habitacion" value="Imágenes: " />
                 <p:fileUpload id="imagenes_habitacion"
 
@@ -167,13 +186,15 @@
                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
             </h:panelGrid>
 
-            <f:facet name="footer">
+            <h:panelGrid columns="2" cellpadding="5" >
                 <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{hotelBean.registrarHabitacion}"
                                  update="tabla:dt-hotel" oncomplete="PF('manageHabitacionDialog').hide()"/>
                 <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
                                  class="ui-button-secondary"/>
-            </f:facet>
+            </h:panelGrid>
+
         </h:form>
+
     </p:dialog>
 
     <p:confirmDialog id="eliminar_hoteld" widgetVar="deleteHotelDialog" showEffect="fade" width="300"

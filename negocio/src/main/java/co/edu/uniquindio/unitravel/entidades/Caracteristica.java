@@ -22,6 +22,9 @@ public class Caracteristica implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
+    @Column(nullable = false)
+    private int tipo;
+
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")
     private String estado;
 

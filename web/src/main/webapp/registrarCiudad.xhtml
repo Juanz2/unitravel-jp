@@ -70,12 +70,18 @@
 
             <p:dialog header="Registro Ciudad" showEffect="fade" modal="true"
                       widgetVar="manageCiudadDialog" responsive="true">
-                <p:outputPanel id="manage-ciudad-content" class="ui-fluid">
-                    <div class="p-field">
-                        <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
-                        <p:inputText id="name" value="#{ciudadBean.ciudadSeleccionada.nombre}" required="true"/>
-                    </div>
-                </p:outputPanel>
+
+
+                        <h:panelGrid cellpadding="5" columns="2">
+                            <p:outputLabel for="name">Nombre ciudad</p:outputLabel>
+                            <p:inputText id="name" value="#{ciudadBean.ciudadSeleccionada.nombre}" required="true"/>
+
+                            <p:outputLabel for="imagenes_ciudad" value="Imágenes: " />
+                            <p:fileUpload id="imagenes_ciudad"
+                                          listener="#{ciudadBean.subirImagenes}" mode="advanced"
+                                          multiple="true" sizeLimit="1000000" fileLimit="5"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+                        </h:panelGrid>
 
                 <f:facet name="footer">
                     <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{ciudadBean.registrarCiudad}"

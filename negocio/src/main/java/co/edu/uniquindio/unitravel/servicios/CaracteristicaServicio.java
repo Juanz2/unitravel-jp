@@ -13,4 +13,8 @@ public interface CaracteristicaServicio {
 
     List<Caracteristica> obtenerCaracteristicas();
 
+    List<Caracteristica> obtenerCaracteristicasHoteles();
+
+    List<Caracteristica> obtenerCaracteristicasHabitaciones();
+
 }

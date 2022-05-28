@@ -16,30 +16,118 @@
 </h:head>
 <h:body>
 
-        <div class="p-3 bg-dark text-white">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
-                </a>
+    <div class="p-3 bg-dark text-white">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
+            </a>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
-                    <li><a href="registrarHotel.xhtml" class="nav-link px-2 text-white">Hoteles</a></li>
-                    <li><a href="registrarHabitacion.xhtml" class="nav-link px-2 text-white">Gestionar Habitaciones</a></li>
-                    <li><a href="registrarSilla.xhtml" class="nav-link px-2 text-white">Gestionar Sillas</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Preguntas frecuentes</a></li>
-                </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+                <li><a href="registrarHotel.xhtml" class="nav-link px-2 text-white">Hoteles</a></li>
+                <li><a href="registrarHabitacion.xhtml" class="nav-link px-2 text-white">Gestionar Habitaciones</a></li>
+                <li><a href="registrarSilla.xhtml" class="nav-link px-2 text-white">Gestionar Sillas</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Preguntas frecuentes</a></li>
+            </ul>
 
-                <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <p:inputText type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Buscar..." aria-label="Search"/>
-                </h:form>
+            <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <p:inputText type="search" class="form-control form-control-dark text-white bg-dark"
+                             placeholder="Buscar..." aria-label="Search"/>
+            </h:form>
 
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='login.xhtml'">Ingresar</button>
-                    <button type="button" class="btn btn-warning" onclick="window.location.href='registrarUsuario.xhtml'">Registrarse</button>
-                </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2"
+                        onclick="window.location.href='login.xhtml'">Ingresar
+                </button>
+                <button type="button" class="btn btn-warning"
+                        onclick="window.location.href='registrarUsuario.xhtml'">Registrarse
+                </button>
             </div>
         </div>
+    </div>
+
+    <div id="contenido">
+        <div class="container">
+            <br/>
+
+
+
+                    <p:carousel value="#{inicioBean.listaCiudades}" var="ciudad" numVisible="3" numScroll="1"
+                    circular="true" autoplayInterval="5000">
+                        <div class="ciudad-item">
+                            <div class="ciudad-item-content">
+                                <div class="p-mb-3">
+                                   <img src="uploads/#{ciudad.foto}" alt="..." style="width: 290px; height: 410px; object-fit: cover"/>
+                                </div>
+                                <div>
+                                    <h4 class="p-mb-1">#{ciudad.nombre}</h4>
+                                    <div class="p-mt-5">
+                                        <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button p-mr-2" />
+                                        <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button p-mr-2" />
+                                        <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:carousel>
+
+            <h:form>
+                <p:dataView id="lista-hoteles" value="#{inicioBean.listaHoteles}" var="hotel"
+                            listIcon="pi pi-bars"
+                            gridIcon="pi pi-th-large">
+
+                    <p:dataViewGridItem>
+
+                        <p:card style="width: 25rem; margin-bottom: 2em">
+                            <f:facet name="header">
+                                <img alt="user header" src="uploads/#{hotel.imagenPrincipal}" class="imagen-hotel"/>
+                            </f:facet>
+                            <f:facet name="title">
+                                #{hotel.nombre}
+                            </f:facet>
+                            <p>#{hotel.ciudad.nombre}</p>
+                            <f:facet name="footer">
+                                <p:commandButton icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
+                            </f:facet>
+
+                        </p:card>
+                    </p:dataViewGridItem>
+
+                    <p:dataViewListItem>
+                        <div class="row d-flex m-5">
+                            <div class="col-lg-2 col-md-1" style="text-align: center">
+                                <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel" alt="Imagen"/>
+                            </div>
+                            <div class="col-lg-8 col-md-1 align-self-center">
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Nombre:"/>
+                                        <h:outputText value="#{hotel.nombre}" style="font-weight: bold"/>
+
+                                        <h:outputText value="Ciudad:"/>
+                                        <h:outputText value="#{hotel.ciudad.nombre}"/>
+                                        <h:outputText value="Características:"/>
+                                        <p:repeat value="#{hotel.caracteristicas}" var="car">
+                                            <p:chip label="#{car.nombre}" styleClass="me-2"/>
+                                        </p:repeat>
+                                        <h:outputText value="Descripción:"/>
+                                        <h:outputText value="#{hotel.descripcion}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </div>
+                            <div class="col-lg-2 col-md-1 align-self-center">
+                                <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+
+                                                 icon="pi pi-arrow-right" iconPos="right"/>
+
+                            </div>
+                        </div>
+                    </p:dataViewListItem>
+
+                </p:dataView>
+            </h:form>
+        </div>
+    </div>
 </h:body>
 </html>

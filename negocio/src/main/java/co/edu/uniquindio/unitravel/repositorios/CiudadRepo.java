@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unitravel.repositorios;
 
+import co.edu.uniquindio.unitravel.entidades.Caracteristica;
 import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,6 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     @Query("select c from Ciudad  c where  c.estado = 'A'")
     List<Ciudad> obtenerCiudades();
+
+
 }

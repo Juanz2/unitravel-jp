@@ -48,4 +48,16 @@ public class CaracteristicaServicioImp implements CaracteristicaServicio{
     public List<Caracteristica> obtenerCaracteristicas() {
         return caracteristicaRepo.obtenerListaCaracteristicas();
     }
+
+    @Override
+    public List<Caracteristica> obtenerCaracteristicasHoteles() {
+        return caracteristicaRepo.obtenerCaracteristicasHotel();
+    }
+
+    @Override
+    public List<Caracteristica> obtenerCaracteristicasHabitaciones() {
+        return caracteristicaRepo.obtenerCaracteristicasHabitacion();
+    }
+
+
 }
