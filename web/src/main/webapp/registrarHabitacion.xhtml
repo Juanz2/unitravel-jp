@@ -16,7 +16,7 @@
         <div class="card crud-demo">
             <p:toolbar>
                 <p:toolbarGroup>
-                    <p:commandButton value="Nuevo habitacion" icon="pi pi-plus" actionListener="#{habitacionBean.openNew}"
+                    <p:commandButton value="Nueva habitacion" icon="pi pi-plus" actionListener="#{habitacionBean.openNew}"
                                      update="dt-habitacion" oncomplete="PF('manageHabitacionDialog').show()"
                                      styleClass="ui-button-success" style="margin-right: .5rem">
                         <p:resetInput target=":form:manage-Habitacion-content"/>
@@ -79,8 +79,6 @@
 
             <p:dialog header="Registro Habitacion" showEffect="fade" modal="true"
                       widgetVar="manageHabitacionDialog" responsive="true">
-                <p:outputPanel id="manage-habitacion-content" class="ui-fluid">
-
                     <h:panelGrid columns="2" cellpadding="5">
 
                         <p:outputLabel for="numero">Numero habitación</p:outputLabel>
@@ -100,9 +98,19 @@
                             <f:selectItems  value="#{habitacionBean.listaHoteles}" var="hotelVar" itemLabel="#{hotelVar.nombre}"/>
                         </p:selectOneMenu>
 
+                        <p:outputLabel for="grid" value="Caracteristicas"/>
+                        <p:selectManyCheckbox id="grid" value="#{habitacionBean.habitacionSeleccionada.caracteristicas}" layout="grid"
+                                              columns="3" styleClass="grid-checkbox" converter="#{caracteristicasConverter}" required="true">
+                            <f:selectItems value="#{habitacionBean.caracteristicas}" var="caracteristica" itemLabel="#{caracteristica.nombre}" itemValue="#{caracteristica}"/>
+                        </p:selectManyCheckbox>
+
+                        <p:outputLabel for="imagenes_habitacion" value="Imágenes: " />
+                        <p:fileUpload id="imagenes_habitacion"
+                                      listener="#{habitacionBean.subirImagenes}" mode="advanced"
+                                      multiple="true" sizeLimit="1000000" fileLimit="5"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
                     </h:panelGrid>
-                </p:outputPanel>
 
                 <f:facet name="footer">
                     <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{habitacionBean.registrarHabitacion}"

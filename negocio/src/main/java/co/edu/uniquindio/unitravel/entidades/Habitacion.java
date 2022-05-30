@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -48,6 +50,7 @@ public class Habitacion implements Serializable {
 
     @ToString.Exclude
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Caracteristica> caracteristicas;
 
     @ToString.Exclude
@@ -66,5 +69,17 @@ public class Habitacion implements Serializable {
         this.capacidad = capacidad;
         this.estado = estado;
         this.hotel = hotel;
+    }
+    /**
+     * Obtiene la primera imagen del hotel
+     * @return
+     */
+    public String getImagenPrincipal(){
+        if(fotos != null){
+            if(!fotos.isEmpty()){
+                return fotos.get(0);
+            }
+        }
+        return "HabitacionDefault.jpeg";
     }
 }

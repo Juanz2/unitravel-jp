@@ -38,4 +38,8 @@ public class InicioBean implements Serializable {
         listaCiudades = ciudadServicio.listarCiudades();
     }
 
+    public String irDetalleHotel(String codigoHotel){
+        return "detalleHotel?faces-redirect=true&amp;hotelId=" + codigoHotel;
+    }
+
 }

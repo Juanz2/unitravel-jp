@@ -39,11 +39,11 @@ public class Hotel implements Serializable {
     private Integer numeroEstrellas;
 
     @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> fotos;
 
     @ManyToMany
     @ToString.Exclude
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Caracteristica>caracteristicas;
 
     @Lob

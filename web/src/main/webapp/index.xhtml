@@ -50,12 +50,9 @@
     <div id="contenido">
         <div class="container">
             <br/>
-
-
-
                     <p:carousel value="#{inicioBean.listaCiudades}" var="ciudad" numVisible="3" numScroll="1"
                     circular="true" autoplayInterval="5000">
-                        <div class="ciudad-item">
+                        <div class="ciudad-item" style="box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;">
                             <div class="ciudad-item-content">
                                 <div class="p-mb-3">
                                    <img src="uploads/#{ciudad.foto}" alt="..." style="width: 290px; height: 410px; object-fit: cover"/>
@@ -63,9 +60,9 @@
                                 <div>
                                     <h4 class="p-mb-1">#{ciudad.nombre}</h4>
                                     <div class="p-mt-5">
-                                        <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button p-mr-2" />
-                                        <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button p-mr-2" />
-                                        <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+                                        <p:commandButton type="button" icon="pi pi-search"
+                                                         styleClass="rounded-button p-mr-2"
+                                                         onclick="window.location.href='registrarUsuario.xhtml'" />
                                     </div>
                                 </div>
                             </div>
@@ -79,25 +76,25 @@
 
                     <p:dataViewGridItem>
 
-                        <p:card style="width: 25rem; margin-bottom: 2em">
+                        <p:card style="width: 25rem; margin-bottom: 2em;">
                             <f:facet name="header">
-                                <img alt="user header" src="uploads/#{hotel.imagenPrincipal}" class="imagen-hotel"/>
+                                <img alt="user header" src="uploads/#{hotel.imagenPrincipal}" style="width: 290px; height: 410px; object-fit: cover"/>
                             </f:facet>
                             <f:facet name="title">
                                 #{hotel.nombre}
                             </f:facet>
                             <p>#{hotel.ciudad.nombre}</p>
                             <f:facet name="footer">
-                                <p:commandButton icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
+                                <p:commandButton action="#{inicioBean.irDetalleHotel(hotel.codigo)}" icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
                             </f:facet>
 
                         </p:card>
                     </p:dataViewGridItem>
 
                     <p:dataViewListItem>
-                        <div class="row d-flex m-5">
-                            <div class="col-lg-2 col-md-1" style="text-align: center">
-                                <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel" alt="Imagen"/>
+                        <div class="row d-flex m-5" style="box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;">
+                            <div class="col-lg-2 col-md-1" style="text-align: center;">
+                                <img src="/uploads/#{hotel.imagenPrincipal}" style="width: 150px; height: 235px; object-fit: cover" alt="Imagen"/>
                             </div>
                             <div class="col-lg-8 col-md-1 align-self-center">
                                 <p:outputPanel>
@@ -117,9 +114,7 @@
                                 </p:outputPanel>
                             </div>
                             <div class="col-lg-2 col-md-1 align-self-center">
-                                <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
-
-                                                 icon="pi pi-arrow-right" iconPos="right"/>
+                                <p:commandButton value="Ver detalle" action="#{inicioBean.irDetalleHotel(hotel.codigo)}" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right"/>
 
                             </div>
                         </div>
