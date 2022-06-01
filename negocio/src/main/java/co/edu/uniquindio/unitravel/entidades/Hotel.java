@@ -39,6 +39,7 @@ public class Hotel implements Serializable {
     private Integer numeroEstrellas;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> fotos;
 
     @ManyToMany
@@ -50,6 +51,7 @@ public class Hotel implements Serializable {
     private String descripcion;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Ciudad ciudad;
 
     @Column(length = 1, nullable = false, columnDefinition = "varchar(1) default 'A'")

@@ -34,12 +34,16 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         if(parametroBusqueda != null && !parametroBusqueda.isEmpty()){
-            hotelesBusqueda = hotelServicio.obtenerHotelesPorDestino(parametroBusqueda);
+            hotelesBusqueda = hotelServicio.obtenerHotelPorNombre(busqueda);
         }else{
             hotelesBusqueda = new ArrayList<>();
         }
     }
     public String buscar(){
         return "resultadoBusqueda?faces-redirect=true&amp;busqueda=" + busqueda;
+    }
+
+    public String irDetalleHotel(String codigoHotel){
+        return "detalleHotel?faces-redirect=true&amp;hotelId=" + codigoHotel;
     }
 }

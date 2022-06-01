@@ -1,70 +1,120 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      lang="en">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="styleUni.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <title><ui:insert name="title">Título</ui:insert></title>
+</h:head>
+<h:body>
+    <div id="encabezado" class="p-3 bg-success text-white">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <h:graphicImage library="img" name="iconoPrincipal.png" styleClass="icono-p"/>
+            </a>
 
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-        </f:facet>
-        <title><ui:insert name="title">PrimeFaces Ecuador</ui:insert></title>
-        <h:outputScript name="js/layout.js" library="ecuador-layout" />
-        <h:outputScript name="js/prism.js" library="ecuador-layout"/>
-        <ui:insert name="head"/>
-    </h:head>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="registrarHotel.xhtml" class="nav-link px-2 text-white">Hoteles</a></li>
+                <li><a href="registrarHabitacion.xhtml" class="nav-link px-2 text-white">Gestionar Habitaciones</a></li>
+                <li><a href="registrarSilla.xhtml" class="nav-link px-2 text-white">Gestionar Sillas</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Preguntas frecuentes</a></li>
+            </ul>
 
-    <h:body styleClass="#{guestPreferences.inputStyleClass}">
-        <div class="layout-wrapper #{guestPreferences.menuMode} layout-menu-#{guestPreferences.menuColor} #{guestPreferences.orientationRTL ? 'layout-rtl' : null}">
-            <ui:include src="./topbar.xhtml"/>
-            <ui:include src="./right_panel.xhtml"/>
-            <ui:include src="./menu.xhtml"/>
-            <ui:include src="./config.xhtml"/>
-
-            <div class="layout-main">
-                <div class="route-bar">
-                    <div class="route-bar-breadcrumb">
-                        <ul>
-                            <li>
-                                <a href="dashboard.xhtml">
-                                    <i class="pi pi-home"/>
-                                </a>
-                            </li>
-                            <li>/</li>
-                            <ui:insert name="viewname" />
-                        </ul>
-                    </div>
+            <h:form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <div class="input-search ui-inputgroup">
+                    <p:inputText type="search" class="form-control form-control-dark text-white bg-dark"
+                                 placeholder="Buscar..." aria-label="Search" value="#{busquedaBean.busqueda}"/>
+                    <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
                 </div>
-                
-                <div class="layout-content">
-                    <ui:insert name="content"/>
-                </div>
+            </h:form>
 
-                <div class="layout-footer">
-                    <ui:include src="./footer.xhtml"/>
-                </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2"
+                        onclick="window.location.href='login.xhtml'">Ingresar
+                </button>
+                <button type="button" class="btn btn-warning"
+                        onclick="window.location.href='registrarUsuario.xhtml'">Registrarse
+                </button>
             </div>
-
-            <p:ajaxStatus styleClass="layout-ajax-loader">
-                <f:facet name="start">
-                    <i class="pi pi-spin pi-spinner layout-ajax-loader-icon" aria-hidden="true"/>
-                </f:facet>
-
-                <f:facet name="complete">
-                    <h:outputText value="" />
-                </f:facet>
-            </p:ajaxStatus>
         </div>
-        <h:outputStylesheet name="css/primeicons.css" library="ecuador-layout" />
-        <h:outputStylesheet name="css/primeflex.min.css" library="ecuador-layout" />
+    </div>
 
-        <h:outputStylesheet name="css/demo.css" library="demo"/>
-        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ecuador-layout" />
-    </h:body>
-
+    <div id="content">
+        <ui:insert name="content">Contenido</ui:insert>
+    </div>
+    <div id="footer">
+        <footer class="bg-light text-center text-white">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: Social media -->
+                <section class="mb-4">
+                    <!-- Facebook -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #3b5998;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-facebook"></i
+                    ></a>
+                    <!-- Twitter -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #55acee;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-twitter"></i
+                    ></a>
+                    <!-- Google -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #dd4b39;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-google"></i
+                    ></a>
+                    <!-- Instagram -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #ac2bac;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-instagram"></i
+                    ></a>
+                    <!-- Linkedin -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #0082ca;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-linkedin"></i
+                    ></a>
+                    <!-- Github -->
+                    <a
+                            class="btn btn-primary btn-floating m-1"
+                            style="background-color: #333333;"
+                            href="#!"
+                            role="button"
+                    ><i class="pi pi-github"></i
+                    ></a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:
+                <a class="text-white" href="#">Unitravel.com.co</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </div>
+</h:body>
 </html>

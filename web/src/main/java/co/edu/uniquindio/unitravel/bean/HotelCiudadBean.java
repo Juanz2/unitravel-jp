@@ -1,12 +1,11 @@
 package co.edu.uniquindio.unitravel.bean;
 
-import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
-import co.edu.uniquindio.unitravel.servicios.CiudadServicio;
 import co.edu.uniquindio.unitravel.servicios.HotelServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -16,34 +15,24 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class InicioBean implements Serializable {
-
-    private String mensaje = "Primera pagina";
+public class HotelCiudadBean implements Serializable {
 
     @Autowired
     private HotelServicio hotelServicio;
 
-    @Autowired
-    private CiudadServicio ciudadServicio;
+    @Value("#{param['ciudad']}")
+    private String parametroBusqueda;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Hotel> listaHoteles;
 
-    @Getter @Setter
-    private List<Ciudad> listaCiudades;
-
     @PostConstruct
-    public void init(){
-        listaHoteles = hotelServicio.obtenerHoteles();
-        listaCiudades = ciudadServicio.listarCiudades();
+    public void init (){
+        listaHoteles = hotelServicio.obtenerHotelesPorDestino(parametroBusqueda);
     }
 
     public String irDetalleHotel(String codigoHotel){
         return "detalleHotel?faces-redirect=true&amp;hotelId=" + codigoHotel;
     }
-
-    public String irDetalleCiudad(String nombreCiudad){
-        return "hotelesCiudad?faces-redirect=true&amp;ciudad=" + nombreCiudad;
-    }
-
 }

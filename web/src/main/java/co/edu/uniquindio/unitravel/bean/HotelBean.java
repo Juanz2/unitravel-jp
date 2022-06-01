@@ -37,30 +37,38 @@ public class HotelBean implements Serializable {
     private final CaracteristicaServicio caracteristicaServicio;
     private List<Ciudad> listaCiudades;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Caracteristica> listaCaracteristicaHotel;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Caracteristica> listaCaracteristicaHabitacion;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Hotel hotel;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Habitacion habitacion;
 
     @Value("${upload.url}")
     private String urlImagenes;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Hotel hotelSeleccionado;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private ArrayList<String> imagenes;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Hotel> listaHoteles;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Hotel> hotelesSeleccionados;
 
     /**
@@ -77,14 +85,10 @@ public class HotelBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        listaHoteles = new ArrayList<>();
         listaHoteles = hotelServicio.obtenerHoteles();
         listaCiudades = unitravelServicio.obtenerCiudades();
         listaCaracteristicaHotel = caracteristicaServicio.obtenerCaracteristicasHoteles();
         listaCaracteristicaHabitacion = caracteristicaServicio.obtenerCaracteristicasHabitaciones();
-        hotel = new Hotel();
-        hotelSeleccionado = new Hotel();
-        hotelSeleccionado.setEstado("A");
         this.imagenes = new ArrayList<>();
         this.habitacion = new Habitacion();
         this.habitacion.setEstado("A");
@@ -98,11 +102,11 @@ public class HotelBean implements Serializable {
             if (imagenes.size() > 0) {
                 hotelSeleccionado.setFotos(imagenes);
                 hotelServicio.registrarHotel(hotelSeleccionado);
-                listaHoteles.add(hotelSeleccionado);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
-                PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
+                listaHoteles = hotelServicio.obtenerHoteles();
                 imagenes.clear();
                 hotelSeleccionado = null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
+                PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("El hotel debe tener al menos una imagen"));
                 PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
@@ -113,12 +117,6 @@ public class HotelBean implements Serializable {
             PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
         }
     }
-
-    public void openNew(ActionEvent actionEvent) {
-        hotel = new Hotel();
-        hotel.setEstado("A");
-    }
-
 
     /**
      * @param event evento
@@ -160,13 +158,13 @@ public class HotelBean implements Serializable {
                 PrimeFaces.current().ajax().update("form:messages");
                 imagenes.clear();
             } else {
-               // FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe agregar al menos una imagen"));
-                // PrimeFaces.current().ajax().update("form:messages");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe agregar al menos una imagen"));
+                PrimeFaces.current().ajax().update("form:messages");
             }
 
         } catch (Exception e) {
-            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-            //PrimeFaces.current().ajax().update("form:messages");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
+            PrimeFaces.current().ajax().update("form:messages");
         }
     }
 

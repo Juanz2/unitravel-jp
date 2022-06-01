@@ -53,12 +53,13 @@ public class SillaBean implements Serializable {
     public void registrarSilla() {
 
         try {
-            sillaServicio.registrarSilla(silla);
+            sillaServicio.registrarSilla(sillaSeleccionada);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
+            PrimeFaces.current().ajax().update("form:messages", "tabla:dt-silla");
+            listaSillas = sillaServicio.obtenerSillas();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
+            PrimeFaces.current().ajax().update("form:messages", "tabla:dt-silla");
         }
     }
 
@@ -69,10 +70,11 @@ public class SillaBean implements Serializable {
         try {
             sillaServicio.eliminarSilla(sillaSeleccionada.getCodigo());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Silla eliminada"));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
+            PrimeFaces.current().ajax().update("form:messages", "table:dt-silla");
+            listaSillas = sillaServicio.obtenerSillas();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-            PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
+            PrimeFaces.current().ajax().update("form:messages", "table:dt-silla");
         }
     }
 
@@ -85,6 +87,7 @@ public class SillaBean implements Serializable {
             sillaServicio.actualizarSilla(sillaSeleccionada);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Silla actualizada"));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
+            listaSillas = sillaServicio.obtenerSillas();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-silla");
@@ -113,6 +116,9 @@ public class SillaBean implements Serializable {
     public void openNew(){
         silla = new Silla();
         silla.setEstado("A");
+    }
+    public void seleccionarSilla(Silla silla){
+        sillaSeleccionada = silla;
     }
 
 }

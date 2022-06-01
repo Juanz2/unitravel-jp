@@ -16,7 +16,7 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
     @Query("select h.ciudad.nombre from Hotel h where  h.codigo = ?1")
     String obtenerNombreCiudad(Integer codigo);
 
-    @Query("select h from Hotel h where h.ciudad.nombre = ?1 and h.estado = 'A'")
+    @Query("select h from Hotel h where h.ciudad.nombre like %?1% and h.estado = 'A'")
     List<Hotel>obtenerHotelesNombre(String nombreCiudad);
 
     /*

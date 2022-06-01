@@ -6,33 +6,40 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Registrar silla</title>
-</h:head>
-<h:body>
-    <h:form id="form">
-        <div class="card crud-demo">
-            <p:toolbar>
-                <p:toolbarGroup>
-                    <p:commandButton value="Nueva Silla" icon="pi pi-plus" actionListener="#{sillaBean.openNew}"
-                                     update="dt-silla" oncomplete="PF('manageSillaDialog').show()"
-                                     styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-silla-content"/>
-                    </p:commandButton>
 
-                    <p:commandButton value="Eiminar" icon="pi pi-trash" actionListener="PF('deleteSillaDialog').show()"
-                                     update="dt-silla"
-                                     styleClass="ui-button-danger" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-silla-content"/>
-                    </p:commandButton>
+<ui:composition template="/WEB-INF/template.xhtml">
 
-                </p:toolbarGroup>
-            </p:toolbar>
-            <p:dataTable id="dt-silla" widgetVar="dtSilla" var="sillaTable" value="#{sillaBean.listaSillas}"
-                         reflow="true"
-                         selection="#{sillaBean.sillasSeleccionadas}" rowKey="#{sillaTable.codigo}" paginator="true"
+    <ui:define name="title">Unitravel | Sillas</ui:define>
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:growl id="message" showDetail="true"/>
+            <div>
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Nueva silla" icon="pi pi-plus"
+                                         actionListener="#{sillaBean.openNew()}"
+                                         update="@all"
+                                         oncomplete="PF('manageSillaDialog').show()"
+                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                        </p:commandButton>
+
+                        <p:commandButton value="Eiminar" icon="pi pi-trash"
+                                         actionListener="PF('deleteSillaDialog').show()"
+                                         update="tabla:dt-silla"
+                                         styleClass="ui-button-danger" style="margin-right: .5rem">
+
+                        </p:commandButton>
+
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </div>
+        </h:form>
+
+        <h:form id="tabla">
+
+            <p:dataTable id="dt-silla" var="silla" value="#{sillaBean.listaSillas}"
+                         reflow="true" paginator="true"
                          rows="10" rowSelectMode="add" paginatorPosition="bottom">
 
                 <f:facet name="header">
@@ -43,80 +50,83 @@
                     </span>
                     </div>
                 </f:facet>
-                <p:column selectionMode="multiple" exportable="false"></p:column>
 
-                <p:column headerText="Posicion">
-                    <h:outputText value="#{sillaTable.posicion}" sortBy="#{sillaTable.posicion}"/>
+                <p:column headerText="Posición">
+                    <h:outputText value="#{silla.posicion}"/>
                 </p:column>
 
                 <p:column headerText="Precio">
-                    <h:outputText value="#{sillaTable.precio}"/>
+                    <h:outputText value="#{silla.precio}"/>
                 </p:column>
+
 
                 <p:column headerText="Estado">
-                    <h:outputText value="#{sillaTable.estadoSilla}"/>
+                    <h:outputText value="#{silla.estadoSilla}"/>
                 </p:column>
 
-                <p:column exportable="false">
-                    <p:commandButton icon="pi pi-pencil" update="form"
-                                     oncomplete="PF('manageEditSillaDialog').show()"
-                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
-                        <f:setPropertyActionListener value="#{sillaTable}" target="#{sillaBean.sillaSeleccionada}"/>
-                        <p:resetInput target=":form:manage-silla-content"/>
+                <p:column exportable="false" headerText="Opciones">
+                    <p:commandButton icon="pi pi-pencil" update="formulario_edit"
+                                     oncomplete="PF('manageSillaDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success"
+                                     action="#{sillaBean.seleccionarSilla(silla)}">
                     </p:commandButton>
                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                     oncomplete="PF('deleteSillaDialog').show()" update="dt-silla"
-                                     style="margin-left: 30px">
-                        <f:setPropertyActionListener value="#{sillaTable}" target="#{sillaBean.sillaSeleccionada}"/>
+                                     oncomplete="PF('deleteSillaDialog').show()" update="eliminar_silla"
+                                     style="margin-left: 30px" action="#{sillaBean.seleccionarSilla(silla)}">
                     </p:commandButton>
+
                 </p:column>
             </p:dataTable>
 
-            <p:dialog header="Registro Silla" showEffect="fade" modal="true"
-                      widgetVar="manageSillaDialog" responsive="true">
-
-                <p:outputPanel id="manage-silla-content" class="ui-fluid">
-
-                    <h:panelGrid columns="2" cellpadding="5">
-
-                        <p:outputLabel for="posicion">Posicion</p:outputLabel>
-                        <p:inputText id="posicion" value="#{sillaBean.silla.posicion}" required="true"/>
-
-                        <p:outputLabel for="precio">Precio</p:outputLabel>
-                        <p:inputText id="precio" value="#{sillaBean.silla.precio}" required="true"/>
-
-                        <p:outputLabel for="estado">Estado</p:outputLabel>
-                        <p:inputText id="estado" value="#{sillaBean.silla.estadoSilla}" required="true"/>
-
-                    </h:panelGrid>
-                </p:outputPanel>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Guardar---" icon="pi pi-check" actionListener="#{sillaBean.registrarSilla()}"
-                                     update="dt-silla" oncomplete="PF('manageSillaDialog').hide()"/>
-                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageSillaDialog').hide()"
-                                     class="ui-button-secondary"/>
-                </f:facet>
-            </p:dialog>
-
-
-            <p:confirmDialog widgetVar="deleteSillaDialog" showEffect="fade" width="300"
-                             message="¿Desea eliminar la silla?" header="Confirmación" severity="warn">
-                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{sillaBean.eliminarSilla}"
-                                 oncomplete="PF('deleteSillaDialog').hide()" update="dt-silla"/>
-                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                 onclick="PF('deleteSillaDialog').hide()"/>
-            </p:confirmDialog>
-
-            <p:growl id="messages" showDetail="true"/>
 
             <p:confirmDialog global="true" showEffect="fade" width="300">
                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
                                  icon="pi pi-times"/>
             </p:confirmDialog>
-        </div>
 
-    </h:form>
-</h:body>
+        </h:form>
+
+
+        <p:dialog id="formulario_edit" header="Registro Silla" showEffect="fade" modal="true"
+                  widgetVar="manageSillaDialog" responsive="true">
+            <h:form id="formCrear">
+
+                <h:panelGrid columns="2" cellpadding="5">
+
+                    <p:outputLabel for="name" value="Posición"/>
+                    <p:inputText id="name" value="#{sillaBean.sillaSeleccionada.posicion}" required="true"/>
+
+                    <p:outputLabel for="precioSilla" value="Precio"/>
+                    <p:inputText id="precioSilla" value="#{sillaBean.sillaSeleccionada.precio}" required="true"/>
+
+
+                    <p:outputLabel for="estado" value="Estado"/>
+                    <p:inputText id="estado" value="#{sillaBean.sillaSeleccionada.estadoSilla}"/>
+                </h:panelGrid>
+
+
+                <h:panelGrid cellpadding="5" columns="2">
+                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{sillaBean.registrarSilla}"
+                                     update="tabla:dt-silla" oncomplete="PF('manageSillaDialog').hide()"/>
+                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageSillaDialog').hide()"
+                                     class="ui-button-secondary"/>
+                </h:panelGrid>
+
+            </h:form>
+        </p:dialog>
+
+
+        <p:confirmDialog id="eliminar_silla" widgetVar="deleteSillaDialog" showEffect="fade" width="300"
+                         message="¿Desea eliminar la silla?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{sillaBean.eliminarSilla}"
+                                 oncomplete="PF('deleteSillaDialog').hide()" update="tabla:dt-silla"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteSillaDialog').hide()"/>
+            </h:form>
+        </p:confirmDialog>
+
+    </ui:define>
+</ui:composition>
 </html>

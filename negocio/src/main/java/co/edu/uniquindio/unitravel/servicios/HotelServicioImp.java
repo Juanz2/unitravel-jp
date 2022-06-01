@@ -69,4 +69,9 @@ public class HotelServicioImp implements HotelServicio{
     public List<Hotel> obtenerHotelesPorDestino(String nombreCiudad) {
         return hotelRepo.obtenerHotelesNombre(nombreCiudad);
     }
+
+    @Override
+    public List<Hotel> obtenerHotelPorNombre(String nombre) {
+        return hotelRepo.obtenerHotelesNombre(nombre);
+    }
 }

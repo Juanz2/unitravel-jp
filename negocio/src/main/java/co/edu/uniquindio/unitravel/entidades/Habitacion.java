@@ -46,11 +46,11 @@ public class Habitacion implements Serializable {
     private List<Cama> camas;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> fotos;
 
     @ToString.Exclude
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Caracteristica> caracteristicas;
 
     @ToString.Exclude

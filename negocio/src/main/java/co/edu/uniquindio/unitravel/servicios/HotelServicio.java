@@ -21,4 +21,6 @@ public interface HotelServicio {
     List<Hotel> obtenerHoteles();
 
     List<Hotel> obtenerHotelesPorDestino(String nombreCiudad);
+
+    List<Hotel> obtenerHotelPorNombre(String nombre);
 }
