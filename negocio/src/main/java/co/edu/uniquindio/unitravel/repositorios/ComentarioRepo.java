@@ -17,4 +17,8 @@ public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
     List<ComentarioDto> comentariosHoteles();
     @Query("select c from Comentario c where c.estado = 'A'")
     List<Comentario> obtenerComentarios ();
+
+    @Query("select c from Comentario c where c.hotel.codigo = ?1 and c.estado='A'")
+    List<Comentario> obtenerComentariosHotel(Integer idHotel);
+
 }

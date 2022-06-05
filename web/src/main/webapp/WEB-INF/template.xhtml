@@ -36,13 +36,21 @@
                 </div>
             </h:form>
 
+
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2"
-                        onclick="window.location.href='login.xhtml'">Ingresar
-                </button>
-                <button type="button" class="btn btn-warning"
-                        onclick="window.location.href='registrarUsuario.xhtml'">Registrarse
-                </button>
+                <h:form rendered="#{!seguridadBean.autenticado}">
+                    <button type="button" class="btn btn-outline-light me-2"
+                            onclick="window.location.href='login.xhtml'">Ingresar
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            onclick="window.location.href='registrarUsuario.xhtml'">Registrarse
+                    </button>
+                </h:form>
+
+                <h:form rendered="#{seguridadBean.autenticado}">
+                   <p:commandButton value="Cerrar sesión" action="#{seguridadBean.cerrarSesion()}" icon="pi pi-sign-out"/>
+                </h:form>
+
             </div>
         </div>
     </div>

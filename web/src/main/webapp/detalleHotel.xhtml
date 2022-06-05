@@ -59,6 +59,57 @@
                 </p:dataView>
             </h:form>
         </div>
+
+        <h:form>
+            <div class="container">
+                <p:tabView>
+                    <p:tab title="Comentarios">
+                        <p:repeat value="#{detalleHotelBean.comentariosHotel}" var="comentario">
+                            <div class="row d-flex m-5" style="box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;">
+                                <div class="col-lg-8 col-md-1 align-self-center">
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="1" cellpadding="10">
+                                            <h:outputText
+                                                    value="#{comentario.usuario.nombre} ha comentado - #{detalleHotelBean.obtenerFechaComentario(comentario)}"
+                                                    style="font-weight: bold"/>
+                                            <h:outputText value="#{comentario.comentario}"/>
+                                            <p:rating value="#{comentario.calificacion}" readonly="true"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                </div>
+                            </div>
+                        </p:repeat>
+                    </p:tab>
+                </p:tabView>
+                <p:commandButton type="button" value="Comentar" icon="pi pi-comment"
+                                 rendered="#{seguridadBean.autenticado}" onclick="PF('comentarioDialog').show()"
+                                 update="dialogComentario:formComentario"/>
+            </div>
+        </h:form>
+
+        <p:dialog id="dialogComentario" header="Realiza tu comentario ❤️" showEffect="fade" widgetVar="comentarioDialog" modal="true"
+                  rendered="#{seguridadBean.autenticado}">
+            <h:form id="formComentario">
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel value="Comentario" for="comentario"/>
+                    <p:inputTextarea id="comentario" required="true"
+                                     rows="5" cols="30"
+                                     autoResize="false" value="#{detalleHotelBean.comentario.comentario}"/>
+                    <p:message for="comentario"/>
+
+                    <p:outputLabel for="calificacion" value="Calificacion"/>
+                    <p:rating id="calificacion"
+                              required="true" value="#{detalleHotelBean.comentario.calificacion}"/>
+                    <p:message for="calificacion"/>
+                </h:panelGrid>
+                <br/>
+                <p:commandButton value="Comentar" actionListener="#{detalleHotelBean.registrarComentario}"
+                                 icon="pi pi-comment"
+                                 oncomplete="PF('comentarioDialog').hide()" update="@form"/>
+                <p:growl for="comentario-bean" showDetail="true"/>
+            </h:form>
+        </p:dialog>
+
     </ui:define>
 </ui:composition>
 </html>

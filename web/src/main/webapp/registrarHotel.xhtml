@@ -13,7 +13,7 @@
     <ui:define name="content">
 
         <h:form id="form">
-            <p:growl id="message" showDetail="true"/>
+            <p:growl showDetail="true"/>
             <div>
                 <p:toolbar>
                     <p:toolbarGroup>
@@ -128,7 +128,7 @@
                     <p:inputText id="direccion" value="#{hotelBean.hotelSeleccionado.direccion}" required="true"/>
 
                     <p:outputLabel for="grid" value="Caracteristicas"/>
-                    <p:selectManyCheckbox id="grid" value="#{hotelBean.hotelSeleccionado.caracteristicas}" layout="grid"
+                    <p:selectManyCheckbox id="grid" value="#{hotelBean.caracteristicasHotel}" layout="grid"
                                           columns="3" styleClass="grid-checkbox" converter="#{caracteristicasConverter}"
                                           required="true">
                         <f:selectItems value="#{hotelBean.listaCaracteristicaHotel}" var="caracteristica"
@@ -177,7 +177,7 @@
                     <p:inputText id="precio" value="#{hotelBean.habitacion.precio}"/>
 
                     <p:outputLabel for="grid_hb">Características</p:outputLabel>
-                    <p:selectManyCheckbox id="grid_hb" value="#{hotelBean.habitacion.caracteristicas}" layout="grid"
+                    <p:selectManyCheckbox id="grid_hb" value="#{hotelBean.caracteristicasHabitacion}" layout="grid"
                                           columns="3" styleClass="grid-checkbox" converter="#{caracteristicasConverter}"
                                           required="true">
                         <f:selectItems value="#{hotelBean.listaCaracteristicaHabitacion}" var="caracteristicaHb"

@@ -34,7 +34,7 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         if(parametroBusqueda != null && !parametroBusqueda.isEmpty()){
-            hotelesBusqueda = hotelServicio.obtenerHotelPorNombre(busqueda);
+            hotelesBusqueda = hotelServicio.obtenerHotelPorNombre(parametroBusqueda);
         }else{
             hotelesBusqueda = new ArrayList<>();
         }

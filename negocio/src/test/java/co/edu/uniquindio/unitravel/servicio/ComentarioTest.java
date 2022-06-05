@@ -9,10 +9,15 @@ import co.edu.uniquindio.unitravel.servicios.UsuarioServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootTest
+@Transactional
 public class ComentarioTest {
 
     @Autowired
@@ -68,6 +73,13 @@ public class ComentarioTest {
     public void listarComentarios(){
         List<Comentario> listarComentarios = comentarioServicio.obtenerComentarios();
         listarComentarios.forEach(System.out::println);
+    }
+
+    @Test
+    public void obtenerComentariosHotel(){
+        List<Comentario> comentariosHotel;
+        comentariosHotel = comentarioServicio.obtenerComentariosHotel(10);
+        comentariosHotel.forEach(System.out::println);
     }
 }
 

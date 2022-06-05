@@ -27,8 +27,7 @@
                             </f:facet>
                             <p>#{hotel.ciudad.nombre}</p>
                             <f:facet name="footer">
-                                <p:commandButton action="#{hotelCiudadBean.irDetalleHotel(hotel.codigo)}"
-                                                 icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
+                                <p:linkButton href="/detalleHotel.xhtml?hotelId=#{hotel.codigo}" value="Ver Hotel" />
                             </f:facet>
 
                         </p:card>
@@ -58,10 +57,7 @@
                                 </p:outputPanel>
                             </div>
                             <div class="col-lg-2 col-md-1 align-self-center">
-                                <p:commandButton value="Ver detalle"
-                                                 action="#{hotelCiudadBean.irDetalleHotel(hotel.codigo)}"
-                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                                 iconPos="right"/>
+                                <p:linkButton href="/detalleHotel.xhtml?hotelId=#{hotel.codigo}" value="Ver hotel" />
 
                             </div>
                         </div>

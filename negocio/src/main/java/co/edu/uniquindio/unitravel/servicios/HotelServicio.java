@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unitravel.servicios;
 
+import co.edu.uniquindio.unitravel.entidades.Caracteristica;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.entidades.Usuario;
 
@@ -23,4 +24,6 @@ public interface HotelServicio {
     List<Hotel> obtenerHotelesPorDestino(String nombreCiudad);
 
     List<Hotel> obtenerHotelPorNombre(String nombre);
+
+    List<Caracteristica> obtenerCaracteristicasHotel(Integer codigo);
 }

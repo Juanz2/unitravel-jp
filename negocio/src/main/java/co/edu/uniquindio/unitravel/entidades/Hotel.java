@@ -44,7 +44,6 @@ public class Hotel implements Serializable {
 
     @ManyToMany
     @ToString.Exclude
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Caracteristica>caracteristicas;
 
     @Lob

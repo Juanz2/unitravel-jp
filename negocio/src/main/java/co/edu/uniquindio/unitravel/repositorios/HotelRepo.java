@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unitravel.repositorios;
 
+import co.edu.uniquindio.unitravel.entidades.Caracteristica;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -55,4 +56,7 @@ public interface HotelRepo extends JpaRepository<Hotel, Integer> {
 
     @Query("select h from Hotel  h where h.nit = ?1")
     Hotel obtenerHotelNit(String nit);
+
+    @Query("select c from Hotel h join h.caracteristicas c where h.codigo = :codigo")
+    List<Caracteristica> obtenerCaracteristicasHotel(Integer codigo);
 }

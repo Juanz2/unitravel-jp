@@ -2,9 +2,11 @@ package co.edu.uniquindio.unitravel.servicios;
 
 import co.edu.uniquindio.unitravel.entidades.Comentario;
 import co.edu.uniquindio.unitravel.repositorios.ComentarioRepo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ComentarioServicioImpl implements ComentarioServicio {
 
     private final ComentarioRepo comentarioRepo;
@@ -45,6 +47,11 @@ public class ComentarioServicioImpl implements ComentarioServicio {
     @Override
     public List<Comentario> obtenerComentarios() {
         return comentarioRepo.obtenerComentarios();
+    }
+
+    @Override
+    public List<Comentario> obtenerComentariosHotel(Integer idHotel) {
+        return comentarioRepo.obtenerComentariosHotel(idHotel);
     }
 
 }

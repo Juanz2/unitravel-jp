@@ -71,6 +71,14 @@ public class HotelBean implements Serializable {
     @Setter
     private List<Hotel> hotelesSeleccionados;
 
+    @Getter
+    @Setter
+    private List<Caracteristica> caracteristicasHotel;
+
+    @Getter
+    @Setter
+    private List<Caracteristica> caracteristicasHabitacion;
+
     /**
      * @param hotelServicio
      * @param unitravelServicio
@@ -89,7 +97,10 @@ public class HotelBean implements Serializable {
         listaCiudades = unitravelServicio.obtenerCiudades();
         listaCaracteristicaHotel = caracteristicaServicio.obtenerCaracteristicasHoteles();
         listaCaracteristicaHabitacion = caracteristicaServicio.obtenerCaracteristicasHabitaciones();
+        hotelSeleccionado = new Hotel();
+        hotelSeleccionado.setEstado("A");
         this.imagenes = new ArrayList<>();
+        this.caracteristicasHotel = new ArrayList<>();
         this.habitacion = new Habitacion();
         this.habitacion.setEstado("A");
     }
@@ -101,20 +112,18 @@ public class HotelBean implements Serializable {
         try {
             if (imagenes.size() > 0) {
                 hotelSeleccionado.setFotos(imagenes);
+                hotelSeleccionado.setCaracteristicas(caracteristicasHotel);
                 hotelServicio.registrarHotel(hotelSeleccionado);
                 listaHoteles = hotelServicio.obtenerHoteles();
                 imagenes.clear();
                 hotelSeleccionado = null;
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
-                PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
+                addMessage(FacesMessage.SEVERITY_INFO, "Información", "Acción procesada");
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("El hotel debe tener al menos una imagen"));
-                PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
+                addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", "Se debe registrar una imagen");
             }
-
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-            PrimeFaces.current().ajax().update("form:messages", "tabla:dt-hotel");
+            e.getStackTrace();
+            addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", e.getMessage());
         }
     }
 
@@ -153,6 +162,7 @@ public class HotelBean implements Serializable {
             if (imagenes.size() > 0) {
                 habitacion.setFotos(imagenes);
                 habitacion.setHotel(hotelSeleccionado);
+                habitacion.setCaracteristicas(caracteristicasHabitacion);
                 habitacionServicio.registrarHabitacion(habitacion);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe agregar al menos una imagen"));
                 PrimeFaces.current().ajax().update("form:messages");
@@ -182,5 +192,12 @@ public class HotelBean implements Serializable {
 
     public void seleccionarHotel(Hotel h) {
         this.hotelSeleccionado = h;
+        this.caracteristicasHotel = hotelServicio.obtenerCaracteristicasHotel(h.getCodigo());
+        //System.out.println(caracteristicasHotel);
+    }
+
+    public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
     }
 }

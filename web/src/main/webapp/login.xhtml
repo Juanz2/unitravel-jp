@@ -34,17 +34,17 @@
             <h:panelGrid columns="2" cellpadding="5">
 
                 <p:outputLabel value="Usuario:" for="id_usuario"/>
-                <p:inputText id="id_usuario" value="#{loginBean.usuario}" required="true"/>
+                <p:inputText id="id_usuario" value="#{seguridadBean.email}" required="true"/>
 
                 <p:outputLabel value="Contraseña:" for="password_usuario"/>
-                <p:password id="password_usuario" value="#{loginBean.password}" required="true"/>
+                <p:password id="password_usuario" value="#{seguridadBean.password}" required="true"/>
 
             </h:panelGrid>
             <h:panelGrid columns="1" cellpadding="5">
                 <a href="recuperarPassword.xhtml" class="subinfo">
                     <span>¿Ha olvidado su contraseña?</span>
                 </a>
-                <p:commandButton value="Ingresar" action="#{usuarioBean.registrarUsuario()}" update="@form"
+                <p:commandButton value="Ingresar" action="#{seguridadBean.iniciarSesion}" update="@form"
                                  resetValues="true"/>
             </h:panelGrid>
             <p:growl showDetail="true"/>

@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ public class Usuario extends Persona implements Serializable {
 
     @ToString.Include
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> telefono;
 
     @OneToMany(mappedBy = "usuario")

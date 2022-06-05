@@ -13,4 +13,6 @@ public interface ComentarioServicio {
 
     List<Comentario> obtenerComentarios ();
 
+    List<Comentario> obtenerComentariosHotel(Integer idHotel);
+
 }
