@@ -13,5 +13,4 @@ build/
 /bin
 .Ds_Store
 
-/gradle
 /.gradle
