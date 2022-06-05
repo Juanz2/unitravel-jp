@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unitravel.servicios;
 
+import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.entidades.Reserva;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ReservaServicio {
     List<Reserva> obtenerReservas();
 
     List<Reserva> listarReservasUsuario(String cedula) throws Exception;
+
+    List<Hotel> obtenerHotelReserva(Integer idReserva) throws Exception;
 }

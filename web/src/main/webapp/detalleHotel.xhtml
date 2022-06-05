@@ -50,7 +50,8 @@
                             </div>
                             <div class="col-lg-2 col-md-1 align-self-center">
                                 <p:commandButton value="Reservar" styleClass="ui-button-raised" icon="pi pi-arrow-right"
-                                                 iconPos="right"/>
+                                                 iconPos="right" onclick="PF('reservaDialog').show()"
+                                                 actionListener="#{detalleHotelBean.inicializarHabitacionReserva(habitacion.codigo)}"/>
 
                             </div>
                         </div>
@@ -87,7 +88,8 @@
             </div>
         </h:form>
 
-        <p:dialog id="dialogComentario" header="Realiza tu comentario ❤️" showEffect="fade" widgetVar="comentarioDialog" modal="true"
+        <p:dialog id="dialogComentario" header="Realiza tu comentario ❤️" showEffect="fade" widgetVar="comentarioDialog"
+                  modal="true"
                   rendered="#{seguridadBean.autenticado}">
             <h:form id="formComentario">
                 <h:panelGrid columns="3" cellpadding="5">
@@ -109,6 +111,45 @@
                 <p:growl for="comentario-bean" showDetail="true"/>
             </h:form>
         </p:dialog>
+
+        <p:dialog id="dialogReserva" header="Realiza tu reserva 🌎" showEffect="fade" widgetVar="reservaDialog"
+                  modal="true"
+                  rendered="#{seguridadBean.autenticado}">
+
+            <h:form id="formReserva">
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="fecha_inicio" value="Fecha inicio:"/>
+                    <p:datePicker id="fecha_inicio" showIcon="true" value="#{detalleHotelBean.reserva.fechaInicio}"/>
+
+                    <p:outputLabel for="fecha_fin" value="Fecha fin:"/>
+                    <p:datePicker id="fecha_fin" showIcon="true" value="#{detalleHotelBean.reserva.fechaFin}"/>
+
+                    <p:outputLabel for="cantidad" value="Cantidad de personas:"/>
+                    <p:spinner id="cantidad" value="#{detalleHotelBean.reserva.cantidadPersonas}"/>
+
+                    <p:outputLabel for="id_metodoPago" value="Método de pago:"/>
+                    <p:selectOneMenu id="id_metodoPago" value="#{detalleHotelBean.reserva.metodoPago}" required="true"
+                                     requiredMessage="La ciudad es obligatoria"
+                                     converter="#{metodoPagoConverter}">
+                        <f:selectItem itemLabel="Seleccione..." noSelectionOption="true"/>
+                        <f:selectItems var="metodo" itemLabel="#{metodo.nombre}"
+                                       value="#{detalleHotelBean.metodosPago}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <br/>
+
+                <p:commandButton value="Reservar"
+                                 icon="pi pi-money-bill"
+                                 oncomplete="PF('reservaDialog').hide()" update="@form"
+                                 actionListener="#{detalleHotelBean.registrarReserva}"/>
+                <p:growl for="reserva-bean" showDetail="true"/>
+
+            </h:form>
+
+        </p:dialog>
+
 
     </ui:define>
 </ui:composition>

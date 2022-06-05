@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Unitravel | Reservas</ui:define>
+    <ui:define name="content">
+
+        <h:form id="formReserva">
+            <p:dataTable id="tableReserva" value="#{reservasUsuarioBean.listaReservas}" paginator="true" rows="10" var="reserva"
+                         selection="#{reservasUsuarioBean.reserva}">
+
+                <p:column headerText="Fecha inicio">
+                    <h:outputText value="#{reservasUsuarioBean.obtenerFechaComentario(reserva.fechaInicio)}"/>
+                </p:column>
+
+                <p:column headerText="Fecha fin">
+                    <h:outputText value="#{reservasUsuarioBean.obtenerFechaComentario(reserva.fechaFin)}"/>
+                </p:column>
+
+                <p:column headerText="Valor total">
+                    <h:outputText value="#{reservasUsuarioBean.convertirValorTotal(reserva)}"/>
+                </p:column>
+
+                <p:column headerText="Método de pago">
+                    <h:outputText value="#{reserva.metodoPago.nombre}"/>
+                </p:column>
+
+                <p:column headerText="Hotel">
+                    <h:outputText value="#{reservasUsuarioBean.obtenerNombreHotel(reserva)}"/>
+                </p:column>
+
+                <p:column exportable="false">
+                    <p:commandButton class="ui-button-info" icon="pi pi-search" value="Ver detalle" update="dialogReserva"
+                                     oncomplete="PF('detalleReserva').show()" action="#{reservasUsuarioBean.setReservaSeleccionada(reserva)}">
+                    </p:commandButton>
+                </p:column>
+                <p:column exportable="false">
+                    <p:commandButton class="ui-button-danger" icon="pi pi-trash" process="@this"
+                                     oncomplete="PF('cancelarDialog').show()" value="Cancelar reserva"
+                                     action="#{reservasUsuarioBean.seleccionarReserva(reserva)}">
+                    </p:commandButton>
+                </p:column>
+
+
+            </p:dataTable>
+        </h:form>
+
+
+        <p:dialog header="Detalle de la reserva 👒 🛫 🌎" id="dialogReserva" showEffect="fade" widgetVar="detalleReserva" modal="true">
+
+            <h:form id="reservaFormDialog">
+
+                    <p:panelGrid columns="2" columnClasses="label,value">
+
+                        <h:outputText value="Fecha inicio:"/>
+                        <h:outputText value="#{reservasUsuarioBean.reservaSeleccionada.fechaInicio}"/>
+
+                        <h:outputText value="Fecha Fin:"/>
+                        <h:outputText value="#{reservasUsuarioBean.reservaSeleccionada.fechaFin}"/>
+
+                        <h:outputText value="Cantidad de personas:"/>
+                        <h:outputText value="#{reservasUsuarioBean.reservaSeleccionada.cantidadPersonas}"/>
+
+                        <h:outputText value="Valor total:"/>
+                        <h:outputText value="#{reservasUsuarioBean.reservaSeleccionada.precioTotal}"/>
+
+                    </p:panelGrid>
+            </h:form>
+
+        </p:dialog>
+
+        <p:confirmDialog id="cancelarReserva" widgetVar="cancelarDialog" showEffect="fade" width="300"
+                         message="¿Está seguro de cancelar la reserva?" header="Confirmación" severity="warn">
+            <h:form>
+                <p:commandButton value="Si" icon="pi pi-check" action="#{reservasUsuarioBean.cancelarReserva}"
+                                 oncomplete="PF('cancelarDialog').hide()" update="@form"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('cancelarDialog').hide()"/>
+                <p:growl for="reserva-bean" showDetail="true"/>
+            </h:form>
+        </p:confirmDialog>
+
+
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,9 +1,8 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
@@ -48,7 +47,10 @@ public class Reserva implements Serializable {
 
     @ManyToMany
     private List<Silla> sillas;
+
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ToString.Exclude
     private List<Habitacion> habitaciones;
     @ManyToOne
     private Usuario usuario;

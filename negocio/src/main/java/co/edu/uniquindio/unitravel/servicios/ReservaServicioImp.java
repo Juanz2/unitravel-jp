@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unitravel.servicios;
 
 import co.edu.uniquindio.unitravel.entidades.Habitacion;
+import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.entidades.Reserva;
 import co.edu.uniquindio.unitravel.repositorios.ReservaRepo;
 import org.springframework.stereotype.Service;
@@ -84,6 +85,11 @@ public class ReservaServicioImp implements ReservaServicio {
     @Override
     public List<Reserva> listarReservasUsuario(String cedula) {
         return reservaRepo.listaReservasUsuario(cedula);
+    }
+
+    @Override
+    public List<Hotel> obtenerHotelReserva(Integer idReserva) throws Exception {
+        return reservaRepo.hotelReserva(idReserva);
     }
 
     /**
