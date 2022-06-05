@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -5,13 +6,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<ui:composition template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Ciudad</ui:define>
+<ui:composition template="/WEB-INF/template.xhtml">
     <ui:define name="content">
+
         <div class="container">
             <h:form>
-                <p:dataView id="lista-hoteles" value="#{hotelCiudadBean.listaHoteles}" var="hotel"
+                <p:dataView id="lista-hoteles" value="#{busquedaBean.hotelesBusqueda}" var="hotel"
                             listIcon="pi pi-bars"
                             gridIcon="pi pi-th-large">
 
@@ -19,7 +20,7 @@
 
                         <p:card style="width: 25rem; margin-bottom: 2em;">
                             <f:facet name="header">
-                                <img alt="user header" src="uploads/#{hotel.imagenPrincipal}"
+                                <img alt="user header" src="uploads#{hotel.imagenPrincipal}"
                                      style="width: 290px; height: 410px; object-fit: cover"/>
                             </f:facet>
                             <f:facet name="title">
@@ -27,7 +28,8 @@
                             </f:facet>
                             <p>#{hotel.ciudad.nombre}</p>
                             <f:facet name="footer">
-                                <p:linkButton href="/detalleHotel.xhtml?hotelId=#{hotel.codigo}" value="Ver Hotel" />
+                                <p:commandButton action="#{busquedaBean.irDetalleHotel(hotel.codigo)}"
+                                                 icon="pi pi-arrow-right" iconPos="right" value="Ver Detalle"/>
                             </f:facet>
 
                         </p:card>
@@ -57,7 +59,10 @@
                                 </p:outputPanel>
                             </div>
                             <div class="col-lg-2 col-md-1 align-self-center">
-                                <p:linkButton href="/detalleHotel.xhtml?hotelId=#{hotel.codigo}" value="Ver hotel" />
+                                <p:commandButton value="Ver detalle"
+                                                 action="#{busquedaBean.irDetalleHotel(hotel.codigo)}"
+                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                 iconPos="right"/>
 
                             </div>
                         </div>
@@ -66,6 +71,7 @@
                 </p:dataView>
             </h:form>
         </div>
+
     </ui:define>
 </ui:composition>
 </html>
