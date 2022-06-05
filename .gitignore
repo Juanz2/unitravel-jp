@@ -11,4 +11,7 @@ build/
 *.lock
 *.bin
 /bin
-/resources/application.properties
+.Ds_Store
+
+/gradle
+/.gradle
