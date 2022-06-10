@@ -42,7 +42,7 @@ public class Habitacion implements Serializable {
     @ManyToMany(mappedBy = "habitaciones")
     private List<Reserva> reservas;
 
-    @ElementCollection
+    @ManyToMany
     private List<Cama> camas;
 
     @ElementCollection

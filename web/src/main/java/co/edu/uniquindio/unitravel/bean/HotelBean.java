@@ -1,13 +1,7 @@
 package co.edu.uniquindio.unitravel.bean;
 
-import co.edu.uniquindio.unitravel.entidades.Caracteristica;
-import co.edu.uniquindio.unitravel.entidades.Ciudad;
-import co.edu.uniquindio.unitravel.entidades.Habitacion;
-import co.edu.uniquindio.unitravel.entidades.Hotel;
-import co.edu.uniquindio.unitravel.servicios.CaracteristicaServicio;
-import co.edu.uniquindio.unitravel.servicios.HabitacionServicio;
-import co.edu.uniquindio.unitravel.servicios.HotelServicio;
-import co.edu.uniquindio.unitravel.servicios.UnitravelServicio;
+import co.edu.uniquindio.unitravel.entidades.*;
+import co.edu.uniquindio.unitravel.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +16,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +28,8 @@ public class HotelBean implements Serializable {
     private final HabitacionServicio habitacionServicio;
     private final UnitravelServicio unitravelServicio;
     private final CaracteristicaServicio caracteristicaServicio;
+
+    private final CamaServicio camaServicio;
     private List<Ciudad> listaCiudades;
 
     @Getter
@@ -79,16 +74,23 @@ public class HotelBean implements Serializable {
     @Setter
     private List<Caracteristica> caracteristicasHabitacion;
 
+
+    @Getter
+    @Setter
+    private List<Cama> listaCamas;
+
     /**
      * @param hotelServicio
      * @param unitravelServicio
      * @param habitacionServicio
+     * @param camaServicio
      */
-    public HotelBean(HotelServicio hotelServicio, UnitravelServicio unitravelServicio, HabitacionServicio habitacionServicio, CaracteristicaServicio caracteristicaServicio) {
+    public HotelBean(HotelServicio hotelServicio, UnitravelServicio unitravelServicio, HabitacionServicio habitacionServicio, CaracteristicaServicio caracteristicaServicio, CamaServicio camaServicio) {
         this.hotelServicio = hotelServicio;
         this.unitravelServicio = unitravelServicio;
         this.habitacionServicio = habitacionServicio;
         this.caracteristicaServicio = caracteristicaServicio;
+        this.camaServicio = camaServicio;
     }
 
     @PostConstruct
@@ -97,6 +99,7 @@ public class HotelBean implements Serializable {
         listaCiudades = unitravelServicio.obtenerCiudades();
         listaCaracteristicaHotel = caracteristicaServicio.obtenerCaracteristicasHoteles();
         listaCaracteristicaHabitacion = caracteristicaServicio.obtenerCaracteristicasHabitaciones();
+        listaCamas = camaServicio.obtenerListaCamas();
         hotelSeleccionado = new Hotel();
         hotelSeleccionado.setEstado("A");
         this.imagenes = new ArrayList<>();
@@ -117,13 +120,16 @@ public class HotelBean implements Serializable {
                 listaHoteles = hotelServicio.obtenerHoteles();
                 imagenes.clear();
                 hotelSeleccionado = null;
-                addMessage(FacesMessage.SEVERITY_INFO, "Información", "Acción procesada");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Debe contener al menos una foto");
+                FacesContext.getCurrentInstance().addMessage("hotel-bean", fm);
             } else {
-                addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", "Se debe registrar una imagen");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Información", "Procesado correctamente");
+                FacesContext.getCurrentInstance().addMessage("hotel-bean", fm);
             }
         } catch (Exception e) {
             e.getStackTrace();
-            addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", e.getMessage());
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("hotel-bean", fm);
         }
     }
 
@@ -164,17 +170,17 @@ public class HotelBean implements Serializable {
                 habitacion.setHotel(hotelSeleccionado);
                 habitacion.setCaracteristicas(caracteristicasHabitacion);
                 habitacionServicio.registrarHabitacion(habitacion);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe agregar al menos una imagen"));
-                PrimeFaces.current().ajax().update("form:messages");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Información", "Procesado correctamente");
+                FacesContext.getCurrentInstance().addMessage("hotelHb-bean", fm);
                 imagenes.clear();
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Debe agregar al menos una imagen"));
-                PrimeFaces.current().ajax().update("form:messages");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "Procesado correctamente");
+                FacesContext.getCurrentInstance().addMessage("hotelHb-bean", fm);
             }
 
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
-            PrimeFaces.current().ajax().update("form:messages");
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Información", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("hotelHb-bean", fm);
         }
     }
 
@@ -185,7 +191,13 @@ public class HotelBean implements Serializable {
         try {
             hotelServicio.eliminarHotel(hotelSeleccionado.getCodigo());
             listaHoteles.remove(hotelSeleccionado);
+
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "Procesado correctamente");
+            FacesContext.getCurrentInstance().addMessage("hotelDelete-bean", fm);
+
         } catch (Exception e) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Información", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("hotelDelete-bean", fm);
             e.getStackTrace();
         }
     }

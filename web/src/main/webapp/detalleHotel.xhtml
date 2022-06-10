@@ -43,8 +43,14 @@
 
                                         <h:outputText value="Características:"/>
                                         <p:repeat value="#{habitacion.caracteristicas}" var="car">
-                                            <p:chip label="#{car.nombre}" styleClass="me-2"/>
+                                            <p:chip label="#{car.nombre}" styleClass="me-2" style="background: #ffc107"/>
                                         </p:repeat>
+
+                                        <h:outputText value="Cama(s):"/>
+                                        <p:repeat value="#{habitacion.camas}" var="cama">
+                                            <p:chip label="#{cama.nombre}" styleClass="p-mr-2 custom-chip" style="background: #198754; color: white"/>
+                                        </p:repeat>
+
                                     </h:panelGrid>
                                 </p:outputPanel>
                             </div>

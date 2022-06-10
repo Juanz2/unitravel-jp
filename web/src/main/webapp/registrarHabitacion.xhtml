@@ -104,6 +104,14 @@
                             <f:selectItems value="#{habitacionBean.caracteristicas}" var="caracteristica" itemLabel="#{caracteristica.nombre}" itemValue="#{caracteristica}"/>
                         </p:selectManyCheckbox>
 
+
+                        <p:outputLabel for="grid_cama" value="Cama(s)"/>
+                        <p:selectManyCheckbox id="grid_cama" value="#{habitacionBean.habitacionSeleccionada.camas}" layout="grid"
+                                              columns="3" styleClass="grid-checkbox" converter="#{camaConverter}" required="true">
+                            <f:selectItems value="#{habitacionBean.camas}" var="cama" itemLabel="#{cama.nombre}" itemValue="#{cama}"/>
+                        </p:selectManyCheckbox>
+
+
                         <p:outputLabel for="imagenes_habitacion" value="Imágenes: " />
                         <p:fileUpload id="imagenes_habitacion"
                                       listener="#{habitacionBean.subirImagenes}" mode="advanced"

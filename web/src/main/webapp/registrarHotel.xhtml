@@ -98,7 +98,7 @@
 
 
         <p:dialog id="formulario_edit" header="Registro Hotel" showEffect="fade" modal="true"
-                  widgetVar="manageHotelDialog" responsive="true">
+                  widgetVar="manageHotelDialog" responsive="true" style="max-height: 650px; overflow: auto">
             <h:form id="formCrear">
 
                 <h:panelGrid columns="2" cellpadding="5">
@@ -157,6 +157,8 @@
                                      class="ui-button-secondary"/>
                 </h:panelGrid>
 
+                <p:growl for="hotel-bean" showDetail="true"/>
+
             </h:form>
         </p:dialog>
 
@@ -184,6 +186,14 @@
                                        itemLabel="#{caracteristicaHb.nombre}" itemValue="#{caracteristicaHb}"/>
                     </p:selectManyCheckbox>
 
+
+                    <p:outputLabel for="grid_cama" value="Cama(s)"/>
+                    <p:selectManyCheckbox id="grid_cama" value="#{hotelBean.habitacion.camas}" layout="grid"
+                                          columns="3" styleClass="grid-checkbox" converter="#{camaConverter}" required="true">
+                        <f:selectItems value="#{hotelBean.listaCamas}" var="cama" itemLabel="#{cama.nombre}" itemValue="#{cama}"/>
+                    </p:selectManyCheckbox>
+
+
                     <p:outputLabel for="imagenes_habitacion" value="Imágenes: "/>
                     <p:fileUpload id="imagenes_habitacion"
 
@@ -199,6 +209,7 @@
                     <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageHabitacionDialog').hide()"
                                      class="ui-button-secondary"/>
                 </h:panelGrid>
+                <p:growl for="hotelHb-bean" showDetail="true"/>
 
             </h:form>
 
@@ -211,6 +222,9 @@
                                  oncomplete="PF('deleteHotelDialog').hide()" update="tabla:dt-hotel"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                  onclick="PF('deleteHotelDialog').hide()"/>
+
+                <p:growl for="hotelDelete-bean" showDetail="true"/>
+
             </h:form>
         </p:confirmDialog>
 

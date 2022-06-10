@@ -1,8 +1,10 @@
 package co.edu.uniquindio.unitravel.bean;
 
+import co.edu.uniquindio.unitravel.entidades.Cama;
 import co.edu.uniquindio.unitravel.entidades.Caracteristica;
 import co.edu.uniquindio.unitravel.entidades.Habitacion;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
+import co.edu.uniquindio.unitravel.servicios.CamaServicio;
 import co.edu.uniquindio.unitravel.servicios.CaracteristicaServicio;
 import co.edu.uniquindio.unitravel.servicios.HabitacionServicio;
 import co.edu.uniquindio.unitravel.servicios.HotelServicio;
@@ -14,6 +16,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -32,40 +35,56 @@ public class HabitacionBean {
 
     private final HabitacionServicio habitacionServicio;
     private final HotelServicio hotelServicio;
-    @Getter @Setter
+
+    private final CamaServicio camaServicio;
+    @Getter
+    @Setter
     private List<Hotel> listaHoteles;
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Habitacion> listaHabitaciones;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Habitacion habitacion;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Habitacion habitacionSeleccionada;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Habitacion> habitacionesSeleccionadas;
 
     @Value("${upload.url}")
     private String urlImagenes;
     private final CaracteristicaServicio caracteristicaServicio;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private ArrayList<String> imagenes;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Caracteristica> caracteristicas;
 
-    public HabitacionBean(HabitacionServicio habitacionServicio, HotelServicio hotelServicio, CaracteristicaServicio caracteristicaServicio) {
+    @Getter
+    @Setter
+    private List<Cama> camas;
+
+    public HabitacionBean(HabitacionServicio habitacionServicio, HotelServicio hotelServicio,
+                          CaracteristicaServicio caracteristicaServicio, CamaServicio camaServicio) {
         this.habitacionServicio = habitacionServicio;
         this.hotelServicio = hotelServicio;
         this.caracteristicaServicio = caracteristicaServicio;
+        this.camaServicio = camaServicio;
     }
 
     @PostConstruct
-    public void init (){
+    public void init() {
         habitacionSeleccionada = new Habitacion();
         habitacionSeleccionada.setEstado("A");
         listaHabitaciones = habitacionServicio.obtenerHabitaciones();
+        camas = camaServicio.obtenerListaCamas();
         listaHoteles = hotelServicio.obtenerHoteles();
         caracteristicas = caracteristicaServicio.obtenerCaracteristicasHabitaciones();
     }
@@ -73,7 +92,7 @@ public class HabitacionBean {
     /**
      * Registra la habitación ingresada por el usuario
      */
-    public void registrarHabitacion(){
+    public void registrarHabitacion() {
         try {
             habitacionSeleccionada.setFotos(imagenes);
             habitacionServicio.registrarHabitacion(habitacionSeleccionada);
@@ -81,7 +100,7 @@ public class HabitacionBean {
             PrimeFaces.current().ajax().update("form:messages", "form:dt-habitacion");
             listaHabitaciones = habitacionServicio.obtenerHabitaciones();
             habitacionSeleccionada = null;
-        }catch (Exception e){
+        } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
             PrimeFaces.current().ajax().update("form:messages", "form:dt-habitacion");
         }
@@ -90,7 +109,7 @@ public class HabitacionBean {
     /**
      * Elimina la ciudad seleccionada
      */
-    public void eliminarHabitacion(){
+    public void eliminarHabitacion() {
         try {
             habitacionServicio.eliminarHabitacion(habitacion.getCodigo());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acción procesada"));
@@ -101,7 +120,7 @@ public class HabitacionBean {
         }
     }
 
-    public void openNew(){
+    public void openNew() {
         habitacionSeleccionada = new Habitacion();
     }
 
