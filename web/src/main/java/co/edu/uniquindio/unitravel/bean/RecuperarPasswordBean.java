@@ -29,12 +29,11 @@ public class RecuperarPasswordBean {
     public void recuperarPassword(){
         try{
             usuarioServicio.recuperarPassword(this.correo);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Se ha enviado un correo electrónico para la recuperación de su cuenta");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta\n", "Se ha enviado un correo electrónico para la recuperación de su contraseña");
             FacesContext.getCurrentInstance().addMessage(null, msj);
         }catch (Exception e){
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta\n", e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msj);
         }
-
     }
 }

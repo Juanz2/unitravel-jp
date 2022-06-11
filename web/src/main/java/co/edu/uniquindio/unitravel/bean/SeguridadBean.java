@@ -16,21 +16,25 @@ import java.io.Serializable;
 @Scope("session")
 public class SeguridadBean implements Serializable {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Usuario usuario;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String email;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String password;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean autenticado;
 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
 
-    public String iniciarSesion(){
+    public String iniciarSesion() {
 
         try {
             usuario = usuarioServicio.validarLogin(email, password);
@@ -45,12 +49,10 @@ public class SeguridadBean implements Serializable {
 
     }
 
-    public String cerrarSesion(){
+    public String cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index?faces-redirect=true";
     }
-
-
 
 
 }

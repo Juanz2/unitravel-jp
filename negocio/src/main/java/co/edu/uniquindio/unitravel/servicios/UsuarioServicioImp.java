@@ -42,11 +42,6 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public Usuario actualizarUsuario(Usuario usuario) throws Exception {
 
-        Usuario usuarioBuscado = obtenerUsuario(usuario.getCedula());
-        if (usuarioBuscado != null)
-            throw new Exception("El usuario " + usuario.getCedula() + " ya se encuentra registrado ");
-        if (buscarPorCorreo(usuario.getEmail()) != null)
-            throw new Exception("El usuario " + usuario.getCedula() + " ya se encuentra registrado");
         return usuarioRepo.save(usuario);
     }
 
@@ -84,10 +79,12 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public void recuperarPassword(String correo) throws Exception {
+
         Usuario usuario = usuarioRepo.buscarUsuarioPorCorreo(correo);
+
         if (usuario == null)
             throw new Exception("Correo electrónico no encontrado");
-
-        emailServicio.EnviarEmail("Recuperación de contraseña", "Su contraseña es: " + usuario.getPassword(),correo);
+        String cuerpoMensaje = "Para recuperar tu contraseña ingresa al siguiente enlace: http://localhost:8080/cambiarPassword.xhtml?usuario=" + usuario.getCedula();
+        emailServicio.EnviarEmail("Recuperación de contraseña", cuerpoMensaje, correo);
     }
 }
